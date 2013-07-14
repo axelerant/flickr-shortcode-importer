@@ -8,14 +8,6 @@ None at this time.
 
 ## Filters
 
-* `flickr_shortcode_importer_validate_settings`
-
-	Validate settings helper. [example](https://gist.github.com/michael-cannon/5833768)
-
-* `flickr_shortcode_importer_version`
-
-	Version tracking for settings. [example](https://gist.github.com/michael-cannon/5833774)
-
 * `flickr_shortcode_importer_sections`
 
 	Alter section options. [example](https://gist.github.com/michael-cannon/5833757)
@@ -24,17 +16,13 @@ None at this time.
 
 	Alter setting options. [example](https://gist.github.com/michael-cannon/5833757)
 
-* `flickr_shortcode_importer_columns`
+* `flickr_shortcode_importer_version`
 
-	Customize post type column headers. [example](https://gist.github.com/michael-cannon/5833693)
+	Version tracking for settings. [example](https://gist.github.com/michael-cannon/5833774)
 
-* `flickr_shortcode_importer_posts_custom_column`
+* `flickr_shortcode_importer_validate_settings`
 
-	Customize post type column contents. [example](https://gist.github.com/michael-cannon/5833716)
-	
-* `flickr_shortcode_importer_get_post_types_args`
-	
-	Alter `get_post_types` arguments for loading post types. [example]()
+	Validate settings helper. [example](https://gist.github.com/michael-cannon/5833768)
 
 ## Need More?
 

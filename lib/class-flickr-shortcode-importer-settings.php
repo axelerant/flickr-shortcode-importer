@@ -71,7 +71,7 @@ class Flickr_Shortcode_Importer_Settings {
 		self::$sections['reset'] = esc_html__( 'Compatibility & Reset', 'flickr-shortcode-importer' );
 		self::$sections['about'] = esc_html__( 'About Flickr Shortcode Importer', 'flickr-shortcode-importer' );
 
-		self::$sections = apply_filters( 'flickr_shortcode_importer_plugin_sections', self::$sections );
+		self::$sections = apply_filters( 'flickr_shortcode_importer_sections', self::$sections );
 	}
 
 
@@ -374,7 +374,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'widget' => 0,
 		);
 
-		self::$settings = apply_filters( 'flickr_shortcode_importer_plugin_settings', self::$settings );
+		self::$settings = apply_filters( 'flickr_shortcode_importer_settings', self::$settings );
 
 		foreach ( self::$settings as $id => $parts ) {
 			self::$settings[ $id ] = wp_parse_args( $parts, self::$default );
@@ -421,7 +421,7 @@ class Flickr_Shortcode_Importer_Settings {
 	public function admin_init() {
 		$version = fsi_get_option( 'version' );
 		self::$version = Flickr_Shortcode_Importer::VERSION;
-		self::$version = apply_filters( 'flickr_shortcode_importer_plugin_version', self::$version );
+		self::$version = apply_filters( 'flickr_shortcode_importer_version', self::$version );
 
 		if ( $version != self::$version )
 			$this->initialize_settings();
@@ -499,7 +499,7 @@ class Flickr_Shortcode_Importer_Settings {
 		';
 
 		echo '
-			<p>If you like this plugin, please <a href="http://aihr.us/about-aihrus/donate/" title="Donate for Good Karma"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" alt="Donate for Good Karma" /></a> or <a href="http://aihr.us/downloads/flickr-shortcode-importer-premium-wordpress-plugin/" title="purchase Flickr Shortcode Importer Premium">purchase Flickr Shortcode Importer Premium</a> to help fund further development and <a href="http://wordpress.org/support/plugin/flickr-shortcode-importer" title="Support forums">support</a>.</p>
+			<p>If you like this plugin, please <a href="http://aihr.us/about-aihrus/donate/" title="Donate for Good Karma"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" alt="Donate for Good Karma" /></a> to help fund further development and <a href="http://wordpress.org/support/plugin/flickr-shortcode-importer" title="Support forums">support</a>.</p>
 		';
 
 		$text = esc_html__( 'Copyright &copy;%1$s %2$s.', 'flickr-shortcode-importer' );
@@ -812,7 +812,7 @@ class Flickr_Shortcode_Importer_Settings {
 
 		$input['version'] = self::$version;
 		$input['donate_version'] = Flickr_Shortcode_Importer::VERSION;
-		$input = apply_filters( 'flickr_shortcode_importer_plugin_validate_settings', $input, $errors );
+		$input = apply_filters( 'flickr_shortcode_importer_validate_settings', $input, $errors );
 
 		unset( $input['export'] );
 		unset( $input['import'] );

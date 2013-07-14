@@ -6,6 +6,8 @@
 * Correct fsi_get_option call
 * Correct settings URL
 * Migrate code to updated framework
+* Remove mention of premium version
+* Update API
 * Update CHANGELOG, readme, and TODO content
 * Update POT
 
