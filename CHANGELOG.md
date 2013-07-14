@@ -3,6 +3,8 @@
 ## master
 
 ## 2.0.0
+* Correct fsi_get_option call
+* Correct settings URL
 * Migrate code to updated framework
 * Update CHANGELOG, readme, and TODO content
 * Update POT
