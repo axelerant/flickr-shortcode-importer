@@ -4,12 +4,15 @@
 
 ## 2.0.0
 * Correct fsi_get_option call
+* Correct label for "Import [flickr] content" checkbox
 * Correct settings URL
+* Escape HTML in localizations as needed
 * Migrate code to updated framework
 * Remove mention of premium version
 * Update API
 * Update CHANGELOG, readme, and TODO content
 * Update POT
+* Update progress bar scripts and styles
 
 ## 1.8.1
 * Author URL update
