@@ -64,10 +64,10 @@ class Flickr_Shortcode_Importer_Settings {
 
 	public static function sections() {
 		$this->sections['general']      = esc_html__( 'Import Settings', 'flickr-shortcode-importer' );
-		$this->sections['api']   		= esc_html__( 'Flickr API', 'flickr-shortcode-importer' );
-		$this->sections['selection']	= esc_html__( 'Posts Selection', 'flickr-shortcode-importer' );
-		$this->sections['testing']		= esc_html__( 'Testing Options', 'flickr-shortcode-importer' );
-		$this->sections['posts']		= esc_html__( 'Post Options', 'flickr-shortcode-importer' );
+		$this->sections['api']     = esc_html__( 'Flickr API', 'flickr-shortcode-importer' );
+		$this->sections['selection'] = esc_html__( 'Posts Selection', 'flickr-shortcode-importer' );
+		$this->sections['testing']  = esc_html__( 'Testing Options', 'flickr-shortcode-importer' );
+		$this->sections['posts']  = esc_html__( 'Post Options', 'flickr-shortcode-importer' );
 		self::$sections['reset']     = esc_html__( 'Compatibility & Reset', 'flickr-shortcode-importer' );
 		self::$sections['about']     = esc_html__( 'About Flickr Shortcode Importer', 'flickr-shortcode-importer' );
 
@@ -88,183 +88,183 @@ class Flickr_Shortcode_Importer_Settings {
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['import_flickr_sourced_tags'] = array(
 			'title'   => esc_html__( 'Import Flickr-sourced A/IMG tags?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Converts Flickr-sourced A/IMG tags to [flickr] and then proceeds with import.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['set_featured_image'] = array(
 			'title'   => esc_html__( 'Set Featured Image?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Set the first [flickr] or [flickrset] image found as the Featured Image. Will not replace the current Featured Image of a post.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['force_set_featured_image'] = array(
 			'title'   => esc_html__( 'Force Set Featured Image?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Set the Featured Image even if one already exists for a post.', 'flickr-shortcode-importer'),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['remove_first_flickr_shortcode'] = array(
 			'title'   => esc_html__( 'Remove First Flickr Shortcode?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Removes the first [flickr] from post content. If you use Featured Images as header or lead images, then this might prevent duplicate images in your post.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['make_nice_image_title'] = array(
 			'title'   => esc_html__( 'Make Nice Image Title?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( "Try to make a nice title if none is set. For Flickr set images, Flickr set title plus a numeric suffix is applied.", 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['replace_file_name'] = array(
 			'title'   => esc_html__( 'Replace Filename with Image Title?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Mainly for SEO purposes. This setting replaces the imported media filename with the media\'s title. For non-images, this is always done.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['image_import_size'] = array(
 			'title'   => esc_html__( 'Image Import Size', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Size of image to import into media library from Flickr. If requested size doesn\'t exist, then original is imported because it\'s the closest to the requested import size.', 'flickr-shortcode-importer' ),
 			'type'    => 'select',
 			'std'     => 'Large',
 			'choices' => array(
-				'Small'			=> 'Small (240px wide)',
-				'Medium 640'	=> 'Medium (640px wide)',
-				'Large'			=> 'Large (1024px wide)',
-				'Original'		=> 'Original'
+				'Small'   => 'Small (240px wide)',
+				'Medium 640' => 'Medium (640px wide)',
+				'Large'   => 'Large (1024px wide)',
+				'Original'  => 'Original'
 			)
 		);
-		
+
 		$this->settings['default_image_alignment'] = array(
 			'title'   => esc_html__( 'Default Image Alignment', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Default alignment of image displayed in post when no alignment is found.', 'flickr-shortcode-importer' ),
 			'type'    => 'select',
 			'std'     => 'left',
 			'choices' => array(
-				'none'		=> 'None',
-				'left'		=> 'Left',
-				'center'	=> 'Center',
-				'right'		=> 'Right',
+				'none'  => 'None',
+				'left'  => 'Left',
+				'center' => 'Center',
+				'right'  => 'Right',
 			)
 		);
-		
+
 		$this->settings['default_image_size'] = array(
 			'title'   => esc_html__( 'Default Image Size', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Default size of image displayed in post when no size is found.', 'flickr-shortcode-importer' ),
 			'type'    => 'select',
 			'std'     => 'medium',
 			'choices' => array(
-				'thumbnail'	=> 'Thumbnail',
-				'medium'	=> 'Medium',
-				'large'		=> 'Large',
-				'full'		=> 'Full'
+				'thumbnail' => 'Thumbnail',
+				'medium' => 'Medium',
+				'large'  => 'Large',
+				'full'  => 'Full'
 			)
 		);
-		
+
 		$this->settings['default_a_tag_class'] = array(
 			'title'   => esc_html__( 'Default A Tag Class', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Inserts a class into links around imported images. Useful for lightbox\'ing.', 'flickr-shortcode-importer' ),
 			'std'     => '',
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['link_image_to_attach_page'] = array(
 			'title'   => esc_html__( 'Link Image to Attachment Page?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'If set, post single view images are linked to attachment pages. Otherwise the image links to its source file.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 1
 		);
-		
+
 		$this->settings['image_wrap_class'] = array(
 			'title'   => esc_html__( 'Image Wrap Class', 'flickr-shortcode-importer' ),
 			'desc'   => esc_html__( 'If set, a span tag is wrapped around the image with the given class. Also wraps attribution if enabled. e.g. Providing `flickr-image` results in `&lt;span class="flickr-image"&gt;|&lt;/span&gt;`', 'flickr-shortcode-importer' ),
 			'std'     => esc_html__( '', 'flickr-shortcode-importer' ),
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['set_caption'] = array(
 			'title'   => esc_html__( 'Set Captions?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Uses media title as the caption.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['flickr_image_attribution'] = array(
 			'title'   => esc_html__( 'Include Flickr Author Attribution?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Appends Flickr username, linked back to Flickr image to the imported Flickr image.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['flickr_image_attribution_text'] = array(
 			'title'   => esc_html__( 'Flickr Author Attribution Text', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std'     => esc_html__( 'Photo by ', 'flickr-shortcode-importer' ),
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['flickr_image_attribution_wrap_class'] = array(
 			'title'   => esc_html__( 'Flickr Author Attribution Wrap Class', 'flickr-shortcode-importer' ),
 			'desc'   => esc_html__( 'If set, a span tag is wrapped around the attribution with the given class. e.g. Providing `flickr-attribution` results in `&lt;span class="flickr-attribution"&gt;|&lt;/span&gt;`', 'flickr-shortcode-importer' ),
 			'std'     => esc_html__( '', 'flickr-shortcode-importer' ),
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['flickr_link_in_desc'] = array(
 			'title'   => esc_html__( 'Add Flickr Attribution to Description?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Like `Include Flickr Author Attribution` but appends the image description.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['flickr_link_text'] = array(
 			'title'   => esc_html__( 'Flickr Attribution Text', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std'     => esc_html__( 'Photo by ', 'flickr-shortcode-importer' ),
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['flickr_image_license'] = array(
 			'title'   => esc_html__( 'Add Image License to Description?', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Append image license and link to image description.', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['flickr_image_license_text'] = array(
 			'title'   => esc_html__( 'Flickr Image License Text', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std'     => esc_html__( 'License ', 'flickr-shortcode-importer' ),
 			'type'    => 'text',
 		);
-		
+
 		$this->settings['posts_to_import'] = array(
 			'title'   => esc_html__( 'Posts to Import', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( "A CSV list of post ids to import, like '1,2,3'.", 'flickr-shortcode-importer' ),
 			'std'     => '',
 			'type'    => 'text',
-			'section' => 'selection'
-			'validate' => 'ids'
+			'section' => 'selection',
+			'validate' => 'ids',
 		);
-		
+
 		$this->settings['skip_importing_post_ids'] = array(
 			'title'   => esc_html__( 'Skip Importing Posts', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( "A CSV list of post ids to not import, like '1,2,3'.", 'flickr-shortcode-importer' ),
 			'std'     => '',
 			'type'    => 'text',
-			'section' => 'selection'
-			'validate' => 'ids'
+			'section' => 'selection',
+			'validate' => 'ids',
 		);
-		
+
 		$this->settings['limit'] = array(
 			'title'   => esc_html__( 'Import Limit', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( 'Useful for testing import on a limited amount of posts. 0 or blank means unlimited.', 'flickr-shortcode-importer' ),
@@ -272,15 +272,15 @@ class Flickr_Shortcode_Importer_Settings {
 			'type'    => 'text',
 			'section' => 'testing'
 		);
-		
+
 		$this->settings['debug_mode'] = array(
 			'section' => 'testing',
 			'title'   => esc_html__( 'Debug Mode?', 'flickr-shortcode-importer' ),
-			'desc'	  => esc_html__( 'Bypass Ajax controller to handle posts_to_import directly for testing purposes', 'flickr-shortcode-importer' ),
+			'desc'   => esc_html__( 'Bypass Ajax controller to handle posts_to_import directly for testing purposes', 'flickr-shortcode-importer' ),
 			'type'    => 'checkbox',
 			'std'     => 0
 		);
-		
+
 		$this->settings['flickr_api_key'] = array(
 			'title'   => esc_html__( 'Flickr API Key', 'flickr-shortcode-importer' ),
 			'desc'    => __( '<a href="http://www.flickr.com/services/api/">Flickr API Documentation</a>', 'flickr-shortcode-importer' ),
@@ -288,7 +288,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'type'    => 'text',
 			'section' => 'api'
 		);
-		
+
 		$this->settings['flickr_api_secret'] = array(
 			'title'   => esc_html__( 'Flickr API Secret', 'flickr-shortcode-importer' ),
 			'desc'    => esc_html__( '', 'flickr-shortcode-importer' ),
@@ -296,7 +296,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'type'    => 'text',
 			'section' => 'api'
 		);
-		
+
 		$this->settings['role_enable_post_widget'] = array(
 			'section' => 'posts',
 			'title'   => esc_html__( 'Post [flickr] Import Widget?', 'flickr-shortcode-importer' ),
@@ -304,21 +304,21 @@ class Flickr_Shortcode_Importer_Settings {
 			'type'    => 'select',
 			'std'     => 'level_1',
 			'choices' => array(
-				''			=> 'Disable',
-				'level_10'	=> 'Administrator',
-				'level_7'	=> 'Editor',
-				'level_4'	=> 'Author',
-				'level_1'	=> 'Contributor',
+				''   => 'Disable',
+				'level_10' => 'Administrator',
+				'level_7' => 'Editor',
+				'level_4' => 'Author',
+				'level_1' => 'Contributor',
 			)
 		);
-				
-		$post_types				= get_post_types( array( 'public' => true ), 'objects' );
-		foreach( $post_types as $post_type => $ptype_obj ) {
+
+		$post_types    = get_post_types( array( 'public' => true ), 'objects' );
+		foreach ( $post_types as $post_type => $ptype_obj ) {
 			$this->settings[ 'enable_post_widget_' . $post_type ] = array(
 				'section' => 'posts',
 				'title'   => esc_html__( 'Enable for ' . $ptype_obj->labels->name, 'flickr-shortcode-importer'),
 				'desc'    => esc_html__( '', 'flickr-shortcode-importer' ),
- 				'type'    => 'checkbox',
+				'type'    => 'checkbox',
 				'std'     => ( 'attachment' != $post_type ) ? 1 : 0,
 			);
 		}
@@ -436,7 +436,7 @@ class Flickr_Shortcode_Importer_Settings {
 		add_action( 'admin_print_styles-' . $admin_page, array( &$this, 'styles' ) );
 
 		add_screen_meta_link(
-        	'fsi-importer-link',
+			'fsi-importer-link',
 			esc_html__('[Flickr] Importer', 'flickr-shortcode-importer'),
 			admin_url('tools.php?page=' . Flickr_Shortcode_Importer::id),
 			$admin_page,
