@@ -8,8 +8,6 @@
  * Author URI: http://aihr.us/about-aihrus/michael-cannon-resume/
  * License: GPLv2 or later
  */
-
-
 /**
  * Copyright 2013 Michael Cannon (email: mc@aihr.us)
  * This program is free software; you can redistribute it and/or modify
@@ -24,17 +22,17 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
 class Flickr_Shortcode_Importer {
-	const ID = 'flickr-shortcode-importer';
+	const ID          = 'flickr-shortcode-importer';
 	const PLUGIN_FILE = 'flickr-shortcode-importer/flickr-shortcode-importer.php';
-	const VERSION = '0.0.1';
+	const VERSION     = '0.0.1';
 
 	private static $base = null;
 
 	public static $donate_button = '';
-	public static $flickr_id = false;
-	public static $flickset_id = false;
-	public static $menu_id = null;
-	public static $post_types = null;
+	public static $flickr_id     = false;
+	public static $flickset_id   = false;
+	public static $menu_id       = null;
+	public static $post_types    = null;
 	public static $settings_link = '';
 
 
@@ -61,7 +59,19 @@ class Flickr_Shortcode_Importer {
 
 
 	public function init() {
+		if ( fsi_get_option( 'debug_mode' ) ) {
+			// Turns WordPress debugging on
+			define('WP_DEBUG', true);
+
+			// Tells WordPress to log everything to the /wp-content/debug.log file
+			define('WP_DEBUG_LOG', true);
+
+			// Doesn't force the PHP 'display_errors' variable to be on
+			define('WP_DEBUG_DISPLAY', true);
+		}
+
 		$this->flickr_import_post_types();
+		add_action( 'wp_ajax_ajax_process_shortcode', array( &$this, 'ajax_process_shortcode' ) );
 		load_plugin_textdomain( self::ID, false, 'flickr-shortcode-importer/languages' );
 		self::$donate_button = <<<EOD
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -185,20 +195,17 @@ EOD;
 
 
 	public function flickr_import_post_types() {
-		$post_types = get_post_types( array( 'public' => true ), 'names' );
+		$post_types       = get_post_types( array( 'public' => true ), 'names' );
 		self::$post_types = array();
-
-		foreach ( $post_types as $post_type ) {
+		foreach ( $post_types as $post_type )
 			self::$post_types[] = $post_type;
-		}
 	}
 
 
 	public function flickr_import_meta_boxes() {
 		foreach ( self::$post_types as $post_type ) {
-			if ( fsi_get_option( 'enable_post_widget_' . $post_type ) ) {
+			if ( fsi_get_option( 'enable_post_widget_' . $post_type ) )
 				add_meta_box( 'flickr_import', esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), array( &$this, 'post_flickr_import_meta_box' ), $post_type, 'side' );
-			}
 		}
 	}
 
@@ -223,7 +230,7 @@ EOD;
 
 		// Capability check
 		if ( ! current_user_can( 'manage_options' ) )
-			wp_die( $this->post_id, esc_html__( "Your user account doesn't have permission to import images", 'flickr-shortcode-importer' ) );
+			wp_die( $this->post_id, esc_html__( "Your user account doesn't have permission to import Flickr shortcodes and images.", 'flickr-shortcode-importer' ) );
 
 ?>
 
@@ -247,7 +254,7 @@ EOD;
 
 		// If the button was clicked
 		if ( ! empty( $_POST['flickr-shortcode-importer'] ) || ! empty( $_REQUEST['posts'] ) ) {
-				-   // Form nonce check
+			// Form nonce check
 			check_admin_referer( 'flickr-shortcode-importer' );
 
 			// Create the list of image IDs
@@ -276,9 +283,10 @@ EOD;
 						AND (
 							post_content LIKE '%[flickr %'
 							OR post_content LIKE '%[flickrset %'
+							OR post_content LIKE '%[flickr-gallery %'
 							$flickr_source_where
 						)
-					";
+				";
 
 				$include_ids = fsi_get_option( 'posts_to_import' );
 				if ( $include_ids )
@@ -288,7 +296,7 @@ EOD;
 				if ( $skip_ids )
 					$query  .= ' AND ID NOT IN ( ' . $skip_ids . ' )';
 
-				$limit = (int) fsi_get_option( 'limit' );
+				$limit = fsi_get_option( 'limit' );
 				if ( $limit )
 					$query  .= ' LIMIT ' . $limit;
 
@@ -328,14 +336,13 @@ EOD;
 		// <a class="tt-flickr tt-flickr-Medium" title="Khan Sao Road, Bangkok, Thailand" href="http://www.flickr.com/photos/comprock/4334303694/" target="_blank"><img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" /></a>
 		// cycle through a/img
 		$find_flickr_a_tag = '#<a.*href=.*http://www.flickr.com/.*><img.*src=.*http://farm\d+.static.?flickr.com/[^>]+></a>#i';
-		$a_tag_open = '<a ';
-
-		$post_content = $this->convert_tag_to_flickr( $post_content, $a_tag_open, $find_flickr_a_tag );
+		$a_tag_open        = '<a ';
+		$post_content      = $this->convert_tag_to_flickr( $post_content, $a_tag_open, $find_flickr_a_tag );
 
 		// cycle through standalone img
 		$find_flickr_img_tag = '#<img.*src=.*http://farm\d+.static.?flickr.com/[^>]+>#i';
-		$img_tag_open = '<img ';
-		$post_content = $this->convert_tag_to_flickr( $post_content, $img_tag_open, $find_flickr_img_tag, true );
+		$img_tag_open        = '<img ';
+		$post_content        = $this->convert_tag_to_flickr( $post_content, $img_tag_open, $find_flickr_img_tag, true );
 
 		$update = array(
 			'ID' => $post->ID,
@@ -348,31 +355,29 @@ EOD;
 
 	public function convert_tag_to_flickr( $post_content, $tag_open, $find_tag, $img_only = false ) {
 		$default_alignment = fsi_get_option( 'default_image_alignment', 'left' );
-		$doc = new DOMDocument();
-		$flickr_shortcode = '[flickr id="%1$s" thumbnail="%2$s" align="%3$s"]' . "\n";
-		$matches = explode( $tag_open, $post_content );
-		$size = '';
+		$doc               = new DOMDocument();
+		$flickr_shortcode  = '[flickr id="%1$s" thumbnail="%2$s" align="%3$s"]' . "\n";
+		$matches           = explode( $tag_open, $post_content );
+		$size              = '';
 
 		// for each A/IMG tag set
 		foreach ( $matches as $html ) {
 			$html = $tag_open . $html;
 
-			if ( ! preg_match( $find_tag, $html, $match ) ) {
+			if ( ! preg_match( $find_tag, $html, $match ) )
 				continue;
-			}
 
 			// deal only with the A/IMG tag
 			$tag_html = $match[0];
 
 			// safer than home grown regex
-			if ( ! $doc->loadHTML( $tag_html ) ) {
+			if ( ! $doc->loadHTML( $tag_html ) )
 				continue;
-			}
 
 			if ( ! $img_only ) {
 				// parse out parts id, thumbnail, align
 				$a_tags = $doc->getElementsByTagName( 'a' );
-				$a_tag = $a_tags->item( 0 );
+				$a_tag  = $a_tags->item( 0 );
 
 				// gives size tt-flickr tt-flickr-Medium
 				$size = $a_tag->getAttribute( 'class' );
@@ -381,26 +386,28 @@ EOD;
 			$size = $this->get_shortcode_size( $size );
 
 			$image_tags = $doc->getElementsByTagName( 'img' );
-			$image_tag = $image_tags->item( 0 );
+			$image_tag  = $image_tags->item( 0 );
 
 			// give photo id http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg
-			$src = $image_tag->getAttribute( 'src' );
+			$src      = $image_tag->getAttribute( 'src' );
 			$filename = basename( $src );
-			$id = preg_replace( '#^(\d+)_.*#', '\1', $filename );
+			$id       = preg_replace( '#^(\d+)_.*#', '\1', $filename );
 
 			// gives alginment alignnone
-			$align_primary = $image_tag->getAttribute( 'class' );
+			$align_primary   = $image_tag->getAttribute( 'class' );
 			$align_secondary = $image_tag->getAttribute( 'align' );
-			$align_combined = $align_secondary . ' ' . $align_primary;
+			$align_combined  = $align_secondary . ' ' . $align_primary;
 
 			$find_align = '#(none|left|center|right)#i';
 			preg_match_all( $find_align, $align_combined, $align_matches );
+
 			// get the last align mentioned since that has precedence
 			$align = ( count( $align_matches[0] ) ) ? array_pop( $align_matches[0] ) : $default_alignment;
 
 			// ceate simple [flickr] like
 			// [flickr id="5348222727" thumbnail="small" align="none"]
 			$replacement = sprintf( $flickr_shortcode, $id, $size, $align );
+
 			// replace A/IMG with new [flickr]
 			$post_content = str_replace( $tag_html, $replacement, $post_content );
 		}
@@ -517,7 +524,10 @@ EOD;
 				$.ajax({
 					type: 'POST',
 					url: ajaxurl,
-					data: { action: "importflickrshortcode", id: id },
+					data: {
+						action: "ajax_process_shortcode",
+						id: id
+					},
 					success: function( response ) {
 						if ( response.success ) {
 							FSIPostsUpdateStatus( id, true, response );
@@ -581,7 +591,7 @@ EOD;
 	// Process a single post ID
 	public function process_flickr_shortcode( $post_id ) {
 		$this->post_id = (int) $post_id;
-		$post = get_post( $this->post_id );
+		$post          = get_post( $this->post_id );
 
 		if ( ! $post || ! in_array( $post->post_type, self::$post_types )  )
 			return;
@@ -633,25 +643,20 @@ EOD;
 
 	public function _process_shortcode( $post ) {
 		// default is Flickr Shortcode Import API key
-		$api_key = fsi_get_option( 'flickr_api_key' );
-		$secret = fsi_get_option( 'flickr_api_secret' );
+		$api_key      = fsi_get_option( 'flickr_api_key' );
+		$secret       = fsi_get_option( 'flickr_api_secret' );
 		$this->flickr = new phpFlickr( $api_key, $secret );
 
 		$this->licenses = array();
-		$licenses = $this->flickr->photos_licenses_getInfo();
+		$licenses       = $this->flickr->photos_licenses_getInfo();
 		foreach ( $licenses as $license ) {
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r($license); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
 			$this->licenses[ $license['id'] ] = array(
 				'name' => $license['name'],
 				'url' => $license['url']
 			);
 		}
+
 		ksort( $this->licenses );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($this->licenses); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
 
 		// only use our shortcode handlers to prevent messing up post content
 		remove_all_shortcodes();
@@ -662,12 +667,11 @@ EOD;
 		// Don't overwrite Featured Images
 		$this->featured_id = false;
 		$this->first_image = fsi_get_option( 'remove_first_flickr_shortcode' ) ? true : false;
-		$this->menu_order = 1;
+		$this->menu_order  = 1;
 
 		// process [flickr] codes in posts
 		$post_content = do_shortcode( $post->post_content );
-
-		$post = array(
+		$post         = array(
 			'ID' => $this->post_id,
 			'post_content' => $post_content,
 		);
@@ -681,20 +685,14 @@ EOD;
 			update_post_meta( $this->post_id, "_thumbnail_id", $this->featured_id );
 		}
 
-		if ( fsi_get_option( 'force_reimport' ) ) {
+		if ( fsi_get_option( 'force_reimport' ) )
 			fsi_set_option( 'force_reimport', 0 );
-		}
 	}
 
 
 	// process each [flickr] entry
 	public function shortcode_flickr( $args, $content = null ) {
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($args); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($content); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
-		if ( isset( $args['id'] ) ) {
+		if ( ! empty( $args['id'] ) ) {
 			$this->flickr_id = $args['id'];
 		} else {
 			if ( preg_match( '#/([0-9]+)/?$#', $content, $match ) ) {
@@ -705,42 +703,29 @@ EOD;
 				return '';
 			}
 
-			if ( isset( $args['size'] ) )
+			if ( ! empty( $args['size'] ) )
 				$args['thumbnail'] = $args['size'];
 
 			// for [flickr-gallery] width denotes video
-			if ( isset( $args['width'] ) && isset( $args['height'] ) )
+			if ( ! empty( $args['width'] ) && ! empty( $args['height'] ) )
 				$args['thumbnail'] = 'video_player';
 
-			if ( isset( $args['float'] ) )
+			if ( ! empty( $args['float'] ) )
 				$args['align'] = $args['float'];
-
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r($this->flickr_id); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-				print_r($args); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
 		}
 
 		set_time_limit( 120 );
 
 		$photo = $this->flickr->photos_getInfo( $this->flickr_id );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($photo); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
 		$photo = $photo['photo'];
-
-		if ( isset( $args['set_title'] ) ) {
+		if ( ! empty( $args['set_title'] ) ) {
 			$photo['set_title'] = $args['set_title'];
 		} else {
-			$contexts = $this->flickr->photos_getAllContexts( $this->flickr_id );
-			$photo['set_title'] = isset( $contexts['set'][0]['title'] ) ? $contexts['set'][0]['title'] : '';
+			$contexts           = $this->flickr->photos_getAllContexts( $this->flickr_id );
+			$photo['set_title'] = ! empty( $contexts['set'][0]['title'] ) ? $contexts['set'][0]['title'] : '';
 		}
 
 		$markup = $this->process_flickr_media( $photo, $args );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($markup); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
 
 		return $markup;
 	}
@@ -752,21 +737,16 @@ EOD;
 		$attr = $args;
 		unset( $attr['mode'] );
 
-		if ( ! isset( $attr[ 'user_id' ] ) ) {
-			// fg-user_id of flickr-gallery plugin
-			$attr[ 'user_id' ] = get_option('fg-user_id');
-			// developer's user id (comprock)
-			// $attr[ 'user_id' ] = get_option('fg-user_id', '90901451@N00');
-		}
+		if ( empty( $attr[ 'user_id' ] ) )
+			$attr[ 'user_id' ] = fsi_get_option('fg-user_id');
 
-		if ( ! isset( $attr[ 'per_page' ] ) ) {
-			$attr[ 'per_page' ] = get_option('fg-per_page');
-		}
+		if ( empty( $attr[ 'per_page' ] ) )
+			$attr[ 'per_page' ] = fsi_get_option('fg-per_page');
 
 		switch ( $args['mode'] ) {
 		case 'photoset':
 			$this->flickset_id = $args['photoset'];
-			$info = $this->flickr->photosets_getInfo( $this->flickset_id );
+			$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
 			$args['set_title'] = $info['title'];
 
 			$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
@@ -781,8 +761,8 @@ EOD;
 
 		case 'interesting':
 			$attr['sort'] = 'interestingness-desc';
-			$photos = $this->flickr->photos_search( $attr );
-			$photos = $photos['photo'];
+			$photos       = $this->flickr->photos_search( $attr );
+			$photos       = $photos['photo'];
 			break;
 
 		case 'search':
@@ -793,10 +773,6 @@ EOD;
 
 		default:
 			break;
-		}
-
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($photos); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
 		}
 
 		if ( ! empty( $photos ) ) {
@@ -810,7 +786,7 @@ EOD;
 			echo 'No photos found to import<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
 		}
 
-		$markup = '[gallery]';
+		$markup            = '[gallery]';
 		$this->flickset_id = false;
 
 		return $markup;
@@ -820,9 +796,8 @@ EOD;
 	// process each [flickrset] entry
 	public function shortcode_flickrset( $args ) {
 		$this->flickset_id = $args['id'];
-		$import_limit = ( $args['photos'] ) ? $args['photos'] : -1;
-
-		$info = $this->flickr->photosets_getInfo( $this->flickset_id );
+		$import_limit      = ( $args['photos'] ) ? $args['photos'] : -1;
+		$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
 		$args['set_title'] = $info['title'];
 
 		$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
@@ -863,35 +838,26 @@ EOD;
 	public function render_photo( $photo, $args = false ) {
 		// add image to media library
 		$image_id = $this->import_flickr_media( $photo );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($image_id); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
 
 		// if first image, set as featured
-		if ( ! $this->featured_id ) {
+		if ( ! $this->featured_id )
 			$this->featured_id = $image_id;
-		}
 
 		// no args, means nothing further to do
 		if ( false === $args )
 			return $markup;
 
 		// wrap in link to attachment itself
-		$size = isset( $args['thumbnail'] ) ? $args['thumbnail'] : '';
+		$size = ! empty( $args['thumbnail'] ) ? $args['thumbnail'] : '';
 		$size = $this->get_shortcode_size( $size );
+
 		$link_to_attach_page = fsi_get_option( 'link_image_to_attach_page' ) ? true : false;
-		$image_link = wp_get_attachment_link( $image_id, $size, $link_to_attach_page );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($size); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			var_dump($link_to_attach_page); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($image_link); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
+		$image_link          = wp_get_attachment_link( $image_id, $size, $link_to_attach_page );
 
 		// correct class per args
-		$align = isset( $args['align'] ) ? $args['align'] : fsi_get_option( 'default_image_alignment', 'left' );
-		$align = ' align' . $align;
-		$wp_image = ' wp-image-' . $image_id;
+		$align      = ! empty( $args['align'] ) ? $args['align'] : fsi_get_option( 'default_image_alignment', 'left' );
+		$align      = ' align' . $align;
+		$wp_image   = ' wp-image-' . $image_id;
 		$image_link = preg_replace( '#(class="[^"]+)"#', '\1'
 			. $align
 			. $wp_image
@@ -905,38 +871,29 @@ EOD;
 				$image_link );
 		}
 
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($image_link); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
 		if ( ! $this->first_image ) {
 			// remaining [flickr] converted to locally reference image
 			$markup = $image_link;
 
 			if ( fsi_get_option( 'flickr_image_attribution' ) ) {
 				$wrap_class = fsi_get_option( 'flickr_image_attribution_wrap_class' );
-				if ( $wrap_class ) {
+				if ( $wrap_class )
 					$markup   .= '<span class="'. $wrap_class . '">';
-				}
 
-				$attribution_text = fsi_get_option( 'flickr_image_attribution_text', esc_html__( 'Photo by ', 'flickr-shortcode-importer' ) );
-				$markup   .= $attribution_text;
+				$attribution_text  = fsi_get_option( 'flickr_image_attribution_text', esc_html__( 'Photo by ', 'flickr-shortcode-importer' ) );
+				$markup           .= $attribution_text;
 
-				$attribution_link = '<a href="' . $photo['urls']['url'][0]['_content'];
-				$username = $photo['owner']['username'];
+				$attribution_link  = '<a href="' . $photo['urls']['url'][0]['_content'];
+				$username          = $photo['owner']['username'];
 				$attribution_link .= '">' . $username . '</a>';
-
-				$markup   .= $attribution_link;
-
-				if ( $wrap_class ) {
+				$markup           .= $attribution_link;
+				if ( $wrap_class )
 					$markup  .= '</span>';
-				}
 			}
 
 			$image_wrap_class = fsi_get_option( 'image_wrap_class' );
-			if ( $image_wrap_class ) {
+			if ( $image_wrap_class )
 				$markup = '<span class="'. $image_wrap_class . '">' . $markup . '</span>';
-			}
 		} else {
 			// remove [flickr] from post
 			$this->first_image = false;
@@ -954,24 +911,12 @@ EOD;
 		Author: Trent Gardner
 	*/
 	public function RenderVideo($vid, $type = 'flash', $sizes = null) {
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($vid); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($type); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($sizes); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
+		// fixme import media
 
-		// TODO import media
-
-		if (is_null($sizes)) {
+		if (is_null($sizes))
 			$sizes = $this->flickr->photos_getSizes($vid);
-		}
-
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($sizes); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
 
 		if ($type == 'html5') {
-
 			$video = array();
 			foreach ($sizes as $v) {
 				if ($v['label'] == 'Site MP4') {
@@ -985,9 +930,7 @@ EOD;
 				, $video['height']
 				, $this->video_source
 				, $this->RenderVideo($vid, 'flash', $sizes));
-
 		} else {
-
 			$video = array();
 			foreach ($sizes as $v) {
 				if ($v['label'] == 'Video Player') {
@@ -1002,7 +945,6 @@ EOD;
 	<param name="allowFullScreen" value="true"></param>
 	<embed type="application/x-shockwave-flash" flashvars="flickr_show_info_box=false" src="%s" allowfullscreen="true" height="%s" width="%s"></embed>
 </object>', $video['width'], $video['height'], $this->video_source, $this->video_source, $this->video_source, $video['height'], $video['width']);
-
 		}
 	}
 
@@ -1011,8 +953,9 @@ EOD;
 	public function get_shortcode_size( $size_name = '' ) {
 		$find_size = '#(square|thumbnail|small|medium|large|original|full)#i';
 		preg_match_all( $find_size, $size_name, $size_matches );
+
 		// get the last size mentioned since that has precedence
-		$size_name = ( isset( $size_matches[0] ) ) ? array_pop( $size_matches[0] ) : '';
+		$size_name = ( ! empty( $size_matches[0] ) ) ? array_pop( $size_matches[0] ) : '';
 
 		switch ( strtolower( $size_name ) ) {
 		case 'square':
@@ -1047,9 +990,9 @@ EOD;
 	public function import_flickr_media( $photo, $mode = true ) {
 		global $wpdb;
 
-		$photo_id = $photo['id'];
-		$set_title = isset( $photo['set_title'] ) ? $photo['set_title'] : '';
-		$title = $photo['title'];
+		$photo_id  = $photo['id'];
+		$set_title = ! empty( $photo['set_title'] ) ? $photo['set_title'] : '';
+		$title     = $photo['title'];
 
 		if ( fsi_get_option( 'make_nice_image_title' ) ) {
 			// if title is a filename, use set_title - menu order instead
@@ -1058,24 +1001,20 @@ EOD;
 				&& ! empty( $set_title ) ) {
 				$title = $set_title . ' - ' . $this->menu_order;
 			} elseif ( ! preg_match( '#\s#', $title ) ) {
-				$title = $this->cbMkReadableStr( $title );
+				$title = self::readable_str( $title );
 			}
 		}
 
-		$alt = $title;
+		$alt     = $title;
 		$caption = fsi_get_option( 'set_caption' ) ? $title : '';
-		$desc = html_entity_decode( $photo['description'] );
-		$date = $photo['dates']['taken'];
+		$desc    = html_entity_decode( $photo['description'] );
+		$date    = $photo['dates']['taken'];
 
 		$sizes = $this->flickr->photos_getSizes( $photo_id );
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($sizes); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
-		$src = false;
-
+		$src   = false;
 		if ( true === $mode ) {
 			$image_import_size = fsi_get_option( 'image_import_size', 'Large' );
+
 			// check that requested image size exists & grab source url
 			// array is in smallest to largest image size ordering
 			foreach ( $sizes as $size ) {
@@ -1086,17 +1025,14 @@ EOD;
 					}
 				}
 			}
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r($image_import_size); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
 
 			// Flickr saves images as jpg
 			$ext = '.jpg';
 
 			if ( ! empty( $title ) && fsi_get_option( 'replace_file_name' ) ) {
-				$file = preg_replace( '#[^\w]#', '-', $title );
-				$file = preg_replace( '#-{2,}#', '-', $file );
-				$file    .= $ext;
+				$file  = preg_replace( '#[^\w]#', '-', $title );
+				$file  = preg_replace( '#-{2,}#', '-', $file );
+				$file .= $ext;
 			} else {
 				$file = basename( $src );
 				$file = str_replace( '?zz=1', '', $file );
@@ -1112,25 +1048,21 @@ EOD;
 			foreach ( $sizes as $v ) {
 				if ( 'html5' == $mode && $v['label'] == 'Site MP4' ) {
 					$video = $v;
-					$ext = '.mp4';
+					$ext   = '.mp4';
 					break;
 				} elseif ( 'flash' == $mode && $v['label'] == 'Video Player' ) {
 					$video = $v;
-					$ext = '.swf';
+					$ext   = '.swf';
 					break;
 				}
-				// TODO what about unknown here?
+				// fixme what about unknown here?
 			}
 
 			$src = $video['source'];
 
-			$file = preg_replace( '#[^\w]#', '-', $title );
-			$file = preg_replace( '#-{2,}#', '-', $file );
-			$file    .= $ext;
-		}
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($src); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($file); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
+			$file  = preg_replace( '#[^\w]#', '-', $title );
+			$file  = preg_replace( '#-{2,}#', '-', $file );
+			$file .= $ext;
 		}
 
 		// see if src is duplicate, if so return image_id
@@ -1141,15 +1073,9 @@ EOD;
 				AND m.meta_key LIKE '_flickr_photo_id'
 				AND m.meta_value LIKE '$photo_id'
 		";
-		$dup = $wpdb->get_var( $query );
+		$dup   = $wpdb->get_var( $query );
 
 		if ( $dup && fsi_get_option( 'force_reimport' ) ) {
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r('force_reimport'); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-				print_r($dup); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-				print_r($src); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
-
 			// delete prior import
 			wp_delete_attachment( $dup, true );
 			$dup = false;
@@ -1158,10 +1084,6 @@ EOD;
 		if ( $dup ) {
 			if ( true !== $mode ) {
 				$this->video_source = wp_get_attachment_url( $dup );
-
-				if ( fsi_get_option( 'debug_mode' ) ) {
-					print_r($this->video_source); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-				}
 
 				return $dup;
 			}
@@ -1176,11 +1098,11 @@ EOD;
 		}
 
 		if ( fsi_get_option( 'flickr_link_in_desc' ) ) {
-			$desc    .= "\n" . fsi_get_option( 'flickr_link_text', esc_html__( 'Photo by ', 'flickr-shortcode-importer' ) );
-			$link = '<a href="' . $photo['urls']['url'][0]['_content'];
+			$desc .= "\n" . fsi_get_option( 'flickr_link_text', esc_html__( 'Photo by ', 'flickr-shortcode-importer' ) );
+			$link  = '<a href="' . $photo['urls']['url'][0]['_content'];
 
 			if ( $this->flickset_id ) {
-				$link   .= 'in/set-' . $this->flickset_id . '/';
+				$link .= 'in/set-' . $this->flickset_id . '/';
 			}
 
 			$username = $photo['owner']['username'];
@@ -1192,37 +1114,25 @@ EOD;
 			// append license info
 			// <photo id="2733" secret="123456" server="12" isfavorite="0" license="3"
 			// no license All rights reserved, any license Some rights reserved
-			$license = $photo['license'];
+			$license  = $photo['license'];
 			$desc    .= "\n" . fsi_get_option( 'flickr_image_license_text', esc_html__( 'License ', 'flickr-shortcode-importer' ) );
 			if ( $license ) {
-				$link = '<a href="' . $this->licenses[$license]['url'];
-				$link    .= '" title="' . $this->licenses[$license]['name'];
-
-				$link    .= '">' . $this->licenses[$license]['name'] . '</a>';
+				$link  = '<a href="' . $this->licenses[$license]['url'];
+				$link .= '" title="' . $this->licenses[$license]['name'];
+				$link .= '">' . $this->licenses[$license]['name'] . '</a>';
 			} else {
 				$link = $this->licenses[$license]['name'];
 			}
-			$desc    .= $link;
-		}
-
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($desc); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
+			$desc .= $link;
 		}
 
 		$file_move = wp_upload_bits( $file, null, $this->file_get_contents_curl( $src ) );
-		$filename = $file_move['file'];
-
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($file_move); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($filename); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
-
-		if ( ! $filename ) {
+		$filename  = $file_move['file'];
+		if ( ! empty( $filename ) )
 			$this->die_json_error_msg( $this->post_id, sprintf( esc_html__( 'Source file not found: %s', 'flickr-shortcode-importer' ), $src ) );
-		}
 
 		$wp_filetype = wp_check_filetype( $file, null );
-		$attachment = array(
+		$attachment  = array(
 			'menu_order' => $this->menu_order++,
 			'post_content' => $desc,
 			'post_date' => $date,
@@ -1231,20 +1141,11 @@ EOD;
 			'post_status' => 'inherit',
 			'post_title' => $title,
 		);
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			print_r($wp_filetype); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			print_r($attachment); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-		}
 
 		// relate image to post
 		$image_id = wp_insert_attachment( $attachment, $filename, $this->post_id );
-		if ( true !== $mode ) {
+		if ( true !== $mode )
 			$this->video_source = wp_get_attachment_url( $image_id );
-
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r($this->video_source); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
-		}
 
 		if ( ! $image_id )
 			$this->die_json_error_msg( $this->post_id, sprintf( esc_html__( 'The originally uploaded image file cannot be found at %s', 'flickr-shortcode-importer' ), esc_html( $filename ) ) );
@@ -1254,9 +1155,6 @@ EOD;
 
 		if ( true === $mode ) {
 			$metadata = wp_generate_attachment_metadata( $image_id, $filename );
-			if ( fsi_get_option( 'debug_mode' ) ) {
-				print_r($metadata); echo '<br />'; echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
-			}
 
 			if ( is_wp_error( $metadata ) )
 				$this->die_json_error_msg( $this->post_id, $metadata->get_error_message() );
@@ -1308,11 +1206,10 @@ EOD;
 	 * Returns string of a filename or string converted to a spaced extension
 	 * less header type string.
 	 *
-	 * @author Michael Cannon <mc@aihr.us>
 	 * @param string  filename or arbitrary text
 	 * @return mixed string/boolean
 	 */
-	public function cbMkReadableStr($str) {
+	public static function readable_str($str) {
 		if ( is_numeric( $str ) ) {
 			return number_format( $str );
 		}
@@ -1426,7 +1323,7 @@ function fsi_save_post( $post_id ) {
 		return;
 
 	// save checkbox or not
-	$checked = ( isset( $_POST['flickr_import'] ) && ! empty( $_POST['flickr_import'] ) ) ? 1 : 0;
+	$checked = ! empty( $_POST['flickr_import'] ) ? 1 : 0;
 	update_post_meta( $post_id, 'process_flickr_shortcode', $checked );
 
 	if ( ! $checked )

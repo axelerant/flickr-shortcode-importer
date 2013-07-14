@@ -3,16 +3,23 @@
 ## master
 
 ## 2.0.0
+* Add setting options for Flickr User ID and Images Per Page
 * Correct fsi_get_option call
 * Correct label for "Import [flickr] content" checkbox
 * Correct settings URL
 * Escape HTML in localizations as needed
+* Include [flickr-gallery] in Ajax importing
 * Migrate code to updated framework
+* Remove "Compatiblity" verbiage
 * Remove mention of premium version
+* Remove most `debug_mode` checks
+* Rename WP_AJAX call
 * Update API
 * Update CHANGELOG, readme, and TODO content
 * Update POT
+* Update import examples
 * Update progress bar scripts and styles
+* Use `empty` vs. `isset` checks
 
 ## 1.8.1
 * Author URL update

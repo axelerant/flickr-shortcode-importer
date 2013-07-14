@@ -68,7 +68,7 @@ class Flickr_Shortcode_Importer_Settings {
 		self::$sections['selection'] = esc_html__( 'Posts Selection', 'flickr-shortcode-importer' );
 		self::$sections['testing'] = esc_html__( 'Testing Options', 'flickr-shortcode-importer' );
 		self::$sections['posts'] = esc_html__( 'Post Options', 'flickr-shortcode-importer' );
-		self::$sections['reset'] = esc_html__( 'Compatibility & Reset', 'flickr-shortcode-importer' );
+		self::$sections['reset'] = esc_html__( 'Reset', 'flickr-shortcode-importer' );
 		self::$sections['about'] = esc_html__( 'About Flickr Shortcode Importer', 'flickr-shortcode-importer' );
 
 		self::$sections = apply_filters( 'flickr_shortcode_importer_sections', self::$sections );
@@ -294,6 +294,22 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Flickr API Secret', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std' => 'e63952df7d02cc03',
+			'type' => 'text',
+			'section' => 'api'
+		);
+
+		self::$settings['fg-user_id'] = array(
+			'title' => esc_html__( 'Flickr User ID', 'flickr-shortcode-importer' ),
+			'desc' => esc_html__( 'For Flickr Gallery plugin. Example: 90901451@N00', 'flickr-shortcode-importer' ),
+			'std' => get_option('fg-user_id'),
+			'type' => 'text',
+			'section' => 'api'
+		);
+
+		self::$settings['fg-per_page'] = array(
+			'title' => esc_html__( 'Images Per Page', 'flickr-shortcode-importer' ),
+			'desc' => esc_html__( 'For Flickr Gallery plugin', 'flickr-shortcode-importer' ),
+			'std' => get_option('fg-per_page', 10),
 			'type' => 'text',
 			'section' => 'api'
 		);
