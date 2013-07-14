@@ -1,0 +1,177 @@
+# Copyright (C) 2013 Flickr Shortcode Importer
+# This file is distributed under the same license as the Flickr Shortcode Importer package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flickr Shortcode Importer 0.0.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/flickr-shortcode-importer\n"
+"POT-Creation-Date: 2013-07-14 06:05:31+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2013-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: flickr-shortcode-importer.php:48
+msgid "Settings"
+msgstr ""
+
+#: flickr-shortcode-importer.php:117
+msgid ""
+"If your Flickr Shortcode Importer display has gone to funky town, please <a "
+"href=\"%s\">read the FAQ</a> about possible CSS fixes."
+msgstr ""
+
+#: flickr-shortcode-importer.php:126
+msgid ""
+"Please donate $2 towards development and support of this Flickr Shortcode "
+"Importer plugin. %s"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:66
+msgid "General"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:67
+msgid "Post Type"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:68
+msgid "Compatibility & Reset"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:69
+msgid "About Flickr Shortcode Importer"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:83
+msgid "Hide built-in quotes?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:84
+msgid "Remove open and close quote span tags surrounding asdf content"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:89
+msgid "Hide \"Testimonials Not Found\"?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:94
+msgid "Enable Paging?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:95
+msgid "For `[asdfswidget_list]`"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:98
+msgid "Disable"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:99
+msgid "Enable"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:100
+msgid "Before asdfs"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:101
+msgid "After asdfs"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:108
+msgid "URL slug-name for <a href=\"%1s\">asdfs archive</a> page."
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:114
+msgid "Archive Page URL"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:124
+msgid "Don't Use Default Taxonomies?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:126
+msgid ""
+"If checked, use Flickr Shortcode Importer's own category and tag taxonomies "
+"instead"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:137
+msgid "Export Settings"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:139
+msgid ""
+"These are your current settings in a serialized format. Copy the contents to "
+"make a backup of your settings."
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:147
+msgid "Import Settings"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:149
+msgid ""
+"Paste new serialized settings here to overwrite your current configuration."
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:155
+msgid "Remove Plugin Data on Deletion?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:158
+msgid ""
+"Delete all Flickr Shortcode Importer data and options from database on "
+"plugin deletion"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:164
+msgid "Reset to Defaults?"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:167
+msgid "Check this box to reset options to their defaults"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:228
+#: lib/class-flickr-shortcode-importer-settings.php:265
+msgid "Flickr Shortcode Importer Settings"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:228
+msgid "Custom Bulk/Quick"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:282
+msgid "Save Changes"
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:291
+msgid "Copyright &copy;%1$s %2$s."
+msgstr ""
+
+#: lib/class-flickr-shortcode-importer-settings.php:651
+msgid "Required"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Flickr Shortcode Importer"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/flickr-shortcode-importer/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "TBD"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Michael Cannon"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://aihr.us/about-aihrus/michael-cannon-resume/"
+msgstr ""
