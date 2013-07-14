@@ -1,6 +1,9 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+
+## 2.0.0
+* Migrate code to updated framework
 * Update CHANGELOG, readme, and TODO content
 * Update POT
 

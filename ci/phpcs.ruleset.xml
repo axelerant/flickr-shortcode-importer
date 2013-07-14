@@ -4,7 +4,8 @@
 		Custom phpcs rules to check for Aihrus' WordPress projects
 	</description>
 
-	<exclude-pattern>TBD</exclude-pattern>
+	<exclude-pattern>inc.flickr.php</exclude-pattern>
+	<exclude-pattern>screen-meta-links.php</exclude-pattern>
 
 	<rule ref="Generic">
 		<exclude name="Generic.ControlStructures.InlineControlStructure.NotAllowed" />
