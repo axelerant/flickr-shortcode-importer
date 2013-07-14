@@ -150,12 +150,7 @@ EOD;
 
 	public static function scripts() {
 		wp_enqueue_script( 'jquery' );
-	}
-
-
-	public static function styles() {
-		wp_register_style( 'flickr-shortcode-importer', plugins_url( 'flickr-shortcode-importer.css', __FILE__ ) );
-		wp_enqueue_style( 'flickr-shortcode-importer' );
+		wp_enqueue_script( 'jquery-ui' );
 	}
 
 
