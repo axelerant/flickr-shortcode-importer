@@ -4,6 +4,7 @@
 
 ## 2.0.0
 * Add setting options for Flickr User ID and Images Per Page
+* Coding standards updates
 * Correct fsi_get_option call
 * Correct label for "Import [flickr] content" checkbox
 * Correct settings URL

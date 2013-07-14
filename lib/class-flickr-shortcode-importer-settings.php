@@ -26,7 +26,7 @@
 class Flickr_Shortcode_Importer_Settings {
 	const ID = 'flickr-shortcode-importer-settings';
 
-	public static $default = array(
+	public static $default  = array(
 		'backwards' => array(
 			'version' => '', // below this version number, use std
 			'std' => '',
@@ -45,7 +45,7 @@ class Flickr_Shortcode_Importer_Settings {
 	public static $defaults = array();
 	public static $sections = array();
 	public static $settings = array();
-	public static $version = null;
+	public static $version  = null;
 
 
 	public function __construct() {
@@ -63,13 +63,13 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public static function sections() {
-		self::$sections['general'] = esc_html__( 'Import Settings', 'flickr-shortcode-importer' );
-		self::$sections['api'] = esc_html__( 'Flickr API', 'flickr-shortcode-importer' );
+		self::$sections['general']   = esc_html__( 'Import Settings', 'flickr-shortcode-importer' );
+		self::$sections['api']       = esc_html__( 'Flickr API', 'flickr-shortcode-importer' );
 		self::$sections['selection'] = esc_html__( 'Posts Selection', 'flickr-shortcode-importer' );
-		self::$sections['testing'] = esc_html__( 'Testing Options', 'flickr-shortcode-importer' );
-		self::$sections['posts'] = esc_html__( 'Post Options', 'flickr-shortcode-importer' );
-		self::$sections['reset'] = esc_html__( 'Reset', 'flickr-shortcode-importer' );
-		self::$sections['about'] = esc_html__( 'About Flickr Shortcode Importer', 'flickr-shortcode-importer' );
+		self::$sections['testing']   = esc_html__( 'Testing Options', 'flickr-shortcode-importer' );
+		self::$sections['posts']     = esc_html__( 'Post Options', 'flickr-shortcode-importer' );
+		self::$sections['reset']     = esc_html__( 'Reset', 'flickr-shortcode-importer' );
+		self::$sections['about']     = esc_html__( 'About Flickr Shortcode Importer', 'flickr-shortcode-importer' );
 
 		self::$sections = apply_filters( 'flickr_shortcode_importer_sections', self::$sections );
 	}
@@ -86,49 +86,49 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Skip Importing Videos?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Importing videos from Flickr often fails. Shortcode is still converted to object/embed linking to Flickr.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['import_flickr_sourced_tags'] = array(
 			'title' => esc_html__( 'Import Flickr-sourced A/IMG tags?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Converts Flickr-sourced A/IMG tags to [flickr] and then proceeds with import.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['set_featured_image'] = array(
 			'title' => esc_html__( 'Set Featured Image?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Set the first [flickr] or [flickrset] image found as the Featured Image. Will not replace the current Featured Image of a post.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['force_set_featured_image'] = array(
 			'title' => esc_html__( 'Force Set Featured Image?', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( 'Set the Featured Image even if one already exists for a post.', 'flickr-shortcode-importer'),
+			'desc' => esc_html__( 'Set the Featured Image even if one already exists for a post.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['remove_first_flickr_shortcode'] = array(
 			'title' => esc_html__( 'Remove First Flickr Shortcode?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Removes the first [flickr] from post content. If you use Featured Images as header or lead images, then this might prevent duplicate images in your post.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['make_nice_image_title'] = array(
 			'title' => esc_html__( 'Make Nice Image Title?', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( "Try to make a nice title if none is set. For Flickr set images, Flickr set title plus a numeric suffix is applied.", 'flickr-shortcode-importer' ),
+			'desc' => esc_html__( 'Try to make a nice title if none is set. For Flickr set images, Flickr set title plus a numeric suffix is applied.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['replace_file_name'] = array(
 			'title' => esc_html__( 'Replace Filename with Image Title?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Mainly for SEO purposes. This setting replaces the imported media filename with the media\'s title. For non-images, this is always done.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['image_import_size'] = array(
@@ -140,8 +140,8 @@ class Flickr_Shortcode_Importer_Settings {
 				'Small' => 'Small (240px wide)',
 				'Medium 640' => 'Medium (640px wide)',
 				'Large' => 'Large (1024px wide)',
-				'Original' => 'Original'
-			)
+				'Original' => 'Original',
+			),
 		);
 
 		self::$settings['default_image_alignment'] = array(
@@ -154,7 +154,7 @@ class Flickr_Shortcode_Importer_Settings {
 				'left' => 'Left',
 				'center' => 'Center',
 				'right' => 'Right',
-			)
+			),
 		);
 
 		self::$settings['default_image_size'] = array(
@@ -166,8 +166,8 @@ class Flickr_Shortcode_Importer_Settings {
 				'thumbnail' => 'Thumbnail',
 				'medium' => 'Medium',
 				'large' => 'Large',
-				'full' => 'Full'
-			)
+				'full' => 'Full',
+			),
 		);
 
 		self::$settings['default_a_tag_class'] = array(
@@ -181,7 +181,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Link Image to Attachment Page?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'If set, post single view images are linked to attachment pages. Otherwise the image links to its source file.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 1
+			'std' => 1,
 		);
 
 		self::$settings['image_wrap_class'] = array(
@@ -195,14 +195,14 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Set Captions?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Uses media title as the caption.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['flickr_image_attribution'] = array(
 			'title' => esc_html__( 'Include Flickr Author Attribution?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Appends Flickr username, linked back to Flickr image to the imported Flickr image.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['flickr_image_attribution_text'] = array(
@@ -222,7 +222,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Add Flickr Attribution to Description?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Like `Include Flickr Author Attribution` but appends the image description.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['flickr_link_text'] = array(
@@ -235,7 +235,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Add Image License to Description?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Append image license and link to image description.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['flickr_image_license_text'] = array(
@@ -276,7 +276,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Debug Mode?', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'Bypass Ajax controller to handle posts_to_import directly for testing purposes.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
-			'std' => 0
+			'std' => 0,
 		);
 
 		self::$settings['flickr_api_key'] = array(
@@ -284,30 +284,30 @@ class Flickr_Shortcode_Importer_Settings {
 			'desc' => __( '<a href="http://www.flickr.com/services/api/">Flickr API Documentation</a>', 'flickr-shortcode-importer' ),
 			'std' => '9f9508c77dc554c1ee7fdc006aa1879e',
 			'type' => 'text',
-			'section' => 'api'
+			'section' => 'api',
 		);
 
 		self::$settings['flickr_api_secret'] = array(
 			'title' => esc_html__( 'Flickr API Secret', 'flickr-shortcode-importer' ),
 			'std' => 'e63952df7d02cc03',
 			'type' => 'text',
-			'section' => 'api'
+			'section' => 'api',
 		);
 
 		self::$settings['fg-user_id'] = array(
 			'title' => esc_html__( 'Flickr User ID', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'For Flickr Gallery plugin. Example: 90901451@N00', 'flickr-shortcode-importer' ),
-			'std' => get_option('fg-user_id'),
+			'std' => get_option( 'fg-user_id' ),
 			'type' => 'text',
-			'section' => 'api'
+			'section' => 'api',
 		);
 
 		self::$settings['fg-per_page'] = array(
 			'title' => esc_html__( 'Images Per Page', 'flickr-shortcode-importer' ),
 			'desc' => esc_html__( 'For Flickr Gallery plugin', 'flickr-shortcode-importer' ),
-			'std' => get_option('fg-per_page', 10),
+			'std' => get_option( 'fg-per_page', 10 ),
 			'type' => 'text',
-			'section' => 'api'
+			'section' => 'api',
 		);
 
 		self::$settings['role_enable_post_widget'] = array(
@@ -322,14 +322,14 @@ class Flickr_Shortcode_Importer_Settings {
 				'level_7' => 'Editor',
 				'level_4' => 'Author',
 				'level_1' => 'Contributor',
-			)
+			),
 		);
 
 		$post_types = get_post_types( array( 'public' => true ), 'objects' );
 		foreach ( $post_types as $post_type => $ptype_obj ) {
 			self::$settings[ 'enable_post_widget_' . $post_type ] = array(
 				'section' => 'posts',
-				'title' => esc_html__( 'Enable for ' . $ptype_obj->labels->name, 'flickr-shortcode-importer'),
+				'title' => esc_html__( 'Enable for ' . $ptype_obj->labels->name, 'flickr-shortcode-importer' ),
 				'type' => 'checkbox',
 				'std' => ( 'attachment' != $post_type ) ? 1 : 0,
 			);
@@ -341,7 +341,7 @@ class Flickr_Shortcode_Importer_Settings {
 			'title' => esc_html__( 'Reimport Flickr Source Images', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
 			'std' => 0,
-			'desc' => esc_html__( 'Needed when changing the Flickr image import size from prior imports.', 'flickr-shortcode-importer' )
+			'desc' => esc_html__( 'Needed when changing the Flickr image import size from prior imports.', 'flickr-shortcode-importer' ),
 		);
 
 		$options = get_option( self::ID );
@@ -430,7 +430,7 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public function admin_init() {
-		$version = fsi_get_option( 'version' );
+		$version       = fsi_get_option( 'version' );
 		self::$version = Flickr_Shortcode_Importer::VERSION;
 		self::$version = apply_filters( 'flickr_shortcode_importer_version', self::$version );
 
@@ -449,10 +449,10 @@ class Flickr_Shortcode_Importer_Settings {
 
 		add_screen_meta_link(
 			'fsi-importer-link',
-			esc_html__('[Flickr] Importer', 'flickr-shortcode-importer'),
-			admin_url('tools.php?page=' . Flickr_Shortcode_Importer::ID),
+			esc_html__( '[Flickr] Importer', 'flickr-shortcode-importer' ),
+			admin_url( 'tools.php?page=' . Flickr_Shortcode_Importer::ID ),
 			$admin_page,
-			array('style' => 'font-weight: bold;')
+			array( 'style' => 'font-weight: bold;' )
 		);
 	}
 
@@ -529,11 +529,11 @@ class Flickr_Shortcode_Importer_Settings {
 	jQuery(document).ready(function($) {
 		$( "#' . self::ID . '" ).tabs();
 		// This will make the "warning" checkbox class really stand out when checked.
-		$(".warning").change(function() {
-			if ($(this).is(":checked"))
-				$(this).parent().css("background", "#c00").css("color", "#fff").css("fontWeight", "bold");
+		$( ".warning" ).change(function() {
+			if ($(this).is( ":checked" ) )
+				$(this).parent().css( "background", "#c00" ).css( "color", "#fff" ).css( "fontWeight", "bold" );
 			else
-				$(this).parent().css("background", "inherit").css("color", "inherit").css("fontWeight", "inherit");
+				$(this).parent().css( "background", "inherit" ).css( "color", "inherit" ).css( "fontWeight", "inherit" );
 		});
 	});
 </script>
@@ -581,7 +581,7 @@ class Flickr_Shortcode_Importer_Settings {
 		if ( is_null( $input ) ) {
 			$options = get_option( self::ID );
 		} else {
-			$options = array();
+			$options      = array();
 			$options[$id] = $input;
 		}
 
@@ -596,11 +596,11 @@ class Flickr_Shortcode_Importer_Settings {
 			$field_class = ' ' . $class;
 
 		// desc isn't escaped because it's might contain allowed html
-		$choices = array_map( 'esc_attr', $choices );
-		$field_class = esc_attr( $field_class );
-		$id = esc_attr( $id );
+		$choices      = array_map( 'esc_attr', $choices );
+		$field_class  = esc_attr( $field_class );
+		$id           = esc_attr( $id );
 		$options[$id] = esc_attr( $options[$id] );
-		$std = esc_attr( $std );
+		$std          = esc_attr( $std );
 
 		switch ( $type ) {
 		case 'checkbox':
@@ -637,7 +637,7 @@ class Flickr_Shortcode_Importer_Settings {
 			break;
 
 		case 'radio':
-			$i = 1;
+			$i             = 1;
 			$count_choices = count( $choices );
 			foreach ( $choices as $value => $label ) {
 				$content .= '<input class="radio' . $field_class . '" type="radio" name="' . self::ID . '[' . $id . ']" id="' . $id . $i . '" value="' . $value . '" ' . checked( $options[$id], $value, false ) . '> <label for="' . $id . $i . '">' . $label . '</label>';
@@ -702,11 +702,11 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public function initialize_settings() {
-		$defaults = self::get_defaults( 'backwards' );
-		$current = get_option( self::ID );
-		$current = wp_parse_args( $current, $defaults );
+		$defaults                 = self::get_defaults( 'backwards' );
+		$current                  = get_option( self::ID );
+		$current                  = wp_parse_args( $current, $defaults );
 		$current['admin_notices'] = fsi_get_option( 'version', self::$version );
-		$current['version'] = self::$version;
+		$current['version']       = self::$version;
 
 		update_option( self::ID, $current );
 	}
@@ -748,20 +748,19 @@ class Flickr_Shortcode_Importer_Settings {
 		$errors = array();
 
 		if ( is_null( $options ) ) {
-			$options = self::get_settings();
+			$options  = self::get_settings();
 			$defaults = self::get_defaults();
 
 			if ( is_admin() ) {
 				if ( ! empty( $input['reset_defaults'] ) ) {
-					foreach ( $defaults as $id => $std ) {
+					foreach ( $defaults as $id => $std )
 						$input[$id] = $std;
-					}
 
 					unset( $input['reset_defaults'] );
 				}
 
 				if ( ! empty( $input['import'] ) && $_SESSION['export'] != $input['import'] ) {
-					$import = $input['import'];
+					$import       = $input['import'];
 					$unserialized = unserialize( $import );
 					if ( is_array( $unserialized ) ) {
 						foreach ( $unserialized as $id => $std )
@@ -772,8 +771,8 @@ class Flickr_Shortcode_Importer_Settings {
 		}
 
 		foreach ( $options as $id => $parts ) {
-			$default = $parts['std'];
-			$type = $parts['type'];
+			$default     = $parts['std'];
+			$type        = $parts['type'];
 			$validations = ! empty( $parts['validate'] ) ? $parts['validate'] : array();
 			if ( ! empty( $validations ) )
 				$validations = explode( ',', $validations );
@@ -816,14 +815,14 @@ class Flickr_Shortcode_Importer_Settings {
 			$input['rewrite_slug'] = $defaults['rewrite_slug'];
 
 		// did URL slugs change?
-		$has_archive = fsi_get_option( 'has_archive' );
+		$has_archive  = fsi_get_option( 'has_archive' );
 		$rewrite_slug = fsi_get_option( 'rewrite_slug' );
 		if ( $has_archive != $input['has_archive'] || $rewrite_slug != $input['rewrite_slug'] )
 			flush_rewrite_rules();
 
-		$input['version'] = self::$version;
+		$input['version']        = self::$version;
 		$input['donate_version'] = Flickr_Shortcode_Importer::VERSION;
-		$input = apply_filters( 'flickr_shortcode_importer_validate_settings', $input, $errors );
+		$input                   = apply_filters( 'flickr_shortcode_importer_validate_settings', $input, $errors );
 
 		unset( $input['export'] );
 		unset( $input['import'] );
