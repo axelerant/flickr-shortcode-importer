@@ -36,8 +36,9 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 = Features =
 
 * API
-* [flickrset] and [flickr-gallery] shortcodes are converted to [gallery]
 * Flickr-sourced A/IMG tagged media imported into WordPress
+* Media of [flick] shortcodes are imported and converted to locally hosted A/IMG
+* Media of [flickrset] and [flickr-gallery] shortcodes are imported and converted to [gallery]
 * Settings export/import
 * Settings screen
 
@@ -45,41 +46,42 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 
 **Import Settings**
 
-* Skip Importing Videos
-* Import Flickr-sourced A/IMG tags
-* Set Featured Image
-* Force Set Featured Image
-* Remove First Flickr Shortcode
-* Make Nice Image Title?
-* Replace Filename with Image Title?
-* Image Import Size
-* Default Image Alignment
-* Default Image Size
-* Default A Tag Class
-* Link Image to Attachment Page?
-* Image Wrap Class
-* Set Captions
-* Include Flickr Author Attribution?
+* Skip Importing Videos - Importing videos from Flickr often fails. Shortcode is still converted to object/embed linking to Flickr.
+* Import Flickr-sourced A/IMG tags - Converts Flickr-sourced A/IMG tags to [flickr] and then proceeds with import.
+* Set Featured Image - Set the first [flickr] or [flickrset] image found as the Featured Image. Will not replace the current Featured Image of a post.
+* Force Set Featured Image - Set the Featured Image even if one already exists for a post.
+* Remove First Flickr Shortcode - Removes the first [flickr] from post content. If you use Featured Images as header or lead images, then this might prevent duplicate images in your post.
+* Make Nice Image Title? - Try to make a nice title if none is set. For Flickr set images, Flickr set title plus a numeric suffix is applied.
+* Replace Filename with Image Title? - Mainly for SEO purposes. This setting replaces the imported media filename with the media's title. For non-images, this is always done.
+* Image Import Size - Size of image to import into media library from Flickr. If requested size doesn't exist, then original is imported because it's the closest to the requested import size.
+* Default Image Alignment - Default alignment of image displayed in post when no alignment is found.
+* Default Image Size - Default size of image displayed in post when no size is found.
+* Default A Tag Class - Inserts a class into links around imported images. Useful for lightbox'ing.
+* Link Image to Attachment Page? - If set, post single view images are linked to attachment pages. Otherwise the image links to its source file.
+* Image Wrap Class - If set, a span tag is wrapped around the image with the given class. Also wraps attribution if enabled. e.g. Providing `flickr-image` results in `&lt;span class="flickr-image"&gt;|&lt;/span&gt;`
+* Set Captions - Uses media title as the caption.
+* Include Flickr Author Attribution? - Appends Flickr username, linked back to Flickr image to the imported Flickr image.
 * Flickr Author Attribution Text
-* Flickr Author Attribution Wrap Class
-* Add Flickr Link in Description?
+* Flickr Author Attribution Wrap Class - If set, a span tag is wrapped around the attribution with the given class. e.g. Providing `flickr-attribution` results in `&lt;span class="flickr-attribution"&gt;|&lt;/span&gt;`
+* Add Flickr Link in Description? - Like `Include Flickr Author Attribution` but appends the image description.
 * Flickr Link Text
-* Add Image License to Description?	
+* Add Image License to Description?	- Append image license and link to image description.
 * Flickr Image License Text
 
 **Posts Selection**
 
-* Posts to Import
-* Skip Importing Posts
+* Posts to Import - A CSV list of post ids to import, like '1,2,3'.
+* Skip Importing Posts - A CSV list of post ids not to import, like '1,2,3'.
 
 **Testing Options**
 
-* Import Limit
-* Debug Mode
+* Import Limit - Useful for testing import on a limited amount of posts. 0 or blank means unlimited.
+* Debug Mode - Bypass Ajax controller to handle posts_to_import directly for testing purposes.
 
 **Post Options**
 
-* Post [flickr] Import Widget?
+* Post [flickr] Import Widget? - Minimum role to enable for [flickr] Import wi
+dget on posts and page edit screens.
 * Enable for Pages
 * Enable for Posts
 * Enable for Media
@@ -87,13 +89,14 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 
 **Flickr API**
 
-* Flickr API Key
+* Flickr API Key - [Flickr API Documentation](http://www.flickr.com/services/api/)
 * Flickr API Secret
-* Flickr User ID
-* Images Per Page
+* Flickr User ID - For Flickr Gallery plugin. Example: 90901451@N00
+* Images Per Page - For Flickr Gallery plugin.
 
-**Compatibility & Reset**
+**Reset**
 
+* Reimport Flickr Source Images - Needed when changing the Flickr image import size from prior imports.
 * Export Settings – These are your current settings in a serialized format. Copy the contents to make a backup of your settings.
 * Import Settings – Paste new serialized settings here to overwrite your current configuration.
 * Remove Plugin Data on Deletion? - Delete all Flickr Shortcode Importer data and options from database on plugin deletion

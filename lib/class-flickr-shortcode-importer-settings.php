@@ -207,7 +207,6 @@ class Flickr_Shortcode_Importer_Settings {
 
 		self::$settings['flickr_image_attribution_text'] = array(
 			'title' => esc_html__( 'Flickr Author Attribution Text', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std' => esc_html__( 'Photo by ', 'flickr-shortcode-importer' ),
 			'type' => 'text',
 		);
@@ -228,7 +227,6 @@ class Flickr_Shortcode_Importer_Settings {
 
 		self::$settings['flickr_link_text'] = array(
 			'title' => esc_html__( 'Flickr Attribution Text', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std' => esc_html__( 'Photo by ', 'flickr-shortcode-importer' ),
 			'type' => 'text',
 		);
@@ -242,7 +240,6 @@ class Flickr_Shortcode_Importer_Settings {
 
 		self::$settings['flickr_image_license_text'] = array(
 			'title' => esc_html__( 'Flickr Image License Text', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std' => esc_html__( 'License ', 'flickr-shortcode-importer' ),
 			'type' => 'text',
 		);
@@ -277,7 +274,7 @@ class Flickr_Shortcode_Importer_Settings {
 		self::$settings['debug_mode'] = array(
 			'section' => 'testing',
 			'title' => esc_html__( 'Debug Mode?', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( 'Bypass Ajax controller to handle posts_to_import directly for testing purposes', 'flickr-shortcode-importer' ),
+			'desc' => esc_html__( 'Bypass Ajax controller to handle posts_to_import directly for testing purposes.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
 			'std' => 0
 		);
@@ -292,7 +289,6 @@ class Flickr_Shortcode_Importer_Settings {
 
 		self::$settings['flickr_api_secret'] = array(
 			'title' => esc_html__( 'Flickr API Secret', 'flickr-shortcode-importer' ),
-			'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 			'std' => 'e63952df7d02cc03',
 			'type' => 'text',
 			'section' => 'api'
@@ -334,7 +330,6 @@ class Flickr_Shortcode_Importer_Settings {
 			self::$settings[ 'enable_post_widget_' . $post_type ] = array(
 				'section' => 'posts',
 				'title' => esc_html__( 'Enable for ' . $ptype_obj->labels->name, 'flickr-shortcode-importer'),
-				'desc' => esc_html__( '', 'flickr-shortcode-importer' ),
 				'type' => 'checkbox',
 				'std' => ( 'attachment' != $post_type ) ? 1 : 0,
 			);

@@ -24,7 +24,7 @@
 class Flickr_Shortcode_Importer {
 	const ID          = 'flickr-shortcode-importer';
 	const PLUGIN_FILE = 'flickr-shortcode-importer/flickr-shortcode-importer.php';
-	const VERSION     = '0.0.1';
+	const VERSION     = '2.0.0';
 
 	private static $base = null;
 
@@ -1128,7 +1128,7 @@ EOD;
 
 		$file_move = wp_upload_bits( $file, null, $this->file_get_contents_curl( $src ) );
 		$filename  = $file_move['file'];
-		if ( ! empty( $filename ) )
+		if ( empty( $filename ) )
 			$this->die_json_error_msg( $this->post_id, sprintf( esc_html__( 'Source file not found: %s', 'flickr-shortcode-importer' ), $src ) );
 
 		$wp_filetype = wp_check_filetype( $file, null );

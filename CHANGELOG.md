@@ -11,14 +11,16 @@
 * Include [flickr-gallery] in Ajax importing
 * Migrate code to updated framework
 * Remove "Compatiblity" verbiage
+* Remove blank descriptions from settings options
 * Remove mention of premium version
 * Remove most `debug_mode` checks
 * Rename WP_AJAX call
 * Update API
-* Update CHANGELOG, readme, and TODO content
+* Update CHANGELOG and TODO content
 * Update POT
 * Update import examples
 * Update progress bar scripts and styles
+* Update readme verbiage
 * Use `empty` vs. `isset` checks
 
 ## 1.8.1
