@@ -155,7 +155,7 @@ EOD;
 
 
 	public function admin_notices_0_0_1() {
-		$content  = '<div class="updated"><p>';
+		$content  = '<div class="updated fade"><p>';
 		$content .= sprintf( __( 'If your Flickr Shortcode Importer display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'flickr-shortcode-importer' ), 'https://aihrus.zendesk.com/entries/23722573-Major-Changes-Since-2-10-0' );
 		$content .= '</p></div>';
 
@@ -164,7 +164,7 @@ EOD;
 
 
 	public function admin_notices_donate() {
-		$content  = '<div class="updated"><p>';
+		$content  = '<div class="updated fade"><p>';
 		$content .= sprintf( esc_html__( 'Please donate $2 towards development and support of this Flickr Shortcode Importer plugin. %s', 'flickr-shortcode-importer' ), self::$donate_button );
 		$content .= '</p></div>';
 

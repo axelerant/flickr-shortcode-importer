@@ -18,10 +18,7 @@ Imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/I
 
 Import can be run directly from edit page and post screens.
 
-[youtube http://youtube.com/]
-**[Video introduction](http://youtu.be/TBD)**
-
-The first [flickr] image found in post content is set as the post's Featured Image and removed from the post content. The remaining [flickr] shortcodes are then transfromed as image links to their attachment page.  
+The first [flickr] image found in post content is set as the post's Featured Image and removed from the post content. The remaining [flickr] shortcodes are then transformed as image links to their attachment page.  
 
 [flickrset] and [flickr-gallery] shortcodes are converted to [gallery] after the Flickr set images have been added to the Media Library. If 'Set Featured Image' is checked in Options, then the first image of the [flickrset] is used as such.
 
