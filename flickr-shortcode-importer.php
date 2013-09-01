@@ -589,7 +589,7 @@ EOD;
 
 	<p><?php printf( esc_html__( 'Please review your %s before proceeding.', 'flickr-shortcode-importer' ), self::$settings_link ); ?></p>
 
-	<p><?php _e( 'To begin, just press the button below.', 'flickr-shortcode-importer ', 'flickr-shortcode-importer' ); ?></p>
+	<p><?php _e( 'To begin, just press the button below.', 'flickr-shortcode-importer' ); ?></p>
 
 	<p><input type="submit" class="button hide-if-no-js" name="flickr-shortcode-importer" id="flickr-shortcode-importer" value="<?php _e( 'Import Flickr Shortcode', 'flickr-shortcode-importer' ) ?>" /></p>
 
