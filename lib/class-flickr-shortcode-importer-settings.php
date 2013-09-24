@@ -49,9 +49,9 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public function __construct() {
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
-		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'init', array( $this, 'init' ) );
 		load_plugin_textdomain( 'flickr-shortcode-importer', false, '/flickr-shortcode-importer/languages/' );
 	}
 
@@ -444,8 +444,8 @@ class Flickr_Shortcode_Importer_Settings {
 	public function admin_menu() {
 		$admin_page = add_options_page( esc_html__( 'Flickr Shortcode Importer Settings', 'flickr-shortcode-importer' ), esc_html__( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ), 'manage_options', self::ID, array( 'Flickr_Shortcode_Importer_Settings', 'display_page' ) );
 
-		add_action( 'admin_print_scripts-' . $admin_page, array( &$this, 'scripts' ) );
-		add_action( 'admin_print_styles-' . $admin_page, array( &$this, 'styles' ) );
+		add_action( 'admin_print_scripts-' . $admin_page, array( $this, 'scripts' ) );
+		add_action( 'admin_print_styles-' . $admin_page, array( $this, 'styles' ) );
 
 		add_screen_meta_link(
 			'fsi-importer-link',
@@ -480,7 +480,7 @@ class Flickr_Shortcode_Importer_Settings {
 
 		self::$defaults[$id] = $std;
 
-		add_settings_field( $id, $title, array( &$this, 'display_setting' ), self::ID, $section, $field_args );
+		add_settings_field( $id, $title, array( $this, 'display_setting' ), self::ID, $section, $field_args );
 	}
 
 
@@ -713,13 +713,13 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public function register_settings() {
-		register_setting( self::ID, self::ID, array( &$this, 'validate_settings' ) );
+		register_setting( self::ID, self::ID, array( $this, 'validate_settings' ) );
 
 		foreach ( self::$sections as $slug => $title ) {
 			if ( $slug == 'about' )
-				add_settings_section( $slug, $title, array( &$this, 'display_about_section' ), self::ID );
+				add_settings_section( $slug, $title, array( $this, 'display_about_section' ), self::ID );
 			else
-				add_settings_section( $slug, $title, array( &$this, 'display_section' ), self::ID );
+				add_settings_section( $slug, $title, array( $this, 'display_section' ), self::ID );
 		}
 
 		foreach ( self::$settings as $id => $setting ) {

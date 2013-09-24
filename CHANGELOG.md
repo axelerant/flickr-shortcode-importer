@@ -1,6 +1,8 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+* Revise ci rules
+* Update &$this to $this
 
 ## 2.0.0
 * Add setting options for Flickr User ID and Images Per Page

@@ -39,9 +39,9 @@ class Flickr_Shortcode_Importer {
 
 
 	public function __construct() {
-		add_action( 'admin_init', array( &$this, 'admin_init' ) );
-		add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
-		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'init', array( $this, 'init' ) );
 		self::$base = plugin_basename( __FILE__ );
 	}
 
@@ -49,11 +49,11 @@ class Flickr_Shortcode_Importer {
 	public function admin_init() {
 		$role_enable = fsi_get_option( 'role_enable_post_widget' );
 		if ( ! empty( $role_enable ) && current_user_can( $role_enable ) )
-			add_action( 'add_meta_boxes', array( &$this, 'flickr_import_meta_boxes' ) );
+			add_action( 'add_meta_boxes', array( $this, 'flickr_import_meta_boxes' ) );
 
 		$this->update();
-		add_filter( 'plugin_action_links', array( &$this, 'plugin_action_links' ), 10, 2 );
-		add_filter( 'plugin_row_meta', array( &$this, 'plugin_row_meta' ), 10, 2 );
+		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
+		add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
 		add_theme_support( 'post-thumbnails' );
 		self::$settings_link = '<a href="' . get_admin_url() . 'options-general.php?page=' . Flickr_Shortcode_Importer_Settings::ID . '">' . esc_html__( 'Settings', 'flickr-shortcode-importer' ) . '</a>';
 	}
@@ -72,7 +72,7 @@ class Flickr_Shortcode_Importer {
 		}
 
 		$this->flickr_import_post_types();
-		add_action( 'wp_ajax_ajax_process_shortcode', array( &$this, 'ajax_process_shortcode' ) );
+		add_action( 'wp_ajax_ajax_process_shortcode', array( $this, 'ajax_process_shortcode' ) );
 		load_plugin_textdomain( self::ID, false, 'flickr-shortcode-importer/languages' );
 		self::$donate_button = <<<EOD
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -98,10 +98,10 @@ EOD;
 
 
 	public function admin_menu() {
-		self::$menu_id = add_management_page( esc_html__( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ), esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), 'manage_options', 'flickr-shortcode-importer', array( &$this, 'user_interface' ) );
+		self::$menu_id = add_management_page( esc_html__( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ), esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), 'manage_options', 'flickr-shortcode-importer', array( $this, 'user_interface' ) );
 
-		add_action( 'admin_print_scripts-' . self::$menu_id, array( &$this, 'scripts' ) );
-		add_action( 'admin_print_styles-' . self::$menu_id, array( &$this, 'styles' ) );
+		add_action( 'admin_print_scripts-' . self::$menu_id, array( $this, 'scripts' ) );
+		add_action( 'admin_print_styles-' . self::$menu_id, array( $this, 'styles' ) );
 
 		add_screen_meta_link(
 			'fsi-settings-link',
@@ -212,7 +212,7 @@ EOD;
 	public function flickr_import_meta_boxes() {
 		foreach ( self::$post_types as $post_type ) {
 			if ( fsi_get_option( 'enable_post_widget_' . $post_type ) )
-				add_meta_box( 'flickr_import', esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), array( &$this, 'post_flickr_import_meta_box' ), $post_type, 'side' );
+				add_meta_box( 'flickr_import', esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), array( $this, 'post_flickr_import_meta_box' ), $post_type, 'side' );
 		}
 	}
 
@@ -671,9 +671,9 @@ EOD;
 
 		// only use our shortcode handlers to prevent messing up post content
 		remove_all_shortcodes();
-		add_shortcode( 'flickr-gallery', array( &$this, 'shortcode_flickr_gallery' ) );
-		add_shortcode( 'flickr', array( &$this, 'shortcode_flickr' ) );
-		add_shortcode( 'flickrset', array( &$this, 'shortcode_flickrset' ) );
+		add_shortcode( 'flickr-gallery', array( $this, 'shortcode_flickr_gallery' ) );
+		add_shortcode( 'flickr', array( $this, 'shortcode_flickr' ) );
+		add_shortcode( 'flickrset', array( $this, 'shortcode_flickrset' ) );
 
 		// Don't overwrite Featured Images
 		$this->featured_id = false;
