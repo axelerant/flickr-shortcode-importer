@@ -3,6 +3,8 @@
 ## master
 * Revise ci rules
 * Update &$this to $this
+* Travis ignore WordPress.WhiteSpace.ControlStructureSpacing - false positives
+* https jQuery transport
 
 ## 2.0.0
 * Add setting options for Flickr User ID and Images Per Page
