@@ -1,6 +1,7 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+* Change $2 donation request to $5
 * Revise ci rules
 * Update &$this to $this
 * Travis ignore WordPress.WhiteSpace.ControlStructureSpacing - false positives

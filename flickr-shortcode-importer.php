@@ -165,7 +165,7 @@ EOD;
 
 	public function admin_notices_donate() {
 		$content  = '<div class="updated fade"><p>';
-		$content .= sprintf( esc_html__( 'Please donate $2 towards development and support of this Flickr Shortcode Importer plugin. %s', 'flickr-shortcode-importer' ), self::$donate_button );
+		$content .= sprintf( esc_html__( 'Please donate $5 towards development and support of this Flickr Shortcode Importer plugin. %s', 'flickr-shortcode-importer' ), self::$donate_button );
 		$content .= '</p></div>';
 
 		echo $content;
