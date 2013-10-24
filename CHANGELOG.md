@@ -4,6 +4,7 @@
 
 ## 2.0.1
 * Add media ids to gallery shortcode insertion
+* Add screenshot 14. Imported [flickr-gallery] photoset as [gallery] with media ids
 * Change $2 donation request to $5
 * Revise ci rules
 * Travis ignore WordPress.WhiteSpace.ControlStructureSpacing - false positives

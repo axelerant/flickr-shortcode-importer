@@ -179,6 +179,7 @@ Please visit the [Flickr Shortcode Importer Knowledge Base](https://aihrus.zende
 11. Before Flickr Shortcode Importer for [flickr-gallery]
 12. Image SEO filename, image wrap class and Flickr attribution sample
 13. Edit post screen [flickr] Importer option
+14. Imported [flickr-gallery] photoset as [gallery] with media ids
 
 
 == Changelog ==
