@@ -2,6 +2,9 @@
 
 ## master
 
+## 2.0.2
+* Simplify `wp_enqueue_style` handling
+
 ## 2.0.1
 * Add media ids to gallery shortcode insertion
 * Add screenshot 14. Imported [flickr-gallery] photoset as [gallery] with media ids
