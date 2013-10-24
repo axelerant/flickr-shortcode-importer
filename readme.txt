@@ -5,7 +5,7 @@ Donate link: http://aihr.us/about-aihrus/donate/
 Tags: flickr,import,featured image,photo,image,video
 Requires at least: 3.4
 Tested up to: 3.6.0
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,7 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 = Features =
 
 * API
+* Automatically adds media ids to newly inserted gallery shortcodes
 * Flickr-sourced A/IMG tagged media imported into WordPress
 * Media of [flick] shortcodes are imported and converted to locally hosted A/IMG
 * Media of [flickrset] and [flickr-gallery] shortcodes are imported and converted to [gallery]

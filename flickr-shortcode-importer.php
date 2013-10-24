@@ -3,7 +3,7 @@
  * Plugin Name: Flickr Shortcode Importer
  * Plugin URI: http://wordpress.org/extend/plugins/flickr-shortcode-importer/
  * Description: Imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library.
- * Version: 2.0.0
+ * Version: 2.0.1
  * Author: Michael Cannon
  * Author URI: http://aihr.us/about-aihrus/michael-cannon-resume/
  * License: GPLv2 or later
@@ -26,13 +26,14 @@
 class Flickr_Shortcode_Importer {
 	const ID          = 'flickr-shortcode-importer';
 	const PLUGIN_FILE = 'flickr-shortcode-importer/flickr-shortcode-importer.php';
-	const VERSION     = '2.0.0';
+	const VERSION     = '2.0.1';
 
 	private static $base = null;
 
 	public static $donate_button = '';
 	public static $flickr_id     = false;
 	public static $flickset_id   = false;
+	public static $media_ids     = array();
 	public static $menu_id       = null;
 	public static $post_types    = null;
 	public static $settings_link = '';
@@ -744,6 +745,8 @@ EOD;
 
 	// process each [flickr-gallery] entry from plugin flickr-gallery
 	public function shortcode_flickr_gallery( $args ) {
+		self::$media_ids = array();
+
 		// attributes for passing to flickr directly
 		$attr = $args;
 		unset( $attr['mode'] );
@@ -798,7 +801,11 @@ EOD;
 			echo '' . __LINE__ . ':' . basename( __FILE__ )  . '<br />';
 		}
 
-		$markup            = '[gallery]';
+		if ( empty( self::$media_ids ) )
+			$markup = '[gallery]';
+		else
+			$markup = '[gallery ids="' . implode( ',', self::$media_ids ) . '"]';
+
 		$this->flickset_id = false;
 
 		return $markup;
@@ -807,6 +814,8 @@ EOD;
 
 	// process each [flickrset] entry
 	public function shortcode_flickrset( $args ) {
+		self::$media_ids = array();
+
 		$this->flickset_id = $args['id'];
 		$import_limit      = ( $args['photos'] ) ? $args['photos'] : -1;
 		$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
@@ -826,7 +835,11 @@ EOD;
 				break;
 		}
 
-		$markup            = '[gallery]';
+		if ( empty( self::$media_ids ) )
+			$markup = '[gallery]';
+		else
+			$markup = '[gallery ids="' . implode( ',', self::$media_ids ) . '"]';
+
 		$this->flickset_id = false;
 
 		return $markup;
@@ -850,6 +863,8 @@ EOD;
 	public function render_photo( $photo, $args = false ) {
 		// add image to media library
 		$image_id = $this->import_flickr_media( $photo );
+
+		self::$media_ids[] = $image_id;
 
 		// if first image, set as featured
 		if ( ! $this->featured_id )

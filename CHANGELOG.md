@@ -1,11 +1,15 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+
+## 2.0.1
+* Add media ids to gallery shortcode insertion
 * Change $2 donation request to $5
 * Revise ci rules
-* Update &$this to $this
 * Travis ignore WordPress.WhiteSpace.ControlStructureSpacing - false positives
-* https jQuery transport
+* Update &$this to $this
+* Update bio
+* Use https jQuery transport
 
 ## 2.0.0
 * Add setting options for Flickr User ID and Images Per Page
