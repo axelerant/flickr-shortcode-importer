@@ -1,6 +1,7 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+* transformmed > transformed
 
 ## 2.0.2
 * Simplify `wp_enqueue_style` handling

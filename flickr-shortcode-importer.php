@@ -586,7 +586,7 @@ EOD;
 
 	<p><?php _e( '[flickrset] shortcodes are handled similarly to [flickr] importing. The difference is that [flickrset] is replaced by [gallery] and the Featured Image of a post is set from the first image in the [flickrset] per Options.', 'flickr-shortcode-importer' ); ?></p>
 
-	<p><?php _e( 'Flickr shortcode import is not reversible. Backup your database beforehand or be prepared to revert each transformmed post manually.', 'flickr-shortcode-importer' ); ?></p>
+	<p><?php _e( 'Flickr shortcode import is not reversible. Backup your database beforehand or be prepared to revert each transformed post manually.', 'flickr-shortcode-importer' ); ?></p>
 
 	<p><?php printf( esc_html__( 'Please review your %s before proceeding.', 'flickr-shortcode-importer' ), self::$settings_link ); ?></p>
 
