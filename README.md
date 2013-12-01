@@ -24,7 +24,7 @@ If you find an issue, [let us know here](https://github.com/michael-cannon/flick
 
 ## Support
 
-This is a developer's portal for Flickr Shortcode Importer by Michael Cannon and should not be used for support. Please visit the [Flickr Shortcode Importer Knowledge Base](https://aihrus.zendesk.com/categories/20116727-Flickr-Shortcode-Importer) for frequently asked questions, offering ideas, or getting support.
+This is a developer's portal for Flickr Shortcode Importer by Michael Cannon and should not be used for support. Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
 
 ## Contributions
 

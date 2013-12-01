@@ -137,7 +137,7 @@ See the FAQ for further localization tips.
 
 = Support =
 
-Please visit the [Flickr Shortcode Importer Knowledge Base](https://aihrus.zendesk.com/categories/20116727-Flickr-Shortcode-Importer) for frequently asked questions, offering ideas, or getting support.
+Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
 
 If you want to contribute and I hope you do, visit the [Flickr Shortcode Importer Github repository](https://github.com/michael-cannon/flickr-shortcode-importer).
 
@@ -161,7 +161,7 @@ If you want to contribute and I hope you do, visit the [Flickr Shortcode Importe
 
 == Frequently Asked Questions ==
 
-Please visit the [Flickr Shortcode Importer Knowledge Base](https://aihrus.zendesk.com/categories/20116727-Flickr-Shortcode-Importer) for frequently asked questions, offering ideas, or getting support.
+Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
 
 
 == Screenshots ==

@@ -26,4 +26,4 @@ None at this time.
 
 ## Need More?
 
-Further examples and more can be found by reading and searching the [Flickr Shortcode Importer Knowledge Base](https://aihrus.zendesk.com/categories/20116727-Flickr-Shortcode-Importer) and [source code](https://github.com/michael-cannon/flickr-shortcode-importer).
+Further examples and more can be found by reading and searching the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) and [source code](https://github.com/michael-cannon/flickr-shortcode-importer).

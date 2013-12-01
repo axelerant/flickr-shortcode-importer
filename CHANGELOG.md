@@ -1,6 +1,7 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+* Correct support forums location
 * transformmed > transformed
 
 ## 2.0.2
