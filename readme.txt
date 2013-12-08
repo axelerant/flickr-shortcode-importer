@@ -140,6 +140,7 @@ dget on posts and page edit screens.
 
 1. Edit defaults through WordPress > Settings > [flickr] Options
 1. Import through WordPress > Tools > [flickr] Importer
+1. When editing posts, check Import [flickr] content before clicking "Publish" or "Update"
 
 = Upgrading =
 
@@ -156,6 +157,7 @@ dget on posts and page edit screens.
 
 = Most Common Issues =
 
+* Got `Parse error: syntax error, unexpected T_STATIC, expecting ')'`? Read [Most Aihrus Plugins Require PHP 5.3+](https://aihrus.zendesk.com/entries/30678006) for the fixes.
 * [Debug common theme and plugin conflicts](https://aihrus.zendesk.com/entries/25119302)
 
 = Still Stuck or Want Something Done? Get Support! =
