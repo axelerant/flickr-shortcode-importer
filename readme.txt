@@ -1,4 +1,4 @@
-=== Flickr Shortcode Importer ===
+=== Flickr Shortcode Importer by Aihrus ===
 
 Contributors: comprock
 Donate link: http://aihr.us/about-aihrus/donate/
@@ -9,12 +9,12 @@ Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library.
+Flickr Shortcode Importer by Aihrus imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
 
 
 == Description ==
 
-Imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
+Flickr Shortcode Importer [by Aihrus](http://aihr.us/about-aihrus/) imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
 
 Import can be run directly from edit page and post screens.
 
@@ -39,6 +39,21 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 * Media of [flickrset] and [flickr-gallery] shortcodes are imported and converted to [gallery]
 * Settings export/import
 * Settings screen
+
+= Handled shortcode & media samples =
+
+* [flickr size="small" float="left"]http://www.flickr.com/photos/dancoulter/2619594365/[/flickr] (image)
+* [flickr height="300" width="400"]http://www.flickr.com/photos/dancoulter/2422361554/[/flickr] (video)
+* WARNING: Video media imported, but doesn't seem to work
+* [flickr id="5348222727" thumbnail="small" overlay="false" size="large" group="" align="none"]
+* [flickrset id="72157631107721746" thumbnail="small" photos="" overlay="true" size="large"]
+* [flickr-gallery mode="photoset" photoset="72157626302265777"]
+* [flickr-gallery mode="tag" tags="foo,bar" tag_mode="all"]
+* [flickr-gallery mode="interesting"]
+* [flickr-gallery mode="recent"]
+* [flickr-gallery mode="search" tags="barcamp" group_id="431412@N25"]
+* `<a class="tt-flickr tt-flickr-Medium" title="Khan Sao Road, Bangkok, Thailand" href="http://www.flickr.com/photos/comprock/4334303694/" target="_blank"><img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" /></a>`
+* `<img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" />`
 
 = Settings Options =
 
@@ -100,68 +115,55 @@ dget on posts and page edit screens.
 * Remove Plugin Data on Deletion? - Delete all Flickr Shortcode Importer data and options from database on plugin deletion
 * Reset to Defaults? – Check this box to reset options to their defaults
 
-= Handled shortcode & media samples =
-
-* [flickr size="small" float="left"]http://www.flickr.com/photos/dancoulter/2619594365/[/flickr] (image)
-* [flickr height="300" width="400"]http://www.flickr.com/photos/dancoulter/2422361554/[/flickr] (video)
-* WARNING: Video media imported, but doesn't seem to work
-* [flickr id="5348222727" thumbnail="small" overlay="false" size="large" group="" align="none"]
-* [flickrset id="72157631107721746" thumbnail="small" photos="" overlay="true" size="large"]
-* [flickr-gallery mode="photoset" photoset="72157626302265777"]
-* [flickr-gallery mode="tag" tags="foo,bar" tag_mode="all"]
-* [flickr-gallery mode="interesting"]
-* [flickr-gallery mode="recent"]
-* [flickr-gallery mode="search" tags="barcamp" group_id="431412@N25"]
-* `<a class="tt-flickr tt-flickr-Medium" title="Khan Sao Road, Bangkok, Thailand" href="http://www.flickr.com/photos/comprock/4334303694/" target="_blank"><img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" /></a>`
-* `<img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" />`
-
-= API =
-
-* Read the [Flickr Shortcode Importer API](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/API.md).
-
-= Warnings =
-
-* Backup your database before importing. You can use revision to revert individual posts, but doing so in mass is a major PITA.
-* During my own imports, a post with one [flickr] entry could take a minute. Then posts with many [flickr] entries, several Flickr-source'd A/IMG tags and [flickset] with 30 or so photos took over 10-minutes to import.
-* During import, it might look like nothing is happening. The progress bar only moves after each import succeeds or fails.
-* I recommend setting the limit in options to 1 and then testing your installation. That sure makes for easier recovery in case something goes wrong. If something doesn't work, report it, http://wordpress.org/extend/plugins/flickr-shortcode-importer/.
-* It's strongly recommended to deactivate plugins like WordSocial, WP Smush.it and similar to prevent extended import times. You can always enable them and run them enmasse later.
-* Make sure you have enough disk space. Figure on about 1 GB per 1,000 photos given your using Scissors-continued and have a maximum image size of 1280 x 1024. If your images can be larger, then you'll probably need 1 GB per 250 photos imported.
-* Using your own Flickr API Key might be necessary. Test a single import and see the results before setting your own.
-
-= Languages =
-
-You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](http://aihr.us/contact-aihrus/) to the plugin author.
-
-See the FAQ for further localization tips.
-
-= Support =
-
-Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
-
-If you want to contribute and I hope you do, visit the [Flickr Shortcode Importer Github repository](https://github.com/michael-cannon/flickr-shortcode-importer).
-
-= Thank You =
-
-* Thank you for tobylewis for his file_get_contents_curl and custom post types contributions.
-* A big thank you to Željko Aščić of http://www.touristplayground.com/ for feedback and ideas.
-* Initial code is modeled after Viper007Bond's class based Regenerate Thumbnails plugin. The AJAX status and single auto-submission operations were a big help.
-* [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
-* Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.
-
 
 == Installation ==
 
-1. Via WordPress Admin > Plugins > Add New, Upload the `flickr-shortcode-importer.zip` file
-1. Alternately, via FTP, upload `flickr-shortcode-importer` directory to the `/wp-content/plugins/` directory
-1. Activate the 'Flickr Shortcode Importer' plugin after uploading or through WordPress Admin > Plugins
-1. Edit defaults via Settings > [flickr] Options
-1. Import via Tools > [flickr] Importer
+= Install Methods =
+
+* Through WordPress Admin > Plugins > Add New, Search for "Flickr Shortcode Importer"
+	* Find "Flickr Shortcode Importer by Aihrus"
+	* Click "Install Now" of "Flickr Shortcode Importer by Aihrus"
+* Download [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
+	* Through WordPress Admin > Plugins > Add New
+	* Click Upload
+	* "Choose File" `flickr-shortcode-importer.zip`
+	* Click "Install Now"
+* Download and unzip [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
+	* Using FTP, upload directory `flickr-shortcode-importer` to your website's `/wp-content/plugins/` directory
+
+= Activatation Options =
+
+* Activate the "Flickr Shortcode Importer" plugin after uploading
+* Activate the "Flickr Shortcode Importer" plugin through WordPress Admin > Plugins
+
+= Usage =
+
+1. Edit defaults through WordPress > Settings > [flickr] Options
+1. Import through WordPress > Tools > [flickr] Importer
+
+= Upgrading =
+
+* Through WordPress
+	* Via WordPress Admin > Dashboard > Updates, click "Check Again"
+	* Select plugins for update, click "Update Plugins"
+* Using FTP
+	* Download and unzip [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
+	* FTP, upload directory `flickr-shortcode-importer` to your website's `/wp-content/plugins/` directory
+	* Be sure to overwrite your existing `flickr-shortcode-importer` folder contents
 
 
 == Frequently Asked Questions ==
 
-Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
+= Most Common Issues =
+
+* [Debug common theme and plugin conflicts](https://aihrus.zendesk.com/entries/25119302)
+
+= Still Stuck or Want Something Done? Get Support! =
+
+1. [Open Flickr Shortcode Importer Issues](https://github.com/michael-cannon/flickr-shortcode-importer/issues) - review and submit bug reports and enhancement requests
+1. [Flickr Shortcode Importer Support on WordPress](http://wordpress.org/support/plugin/flickr-shortcode-importer) - ask questions and review responses
+1. [Contribute Code to Flickr Shortcode Importer](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/CONTRIBUTING.md)
+1. [Beta Testers Needed](http://aihr.us/become-beta-tester/) - get the latest Flickr Shortcode Importer version
 
 
 == Screenshots ==
@@ -181,6 +183,8 @@ Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org
 13. Edit post screen [flickr] Importer option
 14. Imported [flickr-gallery] photoset as [gallery] with media ids
 
+[gallery]
+
 
 == Changelog ==
 
@@ -192,17 +196,33 @@ See [Changelog](https://github.com/michael-cannon/flickr-shortcode-importer/blob
 * None
 
 
-== Beta Testers Needed ==
+== Notes ==
 
-I really want Flickr Shortcode Importer and Flickr Shortcode Importer Premium to be the best WordPress plugins of their type. However, it's beyond me to do it alone.
+* Backup your database before importing. You can use revision to revert individual posts, but doing so in mass is a major PITA.
+* During my own imports, a post with one [flickr] entry could take a minute. Then posts with many [flickr] entries, several Flickr-source'd A/IMG tags and [flickset] with 30 or so photos took over 10-minutes to import.
+* During import, it might look like nothing is happening. The progress bar only moves after each import succeeds or fails.
+* I recommend setting the limit in options to 1 and then testing your installation. That sure makes for easier recovery in case something goes wrong. If something doesn't work, report it, http://wordpress.org/extend/plugins/flickr-shortcode-importer/.
+* It's strongly recommended to deactivate plugins like WordSocial, WP Smush.it and similar to prevent extended import times. You can always enable them and run them enmasse later.
+* Make sure you have enough disk space. Figure on about 1 GB per 1,000 photos given your using Scissors-continued and have a maximum image size of 1280 x 1024. If your images can be larger, then you'll probably need 1 GB per 250 photos imported.
+* Using your own Flickr API Key might be necessary. Test a single import and see the results before setting your own.
 
-I need beta testers to help with ensuring pending releases of Flickr Shortcode Importer and Flickr Shortcode Importer Premium are solid. This would benefit us all by helping reduce the number of releases and raise code quality.
 
-[Please contact me directly](http://aihr.us/contact-aihrus/).
+== API ==
 
-Beta testers benefit directly with latest versions, a free 1-site license for Flickr Shortcode Importer Premium, and personalized support assistance.
+* Read the [Flickr Shortcode Importer API](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/API.md).
 
 
-== TODO ==
+== Localization ==
 
-See [TODO](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/TODO.md)
+You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](http://aihr.us/contact-aihrus/) for plugin inclusion.
+
+**[How do I localize?](https://aihrus.zendesk.com/entries/23691557)**
+
+
+== Thank You ==
+
+* Thank you for tobylewis for his file_get_contents_curl and custom post types contributions.
+* A big thank you to Željko Aščić of http://www.touristplayground.com/ for feedback and ideas.
+* Initial code is modeled after Viper007Bond's class based Regenerate Thumbnails plugin. The AJAX status and single auto-submission operations were a big help.
+* [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
+* Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.

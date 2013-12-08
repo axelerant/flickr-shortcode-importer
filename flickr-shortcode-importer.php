@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Flickr Shortcode Importer
+ * Plugin Name: Flickr Shortcode Importer by Aihrus
  * Plugin URI: http://wordpress.org/extend/plugins/flickr-shortcode-importer/
- * Description: Imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library.
+ * Description: Flickr Shortcode Importer by Aihrus imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
  * Version: 2.0.3
  * Author: Michael Cannon
  * Author URI: http://aihr.us/about-aihrus/michael-cannon-resume/
