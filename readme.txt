@@ -153,7 +153,7 @@ dget on posts and page edit screens.
 	* Select plugins for update, click "Update Plugins"
 * Using FTP
 	* Download and unzip [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
-	* FTP, upload directory `flickr-shortcode-importer` to your website's `/wp-content/plugins/` directory
+	* Upload directory `flickr-shortcode-importer` to your website's `/wp-content/plugins/` directory
 	* Be sure to overwrite your existing `flickr-shortcode-importer` folder contents
 
 
