@@ -133,6 +133,7 @@ EOD;
 		global $wpdb;
 
 		require_once 'lib/class-flickr-shortcode-importer-settings.php';
+
 		$delete_data = fsi_get_option( 'delete_data', false );
 		if ( $delete_data ) {
 			delete_option( Flickr_Shortcode_Importer_Settings::ID );

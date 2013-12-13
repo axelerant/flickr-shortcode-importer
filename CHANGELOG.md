@@ -2,7 +2,9 @@
 
 ## master
 * Convert TODO to https://github.com/michael-cannon/flickr-shortcode-importer/issues
+* Correct [ gallery] tag inclusion
 * Revise readme structure
+* Revise readme installation
 
 ## 2.0.3
 * Correct support forums location
