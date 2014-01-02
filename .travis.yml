@@ -9,8 +9,8 @@ php:
 env:
     - WP_VERSION=master WP_MULTISITE=1
     - WP_VERSION=master WP_MULTISITE=0
-    - WP_VERSION=3.5.2 WP_MULTISITE=1
-    - WP_VERSION=3.5.2 WP_MULTISITE=0
+    - WP_VERSION=3.6.0 WP_MULTISITE=1
+    - WP_VERSION=3.6.0 WP_MULTISITE=0
 
 before_install:
     - sudo apt-get update
@@ -26,13 +26,13 @@ before_script:
     - phpenv rehash
     - git clone git://github.com/mrchrisadams/WordPress-Coding-Standards.git $(pear config-get php_dir)/PHP/CodeSniffer/Standards/WordPress
 #    - export WP_TESTS_DIR=/tmp/wordpress-tests/
-#    - bash ci/bin/install-wp-tests.sh wordpress_test root '' ${WP_VERSION} 
+#    - bash tests/bin/install-wp-tests.sh wordpress_test root '' ${WP_VERSION} 
 
 script:
     - find . \( -name '*.php' -o -name '*.inc' \) -exec php -lf {} \;
-    - phpcs -s -n --standard=ci/phpcs.travis.ruleset.xml .
+    - phpcs -s -n --standard=tests/phpcs.ruleset.xml .
     - phpcpd .
-    - phpmd . --exclude jquery-ui-1.10.3.custom.min.css,jquery-ui-1.10.3.custom.css,inc.flickr.php,screen-meta-links.php text ci/phpmd.ruleset.xml
+    - phpmd . --exclude jquery-ui-1.10.3.custom.min.css,jquery-ui-1.10.3.custom.css,inc.flickr.php,screen-meta-links.php text tests/phpmd.ruleset.xml
 #    - phpunit
 
 notifications:
