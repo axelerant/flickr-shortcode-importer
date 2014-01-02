@@ -5,6 +5,7 @@
 * Correct [ gallery] tag inclusion
 * Revise readme structure
 * Revise readme installation
+* Specify a “Text Domain” and “Domain Path”
 
 ## 2.0.3
 * Correct support forums location
