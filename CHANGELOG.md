@@ -5,6 +5,7 @@
 * Correct [ gallery] tag inclusion
 * Revise readme structure
 * Revise readme installation
+* RESOLVE PHP Strict Standards:  call_user_func_array() expects parameter 1 to be a valid callback, non-static method Flickr_Shortcode_Importer::activation() should not be called statically
 * Specify a “Text Domain” and “Domain Path”
 
 ## 2.0.3
