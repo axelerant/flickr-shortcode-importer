@@ -23,18 +23,18 @@ if ( class_exists( 'Flickr_Shortcode_Importer' ) )
 
 
 class Flickr_Shortcode_Importer {
+	const BASE        = FSI_BASE;
 	const ID          = 'flickr-shortcode-importer';
 	const PLUGIN_FILE = 'flickr-shortcode-importer/flickr-shortcode-importer.php';
-	const VERSION     = '2.1.0RC1';
+	const SLUG        = 'fsi_';
+	const VERSION     = FSI_VERSION;
 
-	private static $base = null;
-
-	public static $donate_button = '';
-	public static $flickr_id     = false;
-	public static $flickset_id   = false;
-	public static $media_ids     = array();
-	public static $menu_id       = null;
-	public static $post_types    = null;
+	public static $flickr_id   = false;
+	public static $flickset_id = false;
+	public static $media_ids   = array();
+	public static $menu_id;
+	public static $post_types;
+	public static $plugin_assets;
 	public static $settings_link = '';
 
 
@@ -42,14 +42,14 @@ class Flickr_Shortcode_Importer {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'init', array( $this, 'init' ) );
-		self::$base = plugin_basename( __FILE__ );
 	}
 
 
 	public function admin_init() {
 		$role_enable = fsi_get_option( 'role_enable_post_widget' );
-		if ( ! empty( $role_enable ) && current_user_can( $role_enable ) )
+		if ( ! empty( $role_enable ) && current_user_can( $role_enable ) ) {
 			add_action( 'add_meta_boxes', array( $this, 'flickr_import_meta_boxes' ) );
+		}
 
 		$this->update();
 		add_filter( 'plugin_action_links', array( $this, 'plugin_action_links' ), 10, 2 );
@@ -74,19 +74,11 @@ class Flickr_Shortcode_Importer {
 		$this->flickr_import_post_types();
 		add_action( 'wp_ajax_ajax_process_shortcode', array( $this, 'ajax_process_shortcode' ) );
 		load_plugin_textdomain( self::ID, false, 'flickr-shortcode-importer/languages' );
-		self::$donate_button = <<<EOD
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="WM4F995W9LHXE">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
-EOD;
 	}
 
 
 	public function plugin_action_links( $links, $file ) {
-		if ( $file == self::$base ) {
+		if ( $file == self::BASE ) {
 			array_unshift( $links, self::$settings_link );
 
 			$link = '<a href="' . get_admin_url() . 'tools.php?page=' . self::ID . '">' . esc_html__( 'Import', 'flickr-shortcode-importer' ) . '</a>';
@@ -114,24 +106,27 @@ EOD;
 
 
 	public static function activation() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 	}
 
 
 	public static function deactivation() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 	}
 
 
 	public static function uninstall() {
-		if ( ! current_user_can( 'activate_plugins' ) )
+		if ( ! current_user_can( 'activate_plugins' ) ) {
 			return;
+		}
 
 		global $wpdb;
 
-		require_once 'lib/class-flickr-shortcode-importer-settings.php';
+		require_once FSI_DIR_INC . 'class-flickr-shortcode-importer-settings.php';
 
 		$delete_data = fsi_get_option( 'delete_data', false );
 		if ( $delete_data ) {
@@ -142,11 +137,17 @@ EOD;
 
 
 	public static function plugin_row_meta( $input, $file ) {
-		if ( $file != self::$base )
+		if ( self::BASE != $file ) {
 			return $input;
+		}
+
+		$disable_donate = fsi_get_option( 'disable_donate' );
+		if ( $disable_donate ) {
+			return $input;
+		}
 
 		$links = array(
-			'<a href="http://aihr.us/about-aihrus/donate/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" alt="PayPal - The safer, easier way to pay online!" /></a>',
+			self::$donate_link,
 		);
 
 		$input = array_merge( $input, $links );
@@ -155,18 +156,9 @@ EOD;
 	}
 
 
-	public function admin_notices_0_0_1() {
+	public function notices_0_0_1() {
 		$content  = '<div class="updated fade"><p>';
 		$content .= sprintf( __( 'If your Flickr Shortcode Importer display has gone to funky town, please <a href="%s">read the FAQ</a> about possible CSS fixes.', 'flickr-shortcode-importer' ), 'https://aihrus.zendesk.com/entries/23722573-Major-Changes-Since-2-10-0' );
-		$content .= '</p></div>';
-
-		echo $content;
-	}
-
-
-	public function admin_notices_donate() {
-		$content  = '<div class="updated fade"><p>';
-		$content .= sprintf( esc_html__( 'Please donate $5 towards development and support of this Flickr Shortcode Importer plugin. %s', 'flickr-shortcode-importer' ), self::$donate_button );
 		$content .= '</p></div>';
 
 		echo $content;
@@ -176,8 +168,9 @@ EOD;
 	public function update() {
 		$prior_version = fsi_get_option( 'admin_notices' );
 		if ( $prior_version ) {
-			if ( $prior_version < '0.0.1' )
-				add_action( 'admin_notices', array( $this, 'admin_notices_0_0_1' ) );
+			if ( $prior_version < '0.0.1' ) {
+				self::set_notice( 'notices_0_0_1' );
+			}
 
 			fsi_set_option( 'admin_notices' );
 		}
@@ -185,19 +178,20 @@ EOD;
 		// display donate on major/minor version release
 		$donate_version = fsi_get_option( 'donate_version', false );
 		if ( ! $donate_version || ( $donate_version != self::VERSION && preg_match( '#\.0$#', self::VERSION ) ) ) {
-			add_action( 'admin_notices', array( $this, 'admin_notices_donate' ) );
+			self::set_notice( 'notice_donate' );
 			fsi_set_option( 'donate_version', self::VERSION );
 		}
 	}
 
 
 	public function scripts() {
-		wp_enqueue_script( 'jquery-ui-progressbar', plugins_url( 'js/jquery.ui.progressbar.js', __FILE__ ), array( 'jquery', 'jquery-ui-core', 'jquery-ui-widget' ), '1.10.3' );
+		wp_register_script( 'jquery-ui-progressbar', self::$plugin_assets . 'js/jquery.ui.progressbar.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-widget' ), '1.10.3' );
+		wp_enqueue_script( 'jquery-ui-progressbar' );
 	}
 
 
 	public function styles() {
-		wp_register_style( 'jquery-ui-progressbar', plugins_url( 'css/redmond/jquery-ui-1.10.3.custom.min.css', __FILE__ ), false, '1.10.3' );
+		wp_register_style( 'jquery-ui-progressbar', self::$plugin_assets . 'css/redmond/jquery-ui-1.10.3.custom.min.css', false, '1.10.3' );
 		wp_enqueue_style( 'jquery-ui-progressbar' );
 	}
 
@@ -212,8 +206,9 @@ EOD;
 
 	public function flickr_import_meta_boxes() {
 		foreach ( self::$post_types as $post_type ) {
-			if ( fsi_get_option( 'enable_post_widget_' . $post_type ) )
+			if ( fsi_get_option( 'enable_post_widget_' . $post_type ) ) {
 				add_meta_box( 'flickr_import', esc_html__( '[flickr] Importer', 'flickr-shortcode-importer' ), array( $this, 'post_flickr_import_meta_box' ), $post_type, 'side' );
+			}
 		}
 	}
 
@@ -222,6 +217,7 @@ EOD;
 		wp_nonce_field( 'flickr_import', 'flickr-shortcode-importer' );
 		echo '<label class="selectit">';
 		$checked = get_post_meta( $post->ID, 'process_flickr_shortcode', true );
+		error_log( var_export( $checked, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		echo '<input name="flickr_import" type="checkbox" value="1" ' . checked( $checked, 1, false ) . ' /> ';
 		echo esc_html__( 'Import [flickr] content', 'flickr-shortcode-importer' );
 		echo '</label>';
@@ -238,8 +234,9 @@ EOD;
 		global $wpdb;
 
 		// Capability check
-		if ( ! current_user_can( 'manage_options' ) )
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( $this->post_id, esc_html__( "Your user account doesn't have permission to import Flickr shortcodes and images.", 'flickr-shortcode-importer' ) );
+		}
 
 ?>
 
@@ -1191,6 +1188,7 @@ EOD;
 	 *
 	 * @ref http://wordpress.org/support/topic/plugin-flickr-shortcode-importer-file_get_contents-with-url-isp-does-not-support?replies=2#post-2878241
 	 */
+	// fixme check Aihrus common
 	public function file_get_contents_curl( $url ) {
 		$ch = curl_init();
 
@@ -1272,6 +1270,49 @@ EOD;
 		}
 
 		return false;
+	}
+
+
+	public static function version_check() {
+		$valid_version = true;
+		if ( ! $valid_version ) {
+			$deactivate_reason = esc_html__( 'Failed version check' );
+			aihr_deactivate_plugin( self::BASE, FSI_NAME, $deactivate_reason );
+			self::check_notices();
+		}
+
+		return $valid_version;
+	}
+
+
+	/**
+	 * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+	 */
+	public static function notice_donate( $disable_donate = null, $item_name = null ) {
+		$disable_donate = fsi_get_option( 'disable_donate' );
+
+		parent::notice_donate( $disable_donate, FSI_NAME );
+	}
+
+
+	/**
+	 *
+	 *
+	 * @SuppressWarnings(PHPMD.Superglobals)
+	 */
+	public static function do_load() {
+		$do_load = false;
+		if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'options.php', 'widgets.php' ) ) ) {
+			$do_load = true;
+		} elseif ( ! empty( $_REQUEST['post_type'] ) ) {
+			if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'edit.php', 'edit-tags.php' ) ) ) {
+				$do_load = true;
+			} elseif ( ! empty( $_REQUEST['option_page'] ) && Flickr_Shortcode_Importer::ID == $_REQUEST['option_page'] ) {
+				$do_load = true;
+			}
+		}
+
+		return $do_load;
 	}
 
 

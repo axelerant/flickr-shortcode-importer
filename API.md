@@ -24,6 +24,10 @@ None at this time.
 
 	Validate settings helper. [example](https://gist.github.com/michael-cannon/5833768)
 
+* `fsi_settings_defaults`
+
+	Override settings defaults with your own.
+
 ## Need More?
 
 Further examples and more can be found by reading and searching the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) and [source code](https://github.com/michael-cannon/flickr-shortcode-importer).
