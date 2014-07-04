@@ -66,35 +66,33 @@ require_once FSI_DIR_INC . 'class-flickr-shortcode-importer.php';
 
 
 add_action( 'plugins_loaded', 'flickr_shortcode_importer_plugin_init', 99 );
-if ( ! function_exists( 'flickr_shortcode_importer_plugin_init' ) ) {
-	/**
-	 *
-	 *
-	 * @SuppressWarnings(PHPMD.LongVariable)
-	 * @SuppressWarnings(PHPMD.UnusedLocalVariable)
-	 */
-	function flickr_shortcode_importer_plugin_init() {
-		if ( ! is_admin() ) {
-			return;
+/**
+ *
+ *
+ * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+ */
+function flickr_shortcode_importer_plugin_init() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	if ( ! function_exists( 'add_screen_meta_link' ) ) {
+		require_once FSI_DIR_LIB . 'screen-meta-links.php';
+	}
+
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	if ( is_plugin_active( Flickr_Shortcode_Importer::PLUGIN_FILE ) ) {
+		require_once FSI_DIR_INC . 'class-flickr-shortcode-importer-settings.php';
+
+		global $Flickr_Shortcode_Importer;
+		if ( is_null( $Flickr_Shortcode_Importer ) ) {
+			$Flickr_Shortcode_Importer = new Flickr_Shortcode_Importer();
 		}
 
-		if ( ! function_exists( 'add_screen_meta_link' ) ) {
-			require_once FSI_DIR_LIB . 'screen-meta-links.php';
-		}
-
-		require_once ABSPATH . 'wp-admin/includes/plugin.php';
-		if ( is_plugin_active( Flickr_Shortcode_Importer::PLUGIN_FILE ) ) {
-			require_once FSI_DIR_INC . 'class-flickr-shortcode-importer-settings.php';
-
-			global $Flickr_Shortcode_Importer;
-			if ( is_null( $Flickr_Shortcode_Importer ) ) {
-				$Flickr_Shortcode_Importer = new Flickr_Shortcode_Importer();
-			}
-
-			global $Flickr_Shortcode_Importer_Settings;
-			if ( is_null( $Flickr_Shortcode_Importer_Settings ) ) {
-				$Flickr_Shortcode_Importer_Settings = new Flickr_Shortcode_Importer_Settings();
-			}
+		global $Flickr_Shortcode_Importer_Settings;
+		if ( is_null( $Flickr_Shortcode_Importer_Settings ) ) {
+			$Flickr_Shortcode_Importer_Settings = new Flickr_Shortcode_Importer_Settings();
 		}
 	}
 }
@@ -106,46 +104,44 @@ register_uninstall_hook( __FILE__, array( 'Flickr_Shortcode_Importer', 'uninstal
 
 
 add_action( 'save_post', 'fsi_save_post', 99 );
-if ( ! function_exists( 'fsi_save_post' ) ) {
-	/**
-	 *
-	 *
-	 * @SuppressWarnings(PHPMD.LongVariable)
-	 * @SuppressWarnings(PHPMD.Superglobals)
-	 */
-	function fsi_save_post( $post_id ) {
-		global $Flickr_Shortcode_Importer;
+/**
+ *
+ *
+ * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.Superglobals)
+ */
+function fsi_save_post( $post_id ) {
+	global $Flickr_Shortcode_Importer;
 
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-			return;
-		}
-
-		if ( ! is_numeric( $post_id ) ) {
-			return;
-		}
-
-		if ( empty( $_POST['flickr-shortcode-importer'] ) ) {
-			return;
-		}
-
-		// check that post is wanting the flickr codes imported
-		if ( ! wp_verify_nonce( $_POST['flickr-shortcode-importer'], 'flickr_import' ) ) {
-			return;
-		}
-
-		// save checkbox or not
-		$checked = ! empty( $_POST['flickr_import'] ) ? 1 : 0;
-		if ( ! $checked ) {
-			return;
-		} else {
-			update_post_meta( $post_id, 'process_flickr_shortcode', $checked );
-		}
-
-		remove_action( 'save_post', 'fsi_save_post', 99 );
-		$Flickr_Shortcode_Importer->process_flickr_shortcode( $post_id );
-		add_action( 'save_post', 'fsi_save_post', 99 );
-		delete_post_meta( $post_id, 'process_flickr_shortcode' );
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
 	}
+
+	if ( ! is_numeric( $post_id ) ) {
+		return;
+	}
+
+	if ( empty( $_POST['flickr-shortcode-importer'] ) ) {
+		return;
+	}
+
+	// check that post is wanting the flickr codes imported
+	if ( ! wp_verify_nonce( $_POST['flickr-shortcode-importer'], 'flickr_import' ) ) {
+		return;
+	}
+
+	// save checkbox or not
+	$checked = ! empty( $_POST['flickr_import'] ) ? 1 : 0;
+	if ( ! $checked ) {
+		return;
+	} else {
+		update_post_meta( $post_id, 'process_flickr_shortcode', $checked );
+	}
+
+	remove_action( 'save_post', 'fsi_save_post', 99 );
+	$Flickr_Shortcode_Importer->process_flickr_shortcode( $post_id );
+	add_action( 'save_post', 'fsi_save_post', 99 );
+	delete_post_meta( $post_id, 'process_flickr_shortcode' );
 }
 
 

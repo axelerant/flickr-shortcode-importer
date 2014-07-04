@@ -245,7 +245,6 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( $this->post_id, esc_html__( "Your user account doesn't have permission to import Flickr shortcodes and images.", 'flickr-shortcode-importer' ) );
 		}
-
 ?>
 
 <div id="message" class="updated fade" style="display:none"></div>
@@ -765,35 +764,35 @@ EOD;
 			$attr[ 'per_page' ] = fsi_get_option( 'fg-per_page' );
 
 		switch ( $args['mode'] ) {
-		case 'photoset':
-			$this->flickset_id = $args['photoset'];
-			$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
-			$args['set_title'] = $info['title'];
+			case 'photoset':
+				$this->flickset_id = $args['photoset'];
+				$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
+				$args['set_title'] = $info['title'];
 
-			$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
-			$photos = $photos['photoset']['photo'];
-			break;
+				$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
+				$photos = $photos['photoset']['photo'];
+				break;
 
-		case 'recent':
-		case 'tag':
-			$photos = $this->flickr->photos_search( $attr );
-			$photos = $photos['photo'];
-			break;
+			case 'recent':
+			case 'tag':
+				$photos = $this->flickr->photos_search( $attr );
+				$photos = $photos['photo'];
+				break;
 
-		case 'interesting':
-			$attr['sort'] = 'interestingness-desc';
-			$photos       = $this->flickr->photos_search( $attr );
-			$photos       = $photos['photo'];
-			break;
+			case 'interesting':
+				$attr['sort'] = 'interestingness-desc';
+				$photos       = $this->flickr->photos_search( $attr );
+				$photos       = $photos['photo'];
+				break;
 
-		case 'search':
-			unset( $attr[ 'user_id' ] );
-			$photos = $this->flickr->photos_search( $attr );
-			$photos = $photos['photo'];
-			break;
+			case 'search':
+				unset( $attr[ 'user_id' ] );
+				$photos = $this->flickr->photos_search( $attr );
+				$photos = $photos['photo'];
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 
 		if ( ! empty( $photos ) ) {
@@ -976,29 +975,29 @@ EOD;
 		$size_name = ( ! empty( $size_matches[0] ) ) ? array_pop( $size_matches[0] ) : '';
 
 		switch ( strtolower( $size_name ) ) {
-		case 'square':
-		case 'thumbnail':
-		case 'small':
-			$size = 'thumbnail';
-			break;
+			case 'square':
+			case 'thumbnail':
+			case 'small':
+				$size = 'thumbnail';
+				break;
 
-		case 'medium':
-		case 'medium_640':
-			$size = 'medium';
-			break;
+			case 'medium':
+			case 'medium_640':
+				$size = 'medium';
+				break;
 
-		case 'large':
-			$size = 'large';
-			break;
+			case 'large':
+				$size = 'large';
+				break;
 
-		case 'original':
-		case 'full':
-			$size = 'full';
-			break;
+			case 'original':
+			case 'full':
+				$size = 'full';
+				break;
 
-		default:
-			$size = fsi_get_option( 'default_image_size', 'medium' );
-			break;
+			default:
+				$size = fsi_get_option( 'default_image_size', 'medium' );
+				break;
 		}
 
 		return $size;
