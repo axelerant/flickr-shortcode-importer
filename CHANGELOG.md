@@ -2,7 +2,7 @@
 
 ## master
 
-## 2.1.0RC1
+## 2.1.0RC2
 * Add option Set Descriptions
 * Aihrus Framework version 1.1.4
 * Convert TODO to https://github.com/michael-cannon/flickr-shortcode-importer/issues
