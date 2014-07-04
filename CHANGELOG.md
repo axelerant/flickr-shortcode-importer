@@ -5,10 +5,12 @@
 ## 2.1.0RC1
 * Convert TODO to https://github.com/michael-cannon/flickr-shortcode-importer/issues
 * Correct [ gallery] tag inclusion
-* Revise readme structure
-* Revise readme installation
 * RESOLVE PHP Strict Standards:  call_user_func_array() expects parameter 1 to be a valid callback, non-static method Flickr_Shortcode_Importer::activation() should not be called statically
+* Revise readme installation
+* Revise readme structure
 * Specify a “Text Domain” and “Domain Path”
+* Update file structure
+* Use Codeship.io than Travis CI
 
 ## 2.0.3
 * Correct support forums location
