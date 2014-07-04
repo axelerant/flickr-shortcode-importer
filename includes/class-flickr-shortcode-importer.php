@@ -659,6 +659,8 @@ EOD;
 
 
 	public function _process_shortcode( $post ) {
+		require_once FSI_DIR_LIB . 'phpflickr/phpFlickr.php';
+
 		// default is Flickr Shortcode Import API key
 		$api_key      = fsi_get_option( 'flickr_api_key' );
 		$secret       = fsi_get_option( 'flickr_api_secret' );

@@ -85,7 +85,6 @@ if ( ! function_exists( 'flickr_shortcode_importer_plugin_init' ) ) {
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 		if ( is_plugin_active( Flickr_Shortcode_Importer::PLUGIN_FILE ) ) {
 			require_once FSI_DIR_INC . 'class-flickr-shortcode-importer-settings.php';
-			require_once FSI_DIR_LIB . 'inc.flickr.php';
 
 			global $Flickr_Shortcode_Importer;
 			if ( is_null( $Flickr_Shortcode_Importer ) ) {

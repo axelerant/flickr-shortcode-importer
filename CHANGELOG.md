@@ -15,6 +15,7 @@
 * Revise readme structure
 * Specify a “Text Domain” and “Domain Path”
 * Update file structure
+* Update [PHP Wrapper for the Flickr API](https://github.com/dan-coulter/phpflickr)
 * Use Codeship.io than Travis CI
 
 ## 2.0.3
