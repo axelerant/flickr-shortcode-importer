@@ -17,28 +17,33 @@
  */
 
 require_once AIHR_DIR_INC . 'class-aihrus-common.php';
+require_once FSI_DIR_INC . 'class-flickr-shortcode-importer-settings.php';
 
 if ( class_exists( 'Flickr_Shortcode_Importer' ) )
 	return;
 
 
-class Flickr_Shortcode_Importer {
+class Flickr_Shortcode_Importer extends Aihrus_Common {
 	const BASE        = FSI_BASE;
 	const ID          = 'flickr-shortcode-importer';
 	const PLUGIN_FILE = 'flickr-shortcode-importer/flickr-shortcode-importer.php';
 	const SLUG        = 'fsi_';
 	const VERSION     = FSI_VERSION;
 
+	public static $class       = __CLASS__;
 	public static $flickr_id   = false;
 	public static $flickset_id = false;
 	public static $media_ids   = array();
 	public static $menu_id;
+	public static $notice_key;
 	public static $post_types;
 	public static $plugin_assets;
 	public static $settings_link = '';
 
 
 	public function __construct() {
+		parent::__construct();
+
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'init', array( $this, 'init' ) );
@@ -1136,7 +1141,7 @@ EOD;
 			$desc .= $link;
 		}
 
-		$file_move = wp_upload_bits( $file, null, $this->file_get_contents_curl( $src ) );
+		$file_move = wp_upload_bits( $file, null, self::file_get_contents_curl( $src ) );
 		$filename  = $file_move['file'];
 		if ( empty( $filename ) )
 			$this->die_json_error_msg( $this->post_id, sprintf( esc_html__( 'Source file not found: %s', 'flickr-shortcode-importer' ), $src ) );
@@ -1178,30 +1183,6 @@ EOD;
 		}
 
 		return $image_id;
-	}
-
-
-	/**
-	 * Thank you Tobylewis
-	 *
-	 * file_get_contents support on some shared systems is turned off
-	 *
-	 * @ref http://wordpress.org/support/topic/plugin-flickr-shortcode-importer-file_get_contents-with-url-isp-does-not-support?replies=2#post-2878241
-	 */
-	// fixme check Aihrus common
-	public function file_get_contents_curl( $url ) {
-		$ch = curl_init();
-
-		curl_setopt( $ch, CURLOPT_AUTOREFERER, true );
-		curl_setopt( $ch, CURLOPT_HEADER, 0 );
-		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch, CURLOPT_URL, $url );
-		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, true );
-
-		$data = curl_exec( $ch );
-		curl_close( $ch );
-
-		return $data;
 	}
 
 

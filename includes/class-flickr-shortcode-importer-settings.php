@@ -28,10 +28,12 @@ if ( class_exists( 'Flickr_Shortcode_Importer_Settings' ) )
 	return;
 
 
-class Flickr_Shortcode_Importer_Settings {
+class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 	const ID   = 'flickr-shortcode-importer-settings';
 	const NAME = 'Flickr Shortcode Importer Settings';
 
+	public static $admin_page;
+	public static $class    = __CLASS__;
 	public static $defaults = array();
 	public static $plugin_assets;
 	public static $plugin_url = 'http://wordpress.org/plugins/flickr-shortcode-importer/';
@@ -58,14 +60,17 @@ class Flickr_Shortcode_Importer_Settings {
 
 
 	public function __construct() {
+		parent::__construct();
+
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'init', array( $this, 'init' ) );
-		load_plugin_textdomain( 'flickr-shortcode-importer', false, '/flickr-shortcode-importer/languages/' );
 	}
 
 
 	public function init() {
+		load_plugin_textdomain( 'flickr-shortcode-importer', false, '/flickr-shortcode-importer/languages/' );
+
 		self::$plugin_assets = Flickr_Shortcode_Importer::$plugin_assets;
 	}
 
