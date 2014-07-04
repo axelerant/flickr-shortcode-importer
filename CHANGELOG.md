@@ -1,6 +1,8 @@
 # CHANGELOG Flickr Shortcode Importer plugin for WordPress
 
 ## master
+
+## 2.1.0RC1
 * Convert TODO to https://github.com/michael-cannon/flickr-shortcode-importer/issues
 * Correct [ gallery] tag inclusion
 * Revise readme structure
