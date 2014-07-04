@@ -281,8 +281,8 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 				if ( fsi_get_option( 'import_flickr_sourced_tags' ) ) {
 					$flickr_source_where = <<<EOD
 						OR (
-							post_content LIKE '%<img%src=%http://farm%.static.flickr.com/%>%'
-							OR post_content LIKE '%<img%src=%http://farm%staticflickr.com/%>%'
+							post_content LIKE '%<img%src=%http%://farm%.static.flickr.com/%>%'
+							OR post_content LIKE '%<img%src=%http%://farm%staticflickr.com/%>%'
 						)
 EOD;
 				}

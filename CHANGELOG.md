@@ -9,6 +9,7 @@
 * Correct [ gallery] tag inclusion
 * RESOLVE PHP Strict Standards:  call_user_func_array() expects parameter 1 to be a valid callback, non-static method Flickr_Shortcode_Importer::activation() should not be called statically
 * RESOLVES #4 Import of image description
+* RESOLVES #5 https URLs fails
 * Revise readme installation
 * Revise readme structure
 * Specify a “Text Domain” and “Domain Path”
