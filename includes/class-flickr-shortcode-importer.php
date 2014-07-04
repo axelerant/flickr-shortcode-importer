@@ -350,12 +350,12 @@ EOD;
 		 * <a class="tt-flickr tt-flickr-Medium" title="Khan Sao Road, Bangkok, Thailand" href="http://www.flickr.com/photos/comprock/4334303694/" target="_blank"><img class="alignnone" src="http://farm3.static.flickr.com/2768/4334303694_37785d0f0d.jpg" alt="Khan Sao Road, Bangkok, Thailand" width="500" height="375" /></a>
 		 * cycle through a/img
 		 */
-		$find_flickr_a_tag = '#<a.*href=.*http://www.flickr.com/.*><img.*src=.*http://farm\d+.static.?flickr.com/[^>]+></a>#i';
+		$find_flickr_a_tag = '#<a.*href=.*https?://www.flickr.com/.*><img.*src=.*http://farm\d+.static.?flickr.com/[^>]+></a>#i';
 		$a_tag_open        = '<a ';
 		$post_content      = $this->convert_tag_to_flickr( $post_content, $a_tag_open, $find_flickr_a_tag );
 
 		// cycle through standalone img
-		$find_flickr_img_tag = '#<img.*src=.*http://farm\d+.static.?flickr.com/[^>]+>#i';
+		$find_flickr_img_tag = '#<img.*src=.*https?://farm\d+.static.?flickr.com/[^>]+>#i';
 		$img_tag_open        = '<img ';
 		$post_content        = $this->convert_tag_to_flickr( $post_content, $img_tag_open, $find_flickr_img_tag, true );
 
