@@ -11,6 +11,7 @@
 * RESOLVES #3 After importing via post "Import [flickr] content", it's not unchecked
 * RESOLVES #4 Import of image description
 * RESOLVES #5 https URLs fails
+* RESOLVES #6 Migrate from FlickrManager fails?
 * Revise readme installation
 * Revise readme structure
 * Specify a “Text Domain” and “Domain Path”
