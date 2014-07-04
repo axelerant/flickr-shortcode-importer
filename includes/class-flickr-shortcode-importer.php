@@ -30,8 +30,9 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 	const SLUG        = 'fsi_';
 	const VERSION     = FSI_VERSION;
 
+	public $flickr_id = false;
+
 	public static $class       = __CLASS__;
-	public static $flickr_id   = false;
 	public static $flickset_id = false;
 	public static $media_ids   = array();
 	public static $menu_id;
@@ -225,7 +226,6 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 		wp_nonce_field( 'flickr_import', 'flickr-shortcode-importer' );
 		echo '<label class="selectit">';
 		$checked = get_post_meta( $post->ID, 'process_flickr_shortcode', true );
-		error_log( var_export( $checked, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		echo '<input name="flickr_import" type="checkbox" value="1" ' . checked( $checked, 1, false ) . ' /> ';
 		echo esc_html__( 'Import [flickr] content', 'flickr-shortcode-importer' );
 		echo '</label>';

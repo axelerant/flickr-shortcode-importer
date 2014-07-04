@@ -136,17 +136,16 @@ if ( ! function_exists( 'fsi_save_post' ) ) {
 
 		// save checkbox or not
 		$checked = ! empty( $_POST['flickr_import'] ) ? 1 : 0;
-		update_post_meta( $post_id, 'process_flickr_shortcode', $checked );
-
 		if ( ! $checked ) {
 			return;
+		} else {
+			update_post_meta( $post_id, 'process_flickr_shortcode', $checked );
 		}
 
 		remove_action( 'save_post', 'fsi_save_post', 99 );
-
 		$Flickr_Shortcode_Importer->process_flickr_shortcode( $post_id );
-
 		add_action( 'save_post', 'fsi_save_post', 99 );
+		delete_post_meta( $post_id, 'process_flickr_shortcode' );
 	}
 }
 
