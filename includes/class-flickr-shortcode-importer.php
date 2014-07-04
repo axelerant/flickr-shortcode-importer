@@ -44,6 +44,9 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 	public function __construct() {
 		parent::__construct();
 
+		self::$plugin_assets = plugins_url( '/assets/', dirname( __FILE__ ) );
+		self::$plugin_assets = self::strip_protocol( self::$plugin_assets );
+
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'init', array( $this, 'init' ) );
@@ -1020,8 +1023,14 @@ EOD;
 
 		$alt     = $title;
 		$caption = fsi_get_option( 'set_caption' ) ? $title : '';
-		$desc    = html_entity_decode( $photo['description'] );
-		$date    = $photo['dates']['taken'];
+
+		$desc             = '';
+		$set_descriptions = fsi_get_option( 'set_descriptions' );
+		if ( $set_descriptions ) {
+			$desc = html_entity_decode( $photo['description'] );
+		}
+
+		$date = $photo['dates']['taken'];
 
 		$sizes = $this->flickr->photos_getSizes( $photo_id );
 		$src   = false;
@@ -1283,12 +1292,10 @@ EOD;
 	 */
 	public static function do_load() {
 		$do_load = false;
-		if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'options.php', 'widgets.php' ) ) ) {
+		if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'options.php', 'options-general.php', 'widgets.php' ) ) ) {
 			$do_load = true;
 		} elseif ( ! empty( $_REQUEST['post_type'] ) ) {
 			if ( ! empty( $GLOBALS['pagenow'] ) && in_array( $GLOBALS['pagenow'], array( 'edit.php', 'edit-tags.php' ) ) ) {
-				$do_load = true;
-			} elseif ( ! empty( $_REQUEST['option_page'] ) && Flickr_Shortcode_Importer::ID == $_REQUEST['option_page'] ) {
 				$do_load = true;
 			}
 		}

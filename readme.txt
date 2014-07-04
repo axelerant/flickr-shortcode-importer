@@ -73,6 +73,7 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 * Link Image to Attachment Page? - If set, post single view images are linked to attachment pages. Otherwise the image links to its source file.
 * Image Wrap Class - If set, a span tag is wrapped around the image with the given class. Also wraps attribution if enabled. e.g. Providing `flickr-image` results in `&lt;span class="flickr-image"&gt;|&lt;/span&gt;`
 * Set Captions - Uses media title as the caption.
+* Set Descriptions - Include Flickr descriptions in media information.
 * Include Flickr Author Attribution? - Appends Flickr username, linked back to Flickr image to the imported Flickr image.
 * Flickr Author Attribution Text
 * Flickr Author Attribution Wrap Class - If set, a span tag is wrapped around the attribution with the given class. e.g. Providing `flickr-attribution` results in `&lt;span class="flickr-attribution"&gt;|&lt;/span&gt;`

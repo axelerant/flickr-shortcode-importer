@@ -33,8 +33,9 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 	const NAME = 'Flickr Shortcode Importer Settings';
 
 	public static $admin_page;
-	public static $class    = __CLASS__;
-	public static $defaults = array();
+	public static $class              = __CLASS__;
+	public static $defaults           = array();
+	public static $hide_update_notice = true;
 	public static $plugin_assets;
 	public static $plugin_url = 'http://wordpress.org/plugins/flickr-shortcode-importer/';
 	public static $sections   = array();
@@ -43,18 +44,20 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 
 	public static $default = array(
 		'backwards' => array(
-			'version' => '', // below this version number, use std
-			'std' => '',
+			'version' => null, // below this version number, use std
+			'std' => null,
 		),
 		'choices' => array(), // key => value
-		'class' => '',
-		'desc' => '',
-		'id' => 'default_field',
+		'class' => null, // warning, etc.
+		'desc' => null,
+		'id' => null,
 		'section' => 'general',
-		'std' => '', // default key or value
-		'title' => '',
+		'show_code' => false,
+		'std' => null, // default key or value
+		'suggest' => false, // attempt for auto-suggest on inputs
+		'title' => null,
 		'type' => 'text', // textarea, checkbox, radio, select, hidden, heading, password, expand_begin, expand_end
-		'validate' => '', // required, term, slug, slugs, ids, order, single paramater PHP functions
+		'validate' => null, // required, term, slug, slugs, ids, order, single paramater PHP functions
 		'widget' => 1, // show in widget options, 0 off
 	);
 
@@ -65,6 +68,40 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'init', array( $this, 'init' ) );
+	}
+
+
+	public function admin_init() {
+		$version       = fsi_get_option( 'version' );
+		self::$version = Flickr_Shortcode_Importer::VERSION;
+		self::$version = apply_filters( 'flickr_shortcode_importer_version', self::$version );
+
+		if ( $version != self::$version ) {
+			$this->initialize_settings();
+		}
+
+		if ( ! Flickr_Shortcode_Importer::do_load() ) {
+			return;
+		}
+
+		self::load_options();
+		self::register_settings();
+	}
+
+
+	public function admin_menu() {
+		$admin_page = add_options_page( esc_html__( 'Flickr Shortcode Importer Settings', 'flickr-shortcode-importer' ), esc_html__( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ), 'manage_options', self::ID, array( 'Flickr_Shortcode_Importer_Settings', 'display_page' ) );
+
+		add_action( 'admin_print_scripts-' . $admin_page, array( $this, 'scripts' ) );
+		add_action( 'admin_print_styles-' . $admin_page, array( $this, 'styles' ) );
+
+		add_screen_meta_link(
+			'fsi-importer-link',
+			esc_html__( '[Flickr] Importer', 'flickr-shortcode-importer' ),
+			admin_url( 'tools.php?page=' . Flickr_Shortcode_Importer::ID ),
+			$admin_page,
+			array( 'style' => 'font-weight: bold;' )
+		);
 	}
 
 
@@ -209,6 +246,13 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 			'desc' => esc_html__( 'Uses media title as the caption.', 'flickr-shortcode-importer' ),
 			'type' => 'checkbox',
 			'std' => 0,
+		);
+
+		self::$settings['set_descriptions'] = array(
+			'title' => esc_html__( 'Set Descriptions?', 'flickr-shortcode-importer' ),
+			'desc' => esc_html__( 'Include Flickr descriptions in media information.', 'flickr-shortcode-importer' ),
+			'type' => 'checkbox',
+			'std' => 1,
 		);
 
 		self::$settings['flickr_image_attribution'] = array(
@@ -416,40 +460,6 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 	}
 
 
-	public function admin_init() {
-		$version       = fsi_get_option( 'version' );
-		self::$version = Flickr_Shortcode_Importer::VERSION;
-		self::$version = apply_filters( 'flickr_shortcode_importer_version', self::$version );
-
-		if ( $version != self::$version ) {
-			$this->initialize_settings();
-		}
-
-		if ( ! Flickr_Shortcode_Importer::do_load() ) {
-			return;
-		}
-
-		self::load_options();
-		self::register_settings();
-	}
-
-
-	public function admin_menu() {
-		$admin_page = add_options_page( esc_html__( 'Flickr Shortcode Importer Settings', 'flickr-shortcode-importer' ), esc_html__( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ), 'manage_options', self::ID, array( 'Flickr_Shortcode_Importer_Settings', 'display_page' ) );
-
-		add_action( 'admin_print_scripts-' . $admin_page, array( $this, 'scripts' ) );
-		add_action( 'admin_print_styles-' . $admin_page, array( $this, 'styles' ) );
-
-		add_screen_meta_link(
-			'fsi-importer-link',
-			esc_html__( '[Flickr] Importer', 'flickr-shortcode-importer' ),
-			admin_url( 'tools.php?page=' . Flickr_Shortcode_Importer::ID ),
-			$admin_page,
-			array( 'style' => 'font-weight: bold;' )
-		);
-	}
-
-
 	public static function display_page( $disable_donate = false ) {
 		$disable_donate = fsi_get_option( 'disable_donate' );
 
@@ -461,6 +471,38 @@ class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
 		$version = fsi_get_option( 'version', self::$version );
 
 		parent::initialize_settings( $version );
+	}
+
+
+	/**
+	 *
+	 *
+	 * @SuppressWarnings(PHPMD.Superglobals)
+	 */
+	public static function validate_settings( $input, $options = null, $do_errors = false ) {
+		$validated = parent::validate_settings( $input, $options, $do_errors );
+		if ( empty( $do_errors ) ) {
+			$input  = $validated;
+			$errors = array();
+		} else {
+			$input  = $validated['input'];
+			$errors = $validated['errors'];
+		}
+
+		$input['version']        = self::$version;
+		$input['donate_version'] = Flickr_Shortcode_Importer::VERSION;
+
+		$input = apply_filters( 'fsi_validate_settings', $input, $errors );
+		if ( empty( $do_errors ) ) {
+			$validated = $input;
+		} else {
+			$validated = array(
+				'input' => $input,
+				'errors' => $errors,
+			);
+		}
+
+		return $validated;
 	}
 
 
