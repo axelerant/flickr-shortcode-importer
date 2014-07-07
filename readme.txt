@@ -167,9 +167,9 @@ dget on posts and page edit screens.
 
 = Still Stuck or Want Something Done? Get Support! =
 
-1. [Open Flickr Shortcode Importer Issues](https://github.com/michael-cannon/flickr-shortcode-importer/issues) - review and submit bug reports and enhancement requests
-1. [Flickr Shortcode Importer Support on WordPress](http://wordpress.org/support/plugin/flickr-shortcode-importer) - ask questions and review responses
-1. [Contribute Code to Flickr Shortcode Importer](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/CONTRIBUTING.md)
+1. [Open Issues](https://github.com/michael-cannon/flickr-shortcode-importer/issues) - review and submit bug reports and enhancement requests
+1. [Support on WordPress](http://wordpress.org/support/plugin/flickr-shortcode-importer) - ask questions and review responses
+1. [Contribute Code](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/CONTRIBUTING.md)
 1. [Beta Testers Needed](http://aihr.us/become-beta-tester/) - get the latest Flickr Shortcode Importer version
 
 

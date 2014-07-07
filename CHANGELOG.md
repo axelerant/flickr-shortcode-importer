@@ -5,6 +5,7 @@
 ## 2.1.0RC2
 * Add option Set Descriptions
 * Aihrus Framework version 1.1.4
+* Clean up FAQ
 * Convert TODO to https://github.com/michael-cannon/flickr-shortcode-importer/issues
 * Correct [ gallery] tag inclusion
 * RESOLVE PHP Strict Standards:  call_user_func_array() expects parameter 1 to be a valid callback, non-static method Flickr_Shortcode_Importer::activation() should not be called statically
