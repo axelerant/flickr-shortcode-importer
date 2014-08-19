@@ -27,18 +27,18 @@ function fsi_requirements_check( $force_check = false ) {
 
 	$deactivate_reason = false;
 	if ( ! function_exists( 'aihr_check_aihrus_framework' ) ) {
-		$deactivate_reason = esc_html__( 'Missing Aihrus Framework' );
+		$deactivate_reason = esc_html__( 'Missing Aihrus Framework', 'flickr-shortcode-importer' );
 		add_action( 'admin_notices', 'fsi_notice_aihrus' );
 	} elseif ( ! aihr_check_aihrus_framework( FSI_BASE, FSI_NAME, FSI_AIHR_VERSION ) ) {
-		$deactivate_reason = esc_html__( 'Old Aihrus Framework version detected' );
+		$deactivate_reason = esc_html__( 'Old Aihrus Framework version detected', 'flickr-shortcode-importer' );
 	}
 
 	if ( ! aihr_check_php( FSI_BASE, FSI_NAME ) ) {
-		$deactivate_reason = esc_html__( 'Old PHP version detected' );
+		$deactivate_reason = esc_html__( 'Old PHP version detected', 'flickr-shortcode-importer' );
 	}
 
 	if ( ! aihr_check_wp( FSI_BASE, FSI_NAME ) ) {
-		$deactivate_reason = esc_html__( 'Old WordPress version detected' );
+		$deactivate_reason = esc_html__( 'Old WordPress version detected', 'flickr-shortcode-importer' );
 	}
 
 	if ( ! empty( $deactivate_reason ) ) {
@@ -57,9 +57,9 @@ function fsi_requirements_check( $force_check = false ) {
 
 function fsi_notice_aihrus() {
 	$help_url  = esc_url( 'https://aihrus.zendesk.com/entries/35689458' );
-	$help_link = sprintf( __( '<a href="%1$s">Update plugins</a>. <a href="%2$s">More information</a>.' ), self_admin_url( 'update-core.php' ), $help_url );
+	$help_link = sprintf( __( '<a href="%1$s">Update plugins</a>. <a href="%2$s">More information</a>.', 'flickr-shortcode-importer' ), self_admin_url( 'update-core.php' ), $help_url );
 
-	$text = sprintf( esc_html__( 'Plugin "%1$s" has been deactivated as it requires a current Aihrus Framework. Once corrected, "%1$s" can be activated. %2$s' ), FSI_NAME, $help_link );
+	$text = sprintf( esc_html__( 'Plugin "%1$s" has been deactivated as it requires a current Aihrus Framework. Once corrected, "%1$s" can be activated. %2$s', 'flickr-shortcode-importer' ), FSI_NAME, $help_link );
 
 	aihr_notice_error( $text );
 }

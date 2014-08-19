@@ -1267,7 +1267,7 @@ EOD;
 	public static function version_check() {
 		$valid_version = true;
 		if ( ! $valid_version ) {
-			$deactivate_reason = esc_html__( 'Failed version check' );
+			$deactivate_reason = esc_html__( 'Failed version check', 'flickr-shortcode-importer' );
 			aihr_deactivate_plugin( self::BASE, FSI_NAME, $deactivate_reason );
 			self::check_notices();
 		}
