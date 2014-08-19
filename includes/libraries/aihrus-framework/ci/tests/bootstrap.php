@@ -1,5 +1,4 @@
 <?php
-return;
 
 require_once getenv( 'WP_TESTS_DIR' ) . '/includes/functions.php';
 
