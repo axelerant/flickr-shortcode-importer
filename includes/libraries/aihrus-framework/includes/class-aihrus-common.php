@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright 2013 Michael Cannon (email: mc@aihr.us)
+	Copyright 2014 Michael Cannon (email: mc@aihr.us)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -171,13 +171,19 @@ EOD;
 
 
 	public static function get_styles() {
-		if ( static::$styles_called )
+		if ( empty( self::$styles ) )
 			return;
 
-		foreach ( static::$styles as $style )
-			echo $style;
+		if ( empty( self::$styles_called ) ) {
+			echo '<style>';
 
-		static::$styles_called = true;
+			foreach ( self::$styles as $style )
+				echo $style;
+
+			echo '</style>';
+
+			self::$styles_called = true;
+		}
 	}
 
 
@@ -308,11 +314,14 @@ EOD;
 	}
 
 
-	public static function get_image_src( $image ) {
+	public static function get_image_src( $image, $strip_protocol = true ) {
 		$doc = new DOMDocument();
 		$doc->loadHTML( $image );
 		$xpath = new DOMXPath( $doc );
 		$src   = $xpath->evaluate( 'string(//img/@src)' );
+
+		if ( $strip_protocol )
+			$src = self::strip_protocol( $src );
 
 		return $src;
 	}
@@ -441,6 +450,75 @@ EOD;
 			$output .= '</'.array_pop( $tag_stack ).'>';
 
 		return $output;
+	}
+
+
+	public static function strip_protocol( $link ) {
+		if ( ! empty( $link ) ) {
+			$link = preg_replace( '#https?:#', '', $link );
+		}
+
+		return $link;
+	}
+
+
+	/**
+	 * @ref http://wpbandit.com/code/check-a-users-role-in-wordpress/
+	 */
+	public static function check_user_role( $roles = array(), $user_id = null ) {
+		// Get user by ID, else get current user
+		if ( $user_id ) {
+			$user = get_userdata( $user_id );
+		} else {
+			$user = wp_get_current_user();
+		}
+
+		// No user found, return
+		if ( empty( $user ) )
+			return false;
+
+		// Append administrator to roles, if necessary
+		if ( !in_array( 'administrator', $roles ) )
+			$roles[] = 'administrator';
+
+		// Loop through user roles
+		foreach ( $user->roles as $role ) {
+			// Does user have role
+			if ( in_array( $role, $roles ) ) {
+				return true;
+			}
+		}
+
+		// User not in roles
+		return false;
+	}
+
+
+	public static function activation() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+
+	public static function deactivation() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+
+	public static function uninstall() {
+		if ( ! current_user_can( 'activate_plugins' ) ) {
+			return;
+		}
+	}
+
+
+	public static function version_check() {
+		$good_version = true;
+
+		return $good_version;
 	}
 
 

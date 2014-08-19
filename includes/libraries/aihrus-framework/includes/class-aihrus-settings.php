@@ -1,6 +1,6 @@
 <?php
 /*
-	Copyright 2013 Michael Cannon (email: mc@aihr.us)
+	Copyright 2014 Michael Cannon (email: mc@aihr.us)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License, version 2, as
@@ -22,9 +22,11 @@
  * Based upon http://alisothegeek.com/2011/01/wordpress-settings-api-tutorial-1/
  */
 
+require_once ABSPATH . 'wp-admin/includes/template.php';
 
-if ( class_exists( 'Aihrus_Settings' ) )
+if ( class_exists( 'Aihrus_Settings' ) ) {
 	return;
+}
 
 
 abstract class Aihrus_Settings {
@@ -47,6 +49,7 @@ abstract class Aihrus_Settings {
 		'widget' => 1, // show in widget options, 0 off
 	);
 
+	private static $settings_saved = false;
 
 	public function __construct() {}
 
@@ -93,7 +96,7 @@ abstract class Aihrus_Settings {
 			'widget' => 0,
 		);
 
-		$desc = esc_html__( 'Delete all %s data and options from database on plugin deletion' );
+		$desc = esc_html__( 'Delete all %s data and options from database on plugin deletion. Even if this option isn\'t checked, WordPress will still give a data deletion warning.' );
 
 		static::$settings['delete_data'] = array(
 			'section' => 'reset',
@@ -115,8 +118,9 @@ abstract class Aihrus_Settings {
 
 
 	public static function get_defaults( $mode = null, $old_version = null ) {
-		if ( empty( static::$defaults ) )
+		if ( empty( static::$defaults ) ) {
 			static::settings();
+		}
 
 		$do_backwards = false;
 		if ( 'backwards' == $mode ) {
@@ -142,8 +146,9 @@ abstract class Aihrus_Settings {
 
 
 	public static function get_settings() {
-		if ( empty( static::$settings ) )
+		if ( empty( static::$settings ) ) {
 			static::settings();
+		}
 
 		return static::$settings;
 	}
@@ -169,8 +174,9 @@ abstract class Aihrus_Settings {
 	public static function create_setting( $args = array() ) {
 		extract( $args );
 
-		if ( preg_match( '#(_expand_begin|_expand_end)#', $id ) )
+		if ( preg_match( '#(_expand_begin|_expand_end)#', $id ) ) {
 			return;
+		}
 
 		$field_args = array(
 			'choices' => $choices,
@@ -211,15 +217,18 @@ abstract class Aihrus_Settings {
 	public static function do_settings_sections( $page ) {
 		global $wp_settings_sections, $wp_settings_fields;
 
-		if ( ! isset( $wp_settings_sections ) || ! isset( $wp_settings_sections[$page] ) )
+		if ( ! isset( $wp_settings_sections ) || ! isset( $wp_settings_sections[$page] ) ) {
 			return;
+		}
 
 		foreach ( (array) $wp_settings_sections[$page] as $section ) {
-			if ( $section['callback'] )
+			if ( $section['callback'] ) {
 				call_user_func( $section['callback'], $section );
+			}
 
-			if ( ! isset( $wp_settings_fields ) || ! isset( $wp_settings_fields[$page] ) || ! isset( $wp_settings_fields[$page][$section['id']] ) )
+			if ( ! isset( $wp_settings_fields ) || ! isset( $wp_settings_fields[$page] ) || ! isset( $wp_settings_fields[$page][$section['id']] ) ) {
 				continue;
+			}
 
 			echo '<table id=' . $section['id'] . ' class="form-table">';
 			do_settings_fields( $page, $section['id'] );
@@ -233,12 +242,12 @@ abstract class Aihrus_Settings {
 
 	public static function display_about() {
 		$name = str_replace( ' Settings', '', static::NAME );
-		$text = __( '<img class="alignright size-medium" src="%1$s/media/michael-cannon-red-square-300x2251.jpg" alt="Michael in Red Square, Moscow, Russia" width="300" height="225" /><a href="%2$s">%3$s</a> is by <a href="%4$s">Michael Cannon</a>. He\'s <a href="%5$s">Peichi’s</a> smiling man, an adventurous <a href="%6$s" target="_blank">water-rat</a>, <a href="%7$s">chief people officer</a>, <a href="%8$s">cyclist</a>, <a href="%9$s">full stack developer</a>, <a href="%10$s">poet</a>, <a href="%11$s">WWOOF’er</a> and <a href="%12$s">world traveler</a>.' );
+		$text = __( '<img class="alignright size-medium" src="%1$simages/michael-cannon-red-square-300x2251.jpg" alt="Michael in Red Square, Moscow, Russia" width="300" height="225" /><a href="%2$s">%3$s</a> is by <a href="%4$s">Michael Cannon</a>. He\'s <a href="%5$s">Peichi’s</a> smiling man, an adventurous <a href="%6$s" target="_blank">water-rat</a>, <a href="%7$s">chief people officer</a>, <a href="%8$s">cyclist</a>, <a href="%9$s">full stack developer</a>, <a href="%10$s">poet</a>, <a href="%11$s">WWOOF’er</a> and <a href="%12$s">world traveler</a>.' );
 
 		echo '<div id="about" style="width: 70%; min-height: 225px;"><p>';
 		echo sprintf(
 			$text,
-			static::$plugin_path,
+			static::$plugin_assets,
 			esc_url( static::$plugin_url ),
 			$name,
 			esc_url( 'http://aihr.us/resume/' ),
@@ -262,13 +271,15 @@ abstract class Aihrus_Settings {
 
 		echo '<form action="options.php" method="post">';
 
+		settings_errors( static::ID );
 		settings_fields( static::ID );
 
 		echo '<div id="' . static::ID . '">
 			<ul>';
 
-		foreach ( static::$sections as $section_slug => $section )
+		foreach ( static::$sections as $section_slug => $section ) {
 			echo '<li><a href="#' . $section_slug . '">' . $section . '</a></li>';
+		}
 
 		echo '</ul>';
 
@@ -311,21 +322,23 @@ abstract class Aihrus_Settings {
 
 		extract( $args );
 
-		if ( is_null( $input ) )
+		if ( is_null( $input ) ) {
 			$options = get_option( static::ID );
-		else {
+		} else {
 			$options      = array();
 			$options[$id] = $input;
 		}
 
-		if ( ! isset( $options[$id] ) && $type != 'checkbox' )
+		if ( ! isset( $options[$id] ) && $type != 'checkbox' ) {
 			$options[$id] = $std;
-		elseif ( ! isset( $options[$id] ) )
+		} elseif ( ! isset( $options[$id] ) ) {
 			$options[$id] = 0;
+		}
 
 		$field_class = '';
-		if ( ! empty( $class ) )
+		if ( ! empty( $class ) ) {
 			$field_class = ' ' . $class;
+		}
 
 		// desc isn't escaped because it's might contain allowed html
 		$choices     = array_map( 'esc_attr', $choices );
@@ -338,18 +351,21 @@ abstract class Aihrus_Settings {
 			case 'checkbox':
 				$content .= '<input class="checkbox' . $field_class . '" type="checkbox" id="' . $id . '" name="' . static::ID . '[' . $id . ']" value="1" ' . checked( $field_value, 1, false ) . ' /> ';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<label for="' . $id . '"><span class="description">' . $desc . '</span></label>';
+				}
 
-				if ( $show_code )
+				if ( $show_code ) {
 					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			case 'file':
 				$content .= '<input class="regular-text' . $field_class . '" type="file" id="' . $id . '" name="' . static::ID . '[' . $id . ']" />';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
 				break;
 
@@ -365,8 +381,9 @@ abstract class Aihrus_Settings {
 			case 'password':
 				$content .= '<input class="regular-text' . $field_class . '" type="password" id="' . $id . '" name="' . static::ID . '[' . $id . ']" value="' . $field_value . '" />';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
 				break;
 
@@ -376,60 +393,92 @@ abstract class Aihrus_Settings {
 				foreach ( $choices as $value => $label ) {
 					$content .= '<input class="radio' . $field_class . '" type="radio" name="' . static::ID . '[' . $id . ']" id="' . $id . $i . '" value="' . $value . '" ' . checked( $field_value, $value, false ) . '> <label for="' . $id . $i . '">' . $label . '</label>';
 
-					if ( $i < $count_choices )
+					if ( $i < $count_choices ) {
 						$content .= '<br />';
+					}
 
 					$i++;
 				}
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
-				if ( $show_code )
+				if ( $show_code ) {
 					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			case 'readonly':
 				$content .= '<input class="regular-text' . $field_class . '" type="text" id="' . $id . '" name="' . static::ID . '[' . $id . ']" value="' . $field_value . '" readonly="readonly" />';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
+				break;
 
+			case 'rich_editor':
+				global $wp_version;
+				
+				$field_value = $options[$id];
+
+				if ( $wp_version >= 3.3 && function_exists( 'wp_editor' ) ) {
+					ob_start();
+					wp_editor( $field_value, static::ID . '[' . $id . ']', array( 'textarea_name' => static::ID . '[' . $id . ']' ) );
+					$content = ob_get_clean();
+				} else {
+					$content = '<textarea class="large-text" rows="10" id="' . static::ID . '[' . $id . ']" name="' . static::ID . '[' . $id . ']">' . esc_textarea( $field_value ) . '</textarea>';
+				}
+
+				if ( ! empty( $desc ) ) {
+					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
+
+				if ( $show_code ) {
+					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			case 'select':
 				$content .= '<select class="select' . $field_class . '" id="' . $id . '" name="' . static::ID . '[' . $id . ']">';
 
-				foreach ( $choices as $value => $label )
+				foreach ( $choices as $value => $label ) {
 					$content .= '<option value="' . $value . '"' . selected( $field_value, $value, false ) . '>' . $label . '</option>';
+				}
 
 				$content .= '</select>';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
-				if ( $show_code )
+				if ( $show_code ) {
 					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			case 'text':
 				$content .= '<input class="regular-text' . $field_class . '" type="text" id="' . $id . '" name="' . static::ID . '[' . $id . ']" placeholder="' . $std . '" value="' . $field_value . '" />';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
-				if ( $show_code )
+				if ( $show_code ) {
 					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			case 'textarea':
 				$content .= '<textarea class="' . $field_class . '" id="' . $id . '" name="' . static::ID . '[' . $id . ']" placeholder="' . $std . '" rows="5" cols="30">' . $field_value . '</textarea>';
 
-				if ( ! empty( $desc ) )
+				if ( ! empty( $desc ) ) {
 					$content .= '<br /><span class="description">' . $desc . '</span>';
+				}
 
-				if ( $show_code )
+				if ( $show_code ) {
 					$content .= '<br /><code>' . $id . '</code>';
+				}
 				break;
 
 			default:
@@ -447,10 +496,11 @@ abstract class Aihrus_Settings {
 		register_setting( static::ID, static::ID, array( static::$class, 'validate_settings' ) );
 
 		foreach ( static::$sections as $slug => $title ) {
-			if ( $slug == 'about' )
+			if ( $slug == 'about' ) {
 				add_settings_section( $slug, $title, array( static::$class, 'display_about' ), static::ID );
-			else
+			} else {
 				add_settings_section( $slug, $title, array( static::$class, 'display_section' ), static::ID );
+			}
 		}
 
 		foreach ( static::$settings as $id => $setting ) {
@@ -466,7 +516,8 @@ abstract class Aihrus_Settings {
 
 
 	public static function styles() {
-		wp_enqueue_style( 'jquery-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
+		wp_register_style( 'jquery-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
+		wp_enqueue_style( 'jquery-style' );
 	}
 
 
@@ -478,14 +529,18 @@ abstract class Aihrus_Settings {
 	public static function validate_settings( $input, $options = null, $do_errors = false ) {
 		$errors = array();
 
+		$null_options = false;
 		if ( is_null( $options ) ) {
-			$options  = self::get_settings();
+			$null_options = true;
+
 			$defaults = static::get_defaults();
+			$options  = self::get_settings();
 
 			if ( is_admin() ) {
 				if ( ! empty( $input['reset_defaults'] ) ) {
-					foreach ( $defaults as $id => $std )
-						$input[$id] = $std;
+					foreach ( $defaults as $id => $std ) {
+						$input[ $id ] = $std;
+					}
 
 					unset( $input['reset_defaults'] );
 
@@ -496,8 +551,9 @@ abstract class Aihrus_Settings {
 					$import       = $input['import'];
 					$unserialized = unserialize( $import );
 					if ( is_array( $unserialized ) ) {
-						foreach ( $unserialized as $id => $std )
-							$input[$id] = $std;
+						foreach ( $unserialized as $id => $std ) {
+							$input[ $id ] = $std;
+						}
 					}
 				}
 			}
@@ -507,44 +563,64 @@ abstract class Aihrus_Settings {
 			$default     = $parts['std'];
 			$type        = $parts['type'];
 			$validations = ! empty( $parts['validate'] ) ? $parts['validate'] : array();
-			if ( ! empty( $validations ) )
+			if ( ! empty( $validations ) ) {
 				$validations = explode( ',', $validations );
-
-			if ( ! isset( $input[ $id ] ) ) {
-				if ( 'checkbox' != $type )
-					$input[ $id ] = $default;
-				else
-					$input[ $id ] = 0;
 			}
 
-			if ( $default == $input[ $id ] && ! in_array( 'required', $validations ) )
+			if ( ! isset( $input[ $id ] ) ) {
+				if ( 'checkbox' != $type ) {
+					$input[ $id ] = $default;
+				} else {
+					$input[ $id ] = 0;
+				}
+			}
+
+			if ( $default == $input[ $id ] && ! in_array( 'required', $validations ) ) {
 				continue;
+			}
 
 			if ( 'checkbox' == $type ) {
-				if ( self::is_true( $input[ $id ] ) )
+				if ( self::is_true( $input[ $id ] ) ) {
 					$input[ $id ] = 1;
-				else
+				} else {
 					$input[ $id ] = 0;
+				}
 			} elseif ( in_array( $type, array( 'radio', 'select' ) ) ) {
 				// single choices only
 				$keys = array_keys( $parts['choices'] );
 
 				if ( ! in_array( $input[ $id ], $keys ) ) {
-					if ( self::is_true( $input[ $id ] ) )
+					if ( self::is_true( $input[ $id ] ) ) {
 						$input[ $id ] = 1;
-					else
+					} else {
 						$input[ $id ] = 0;
+					}
 				}
 			}
 
 			if ( ! empty( $validations ) ) {
-				foreach ( $validations as $validate )
+				foreach ( $validations as $validate ) {
 					self::validators( $validate, $id, $input, $default, $errors );
+				}
 			}
 		}
 
 		unset( $input['export'] );
 		unset( $input['import'] );
+
+		$hide_update_notice = false;
+		if ( isset( static::$hide_update_notice ) && ! empty( static::$hide_update_notice ) ) {
+			$hide_update_notice = true;
+		}
+
+		if ( $null_options && empty( $errors ) && ! $hide_update_notice && ! empty( $_REQUEST['option_page'] ) ) {
+			add_settings_error( static::ID, 'settings_updated', esc_html__( 'Settings saved.' ), 'updated' );
+
+			if ( empty( self::$settings_saved ) ) {
+				self::$settings_saved = true;
+				set_transient( 'settings_errors', get_settings_errors(), 30 );
+			}
+		}
 
 		if ( empty( $do_errors ) ) {
 			$validated = $input;
@@ -563,10 +639,15 @@ abstract class Aihrus_Settings {
 		switch ( $validate ) {
 			case 'absint':
 			case 'intval':
-				if ( '' !== $input[ $id ] )
+				if ( '' !== $input[ $id ] ) {
 					$input[ $id ] = $validate( $input[ $id ] );
-				else
+				} else {
 					$input[ $id ] = $default;
+				}
+				break;
+
+			case 'email':
+				$input[ $id ] = self::validate_email( $input[ $id ], $default );
 				break;
 
 			case 'ids':
@@ -579,14 +660,16 @@ abstract class Aihrus_Settings {
 
 			case 'min1':
 				$input[ $id ] = intval( $input[ $id ] );
-				if ( 0 >= $input[ $id ] )
+				if ( 0 >= $input[ $id ] ) {
 					$input[ $id ] = $default;
+				}
 				break;
 
 			case 'nozero':
 				$input[ $id ] = intval( $input[ $id ] );
-				if ( 0 === $input[ $id ] )
+				if ( 0 === $input[ $id ] ) {
 					$input[ $id ] = $default;
+				}
 				break;
 
 			case 'order':
@@ -594,8 +677,17 @@ abstract class Aihrus_Settings {
 				break;
 
 			case 'required':
-				if ( empty( $input[ $id ] ) )
+				if ( empty( $input[ $id ] ) ) {
 					$errors[ $id ] = esc_html__( 'Required' );
+				}
+				break;
+
+			case 'slash_sanitize_title':
+				$temp = explode( '/', $input[ $id ] );
+				$temp = array_map( 'sanitize_title', $temp );
+				$temp = implode( '/', $temp );
+
+				$input[ $id ] = $temp;
 				break;
 
 			case 'slug':
@@ -636,41 +728,46 @@ abstract class Aihrus_Settings {
 	}
 
 
-	public static function validate_ids( $input, $default ) {
-		if ( preg_match( '#^\d+(,\s?\d+)*$#', $input ) )
+	public static function validate_ids( $input, $default = false ) {
+		if ( preg_match( '#^\d+(,\s?\d+)*$#', $input ) ) {
 			return preg_replace( '#\s#', '', $input );
+		}
 
 		return $default;
 	}
 
 
-	public static function validate_order( $input, $default ) {
-		if ( preg_match( '#^desc|asc$#i', $input ) )
+	public static function validate_order( $input, $default = false ) {
+		if ( preg_match( '#^desc|asc$#i', $input ) ) {
 			return $input;
+		}
 
 		return $default;
 	}
 
 
-	public static function validate_slugs( $input, $default ) {
-		if ( preg_match( '#^[\w-]+(,\s?[\w-]+)*$#', $input ) )
+	public static function validate_slugs( $input, $default = false ) {
+		if ( preg_match( '#^[\w-]+(,\s?[\w-]+)*$#', $input ) ) {
 			return preg_replace( '#\s#', '', $input );
+		}
 
 		return $default;
 	}
 
 
-	public static function validate_slug( $input, $default ) {
-		if ( preg_match( '#^[\w-]+$#', $input ) )
+	public static function validate_slug( $input, $default = false ) {
+		if ( preg_match( '#^[\w-]+$#', $input ) ) {
 			return $input;
+		}
 
 		return $default;
 	}
 
 
-	public static function validate_term( $input, $default ) {
-		if ( preg_match( '#^\w+$#', $input ) )
+	public static function validate_term( $input, $default = false ) {
+		if ( preg_match( '#^\w+$#', $input ) ) {
 			return $input;
+		}
 
 		return $default;
 	}
@@ -681,44 +778,59 @@ abstract class Aihrus_Settings {
 	 */
 	public static function is_true( $value = null, $return_boolean = true ) {
 		if ( true === $value || 'true' == strtolower( $value ) || 1 == $value || 'on' == strtolower( $value ) || 'yes' == strtolower( $value ) ) {
-			if ( $return_boolean )
+			if ( $return_boolean ) {
 				return true;
-			else
+			} else {
 				return 1;
+			}
 		} else {
-			if ( $return_boolean )
+			if ( $return_boolean ) {
 				return false;
-			else
+			} else {
 				return 0;
+			}
 		}
 	}
 
 
-	public static function validate_terms( $input, $default ) {
-		if ( preg_match( '#^(([\w- ]+)(,\s?)?)+$#', $input ) )
-			return preg_replace( '#,\s*$#', '', $input );
+	public static function validate_email( $input, $default = false ) {
+		if ( filter_var( $input, FILTER_VALIDATE_EMAIL ) ) {
+			return $input;
+		}
 
 		return $default;
 	}
 
 
-	public static function validate_url( $input, $default ) {
-		if ( filter_var( $input, FILTER_VALIDATE_URL ) )
+	public static function validate_terms( $input, $default = false ) {
+		if ( preg_match( '#^(([\w- ]+)(,\s?)?)+$#', $input ) ) {
+			return preg_replace( '#,\s*$#', '', $input );
+		}
+
+		return $default;
+	}
+
+
+	public static function validate_url( $input, $default = false ) {
+		if ( filter_var( $input, FILTER_VALIDATE_URL ) ) {
 			return $input;
+		}
 
 		return $default;
 	}
 
 
 	public static function get_scripts() {
-		foreach ( static::$scripts as $script )
+		foreach ( static::$scripts as $script ) {
 			echo $script;
+		}
 	}
 
 
 	public static function get_styles() {
-		foreach ( static::$styles as $style )
+		foreach ( static::$styles as $style ) {
 			echo $style;
+		}
 	}
 
 
