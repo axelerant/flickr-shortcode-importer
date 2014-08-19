@@ -2,7 +2,7 @@
 
 ## master
 
-## 2.1.0RC2
+## 2.1.0
 * Add option Set Descriptions
 * Aihrus Framework version 1.1.4
 * Clean up FAQ
