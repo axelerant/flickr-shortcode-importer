@@ -2,9 +2,9 @@
 
 ## master
 
-## 2.1.1RC1
+## 2.1.1RC2
 * Clean up 2.0.3 directories from SVN
-
+* RESOLVE Return no content in case getPhotoInfo fails
 
 ## 2.1.0
 * Add option Set Descriptions

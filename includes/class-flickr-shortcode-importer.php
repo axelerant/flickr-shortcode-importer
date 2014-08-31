@@ -735,6 +735,10 @@ EOD;
 		set_time_limit( 120 );
 
 		$photo = $this->flickr->photos_getInfo( $this->flickr_id );
+		if ( false === $photo ) {
+			return '';
+		}
+		error_log( var_export( $photo, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$photo = $photo['photo'];
 		if ( ! empty( $args['set_title'] ) ) {
 			$photo['set_title'] = $args['set_title'];
@@ -743,6 +747,7 @@ EOD;
 			$photo['set_title'] = ! empty( $contexts['set'][0]['title'] ) ? $contexts['set'][0]['title'] : '';
 		}
 
+		error_log( print_r( $photo, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$markup = $this->process_flickr_media( $photo, $args );
 
 		return $markup;
@@ -853,6 +858,7 @@ EOD;
 
 
 	public function process_flickr_media( $photo, $args = false ) {
+		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$markup = '';
 		if ( 'photo' == $photo['media'] ) {
 			$markup = $this->render_photo( $photo, $args );
@@ -867,6 +873,7 @@ EOD;
 
 
 	public function render_photo( $photo, $args = false ) {
+		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		// add image to media library
 		$image_id = $this->import_flickr_media( $photo );
 
@@ -1005,6 +1012,7 @@ EOD;
 
 
 	public function import_flickr_media( $photo, $mode = true ) {
+		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		global $wpdb;
 
 		$photo_id  = $photo['id'];
