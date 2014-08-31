@@ -2,8 +2,10 @@
 
 ## master
 
-## 2.1.1RC2
+## 2.1.1RC3
 * Clean up 2.0.3 directories from SVN
+* RESOLVE Bulk import [flickr] shortcoded media
+* RESOLVE Check for photo data '_content' field
 * RESOLVE Return no content in case getPhotoInfo fails
 
 ## 2.1.0

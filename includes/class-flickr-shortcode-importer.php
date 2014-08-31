@@ -295,8 +295,11 @@ EOD;
 						AND post_parent = 0
 						AND (
 							post_content LIKE '%[flickr %'
+							OR post_content LIKE '%[flickr]%'
 							OR post_content LIKE '%[flickrset %'
+							OR post_content LIKE '%[flickrset]%'
 							OR post_content LIKE '%[flickr-gallery %'
+							OR post_content LIKE '%[flickr-gallery]%'
 							$flickr_source_where
 						)
 				";
@@ -639,7 +642,6 @@ EOD;
 		}
 
 		$post = get_post( $this->post_id );
-
 		if ( ! $post || ! in_array( $post->post_type, self::$post_types )  )
 			return;
 
@@ -738,7 +740,6 @@ EOD;
 		if ( false === $photo ) {
 			return '';
 		}
-		error_log( var_export( $photo, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$photo = $photo['photo'];
 		if ( ! empty( $args['set_title'] ) ) {
 			$photo['set_title'] = $args['set_title'];
@@ -747,7 +748,6 @@ EOD;
 			$photo['set_title'] = ! empty( $contexts['set'][0]['title'] ) ? $contexts['set'][0]['title'] : '';
 		}
 
-		error_log( print_r( $photo, true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$markup = $this->process_flickr_media( $photo, $args );
 
 		return $markup;
@@ -858,7 +858,6 @@ EOD;
 
 
 	public function process_flickr_media( $photo, $args = false ) {
-		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		$markup = '';
 		if ( 'photo' == $photo['media'] ) {
 			$markup = $this->render_photo( $photo, $args );
@@ -873,7 +872,6 @@ EOD;
 
 
 	public function render_photo( $photo, $args = false ) {
-		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		// add image to media library
 		$image_id = $this->import_flickr_media( $photo );
 
@@ -1016,8 +1014,8 @@ EOD;
 		global $wpdb;
 
 		$photo_id  = $photo['id'];
-		$set_title = ! empty( $photo['set_title'] ) ? $photo['set_title'] : '';
-		$title     = $photo['title'];
+		$set_title = ! empty( $photo['set_title']['_content'] ) ? $photo['set_title']['_content'] : '';
+		$title     = ! empty( $photo['title']['_content'] ) ? $photo['title']['_content'] : '';
 
 		if ( fsi_get_option( 'make_nice_image_title' ) ) {
 			// if title is a filename, use set_title - menu order instead
@@ -1036,7 +1034,8 @@ EOD;
 		$desc             = '';
 		$set_descriptions = fsi_get_option( 'set_descriptions' );
 		if ( $set_descriptions ) {
-			$desc = html_entity_decode( $photo['description'] );
+			$desc = ! empty( $photo['description']['_content'] ) ? $photo['description']['_content'] : '';
+			$desc = html_entity_decode( $desc );
 		}
 
 		$date = $photo['dates']['taken'];
