@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Flickr Shortcode Importer by Aihrus package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flickr Shortcode Importer by Aihrus 2.1.0\n"
+"Project-Id-Version: Flickr Shortcode Importer by Aihrus 2.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/flickr-shortcode-importer\n"
-"POT-Creation-Date: 2014-08-19 04:44:31+00:00\n"
+"POT-Creation-Date: 2014-09-06 09:11:10+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -191,8 +191,8 @@ msgstr ""
 
 #: includes/class-flickr-shortcode-importer-settings.php:267
 #: includes/class-flickr-shortcode-importer-settings.php:287
-#: includes/class-flickr-shortcode-importer.php:909
-#: includes/class-flickr-shortcode-importer.php:1124
+#: includes/class-flickr-shortcode-importer.php:914
+#: includes/class-flickr-shortcode-importer.php:1131
 msgid "Photo by "
 msgstr ""
 
@@ -229,7 +229,7 @@ msgid "Flickr Image License Text"
 msgstr ""
 
 #: includes/class-flickr-shortcode-importer-settings.php:300
-#: includes/class-flickr-shortcode-importer.php:1143
+#: includes/class-flickr-shortcode-importer.php:1150
 msgid "License "
 msgstr ""
 
@@ -372,108 +372,108 @@ msgstr ""
 msgid "Your user account doesn't have permission to import Flickr shortcodes and images."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:327
+#: includes/class-flickr-shortcode-importer.php:330
 msgid "All done. No [flickr] codes found in posts"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:442
+#: includes/class-flickr-shortcode-importer.php:445
 msgid "Please be patient while the [flickr(set)] shortcodes are processed. This can take a while, up to 2 minutes per individual Flickr media item. Do not navigate away from this page until this script is done or the import will not be completed. You will be notified via this page when the import is completed."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:444
+#: includes/class-flickr-shortcode-importer.php:447
 msgid "Estimated time required to import is %1$s minutes."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:446
+#: includes/class-flickr-shortcode-importer.php:449
 msgid "To go back to the previous page, <a href=\"%s\">click here</a>."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:448
+#: includes/class-flickr-shortcode-importer.php:451
 msgid "All done! %1$s [flickr(set)](s) were successfully processed in %2$s seconds and there were %3$s failure(s). To try importing the failed [flickr]s again, <a href=\"%4$s\">click here</a>. %5$s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:450
+#: includes/class-flickr-shortcode-importer.php:453
 msgid "All done! %1$s [flickr(set)](s) were successfully processed in %2$s seconds and there were no failures. %3$s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:453
-#: includes/class-flickr-shortcode-importer.php:601
+#: includes/class-flickr-shortcode-importer.php:456
+#: includes/class-flickr-shortcode-importer.php:604
 msgid "You must enable Javascript in order to proceed!"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:459
+#: includes/class-flickr-shortcode-importer.php:462
 msgid "Abort Importing [flickr(set)]s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:461
+#: includes/class-flickr-shortcode-importer.php:464
 msgid "Debugging Information"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:464
+#: includes/class-flickr-shortcode-importer.php:467
 msgid "Total [flickr(set)]s: %s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:465
+#: includes/class-flickr-shortcode-importer.php:468
 msgid "[flickr(set)]s Imported: %s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:466
+#: includes/class-flickr-shortcode-importer.php:469
 msgid "Import Failures: %s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:497
+#: includes/class-flickr-shortcode-importer.php:500
 msgid "Stopping, please wait a moment."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:589
+#: includes/class-flickr-shortcode-importer.php:592
 msgid "Use this tool to import [flickr] shortcodes into the Media Library. The first [flickr] image found in post content is set as the post's Featured Image and removed from the post content. The remaining [flickr] shortcodes are then transitioned to like sized locally referenced images."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:591
+#: includes/class-flickr-shortcode-importer.php:594
 msgid "[flickrset] shortcodes are handled similarly to [flickr] importing. The difference is that [flickrset] is replaced by [gallery] and the Featured Image of a post is set from the first image in the [flickrset] per Options."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:593
+#: includes/class-flickr-shortcode-importer.php:596
 msgid "Flickr shortcode import is not reversible. Backup your database beforehand or be prepared to revert each transformed post manually."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:595
+#: includes/class-flickr-shortcode-importer.php:598
 msgid "Please review your %s before proceeding."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:597
+#: includes/class-flickr-shortcode-importer.php:600
 msgid "To begin, just press the button below."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:599
+#: includes/class-flickr-shortcode-importer.php:602
 msgid "Import Flickr Shortcode"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:652
+#: includes/class-flickr-shortcode-importer.php:654
 msgid "Failed import: %s doesn't contain [flickr]."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:656
+#: includes/class-flickr-shortcode-importer.php:658
 msgid "&quot;<a href=\"%1$s\" target=\"_blank\">%2$s</a>&quot; Post ID %3$s was successfully processed in %4$s seconds."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:1157
+#: includes/class-flickr-shortcode-importer.php:1164
 msgid "Source file not found: %s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:1176
+#: includes/class-flickr-shortcode-importer.php:1183
 msgid "The originally uploaded image file cannot be found at %s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:1188
+#: includes/class-flickr-shortcode-importer.php:1195
 msgid "Unknown failure reason."
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:1205
+#: includes/class-flickr-shortcode-importer.php:1212
 msgid "&quot;%1$s&quot; Post ID %2$s failed to be processed. The error message was: %3$s"
 msgstr ""
 
-#: includes/class-flickr-shortcode-importer.php:1270
+#: includes/class-flickr-shortcode-importer.php:1277
 msgid "Failed version check"
 msgstr ""
 
