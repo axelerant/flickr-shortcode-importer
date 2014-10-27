@@ -233,3 +233,5 @@ You can translate this plugin into your own language if it's not done so already
 * Initial code is modeled after Viper007Bond's class based Regenerate Thumbnails plugin. The AJAX status and single auto-submission operations were a big help.
 * [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
 * Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.
+
+Current development by [Michael Cannon](https://profiles.wordpress.org/comprock/) of [Aihrus](http://aihr.us/about-aihrus/).
