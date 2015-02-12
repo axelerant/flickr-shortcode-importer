@@ -1,20 +1,19 @@
-=== Flickr Shortcode Importer by Aihrus ===
+=== Flickr Shortcode Importer by Axelerant ===
 
 Contributors: comprock
-Donate link: http://aihr.us/about-aihrus/donate/
 Tags: flickr,import,featured image,photo,image,video
 Requires at least: 3.4
 Tested up to: 4.0.0
-Stable tag: 2.1.1
+Stable tag: 2.2.0RC1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Flickr Shortcode Importer by Aihrus imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
+Flickr Shortcode Importer by Axelerant imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
 
 
 == Description ==
 
-Flickr Shortcode Importer [by Aihrus](http://aihr.us/about-aihrus/) imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
+Flickr Shortcode Importer [by Axelerant](http://axelerant.com/about-axelerant/) imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
 
 Import can be run directly from edit page and post screens.
 
@@ -126,8 +125,8 @@ dget on posts and page edit screens.
 = Install Methods =
 
 * Through WordPress Admin > Plugins > Add New, Search for "Flickr Shortcode Importer"
-	* Find "Flickr Shortcode Importer by Aihrus"
-	* Click "Install Now" of "Flickr Shortcode Importer by Aihrus"
+	* Find "Flickr Shortcode Importer by Axelerant"
+	* Click "Install Now" of "Flickr Shortcode Importer by Axelerant"
 * Download [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
 	* Through WordPress Admin > Plugins > Add New
 	* Click Upload
@@ -162,15 +161,15 @@ dget on posts and page edit screens.
 
 = Most Common Issues =
 
-* Got `Parse error: syntax error, unexpected T_STATIC, expecting ')'`? Read [Most Aihrus Plugins Require PHP 5.3+](https://aihrus.zendesk.com/entries/30678006) for the fixes.
-* [Debug common theme and plugin conflicts](https://aihrus.zendesk.com/entries/25119302)
+* Got `Parse error: syntax error, unexpected T_STATIC, expecting ')'`? Read [Most Axelerant Plugins Require PHP 5.3+](https://nodedesk.zendesk.com/hc/en-us/articles/202331041) for the fixes.
+* [Debug common theme and plugin conflicts](https://nodedesk.zendesk.com/hc/en-us/articles/202330781)
 
 = Still Stuck or Want Something Done? Get Support! =
 
 1. [Open Issues](https://github.com/michael-cannon/flickr-shortcode-importer/issues) - review and submit bug reports and enhancement requests
 1. [Support on WordPress](http://wordpress.org/support/plugin/flickr-shortcode-importer) - ask questions and review responses
 1. [Contribute Code](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/CONTRIBUTING.md)
-1. [Beta Testers Needed](http://aihr.us/become-beta-tester/) - get the latest Flickr Shortcode Importer version
+1. [Beta Testers Needed](http://axelerant.com/become-beta-tester/) - get the latest Flickr Shortcode Importer version
 
 
 == Screenshots ==
@@ -221,9 +220,9 @@ See [Changelog](https://github.com/michael-cannon/flickr-shortcode-importer/blob
 
 == Localization ==
 
-You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](http://aihr.us/contact-aihrus/) for plugin inclusion.
+You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](http://axelerant.com/contact-axelerant/) for plugin inclusion.
 
-**[How do I localize?](https://aihrus.zendesk.com/entries/23691557)**
+**[How do I localize?](https://nodedesk.zendesk.com/hc/en-us/articles/202294892)**
 
 
 == Thank You ==
@@ -234,4 +233,4 @@ You can translate this plugin into your own language if it's not done so already
 * [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
 * Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.
 
-Current development by [Michael Cannon](https://profiles.wordpress.org/comprock/) of [Aihrus](http://aihr.us/about-aihrus/).
+Current development by [Michael Cannon](https://profiles.wordpress.org/comprock/) of [Axelerant](http://axelerant.com/about-axelerant/).
