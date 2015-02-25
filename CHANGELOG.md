@@ -1,6 +1,11 @@
-# CHANGELOG Flickr Shortcode Importer plugin for WordPress
+# CHANGELOG - Flickr Shortcode Importer
 
 ## master
+
+## 2.2.0RC1
+* Update branding to Axelerant
+* Update file headers
+* Update tests
 
 ## 2.1.1
 * Clean up 2.0.3 directories from SVN

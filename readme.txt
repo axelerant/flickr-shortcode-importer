@@ -1,6 +1,6 @@
-=== Flickr Shortcode Importer by Axelerant ===
+=== Flickr Shortcode Importer ===
 
-Contributors: comprock
+Contributors: comprock,saurabhd
 Tags: flickr,import,featured image,photo,image,video
 Requires at least: 3.4
 Tested up to: 4.0.0
@@ -8,12 +8,12 @@ Stable tag: 2.2.0RC1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Flickr Shortcode Importer by Axelerant imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
+Flickr Shortcode Importer imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
 
 
 == Description ==
 
-Flickr Shortcode Importer [by Axelerant](http://axelerant.com/about-axelerant/) imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
+Flickr Shortcode Importer imports [flickr], [flickrset], [flickr-gallery] shortcode and Flickr-sourced A/IMG tagged media into the Media Library. Furthermore, it transforms the post content [flickr] shortcodes into links containing the Media Library based image of the proper size and alignment.
 
 Import can be run directly from edit page and post screens.
 
@@ -125,8 +125,8 @@ dget on posts and page edit screens.
 = Install Methods =
 
 * Through WordPress Admin > Plugins > Add New, Search for "Flickr Shortcode Importer"
-	* Find "Flickr Shortcode Importer by Axelerant"
-	* Click "Install Now" of "Flickr Shortcode Importer by Axelerant"
+	* Find "Flickr Shortcode Importer"
+	* Click "Install Now" of "Flickr Shortcode Importer"
 * Download [`flickr-shortcode-importer.zip`](http://downloads.wordpress.org/plugin/flickr-shortcode-importer.zip) locally
 	* Through WordPress Admin > Plugins > Add New
 	* Click Upload
@@ -233,4 +233,4 @@ You can translate this plugin into your own language if it's not done so already
 * [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
 * Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.
 
-Current development by [Michael Cannon](https://profiles.wordpress.org/comprock/) of [Axelerant](http://axelerant.com/about-axelerant/).
+Current development by [Axelerant](http://axelerant.com/about-axelerant/).

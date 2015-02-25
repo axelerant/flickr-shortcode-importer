@@ -1,4 +1,4 @@
-# Flickr Shortcode Importer plugin for WordPress
+# README - Flickr Shortcode Importer
 
 [![Build Status](https://travis-ci.org/michael-cannon/flickr-shortcode-importer.png?branch=master)](https://travis-ci.org/michael-cannon/flickr-shortcode-importer)
 [![ProjectStatus](http://stillmaintained.com/michael-cannon/flickr-shortcode-importer.png)](http://stillmaintained.com/michael-cannon/flickr-shortcode-importer)
@@ -16,7 +16,7 @@ Here's a [guide on how to install Flickr Shortcode Importer in your WordPress si
 * You can clone the GitHub repository: https://github.com/michael-cannon/flickr-shortcode-importer.git
 * Download it directly as a ZIP file: https://github.com/michael-cannon/flickr-shortcode-importer/archive/master.zip
 
-This will download the latest development version of Flickr Shortcode Importer by Michael Cannon. While this version is usually stable, it is not recommended for use in a production environment.
+This will download the latest development version of Flickr Shortcode Importer. While this version is usually stable, it is not recommended for use in a production environment.
 
 ## Bugs
 
@@ -24,7 +24,7 @@ If you find an issue, [let us know here](https://github.com/michael-cannon/flick
 
 ## Support
 
-This is a developer's portal for Flickr Shortcode Importer by Michael Cannon and should not be used for support. Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
+This is a developer's portal for Flickr Shortcode Importer and should not be used for support. Please visit the [Flickr Shortcode Importer Support Forums](http://wordpress.org/support/plugin/flickr-shortcode-importer) for frequently asked questions, offering ideas, or getting support.
 
 ## Contributions
 
@@ -34,7 +34,7 @@ There are various ways you can contribute:
 
 * [Raise an issue](https://github.com/michael-cannon/flickr-shortcode-importer/issues) on GitHub.
 * Send us a Pull Request with your bug fixes and/or new features.
-* [Translate Flickr Shortcode Importer by Michael Cannon into different languages](https://nodedesk.zendesk.com/hc/en-us/articles/202294892-How-do-I-change-Testimonials-Widget-text-labels-).
+* [Translate Flickr Shortcode Importer into different languages](https://nodedesk.zendesk.com/hc/en-us/articles/202294892-How-do-I-change-Testimonials-Widget-text-labels-).
 * Provide feedback and [suggestions on enhancements](https://github.com/michael-cannon/flickr-shortcode-importer/issues?direction=desc&labels=Enhancement&page=1&sort=created&state=open).
 
 ## Thank You

@@ -1,4 +1,4 @@
-# Contribute To Flickr Shortcode Importer
+# CONTRIBUTE - Flickr Shortcode Importer
 
 Community made patches, localisation, bug reports and contributions are very welcome and help make Flickr Shortcode Importer the #1 bulk/quick edit plugin for WordPress.
 
