@@ -770,11 +770,11 @@ EOD;
 
 		switch ( $args['mode'] ) {
 			case 'photoset':
-				$this->flickset_id = $args['photoset'];
-				$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
+				self::$flickset_id = $args['photoset'];
+				$info              = $this->flickr->photosets_getInfo( self::$flickset_id );
 				$args['set_title'] = $info['title'];
 
-				$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
+				$photos = $this->flickr->photosets_getPhotos( self::$flickset_id );
 				$photos = $photos['photoset']['photo'];
 				break;
 
@@ -817,7 +817,7 @@ EOD;
 		else
 			$markup = '[gallery ids="' . implode( ',', self::$media_ids ) . '"]';
 
-		$this->flickset_id = false;
+		self::$flickset_id = false;
 
 		return $markup;
 	}
@@ -827,12 +827,12 @@ EOD;
 	public function shortcode_flickrset( $args ) {
 		self::$media_ids = array();
 
-		$this->flickset_id = $args['id'];
+		self::$flickset_id = $args['id'];
 		$import_limit      = ( $args['photos'] ) ? $args['photos'] : -1;
-		$info              = $this->flickr->photosets_getInfo( $this->flickset_id );
+		$info              = $this->flickr->photosets_getInfo( self::$flickset_id );
 		$args['set_title'] = $info['title'];
 
-		$photos = $this->flickr->photosets_getPhotos( $this->flickset_id );
+		$photos = $this->flickr->photosets_getPhotos( self::$flickset_id );
 		$photos = $photos['photoset']['photo'];
 
 		// increased because [flickrset] might have lots of photos
@@ -851,7 +851,7 @@ EOD;
 		else
 			$markup = '[gallery ids="' . implode( ',', self::$media_ids ) . '"]';
 
-		$this->flickset_id = false;
+		self::$flickset_id = false;
 
 		return $markup;
 	}
@@ -1010,7 +1010,6 @@ EOD;
 
 
 	public function import_flickr_media( $photo, $mode = true ) {
-		error_log( print_r( func_get_args(), true ) . ':' . __LINE__ . ':' . basename( __FILE__ ) );
 		global $wpdb;
 
 		$photo_id  = $photo['id'];
@@ -1119,7 +1118,7 @@ EOD;
 			}
 
 			// ignore dup if importing [flickrset]
-			if ( ! $this->flickset_id ) {
+			if ( ! self::$flickset_id ) {
 				return $dup;
 			} else {
 				// use local source to speed up transfer
@@ -1131,8 +1130,8 @@ EOD;
 			$desc .= "\n" . fsi_get_option( 'flickr_link_text', esc_html__( 'Photo by ', 'flickr-shortcode-importer' ) );
 			$link  = '<a href="' . $photo['urls']['url'][0]['_content'];
 
-			if ( $this->flickset_id ) {
-				$link .= 'in/set-' . $this->flickset_id . '/';
+			if ( self::$flickset_id ) {
+				$link .= 'in/set-' . self::$flickset_id . '/';
 			}
 
 			$username = $photo['owner']['username'];
