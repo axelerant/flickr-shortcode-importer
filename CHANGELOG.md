@@ -3,6 +3,7 @@
 ## master
 
 ## 2.2.0RC1
+* Aihrus Framework version 1.2.0
 * Update branding to Axelerant
 * Update file headers
 * Update tests
