@@ -1,4 +1,4 @@
-# Contribute To Flickr Shortcode Importer
+# CONTRIBUTE - Flickr Shortcode Importer
 
 Community made patches, localisation, bug reports and contributions are very welcome and help make Flickr Shortcode Importer the #1 bulk/quick edit plugin for WordPress.
 
@@ -6,7 +6,7 @@ When contributing please ensure you follow the guidelines below so that we can k
 
 __Please Note:__ GitHub is for bug reports and contributions only - if you have a support question or a request for a customisation don't post here, go to our [Support Forum](http://wordpress.org/support/plugin/flickr-shortcode-importer) instead.
 
-<strike>For localization, please refer to [How do I change Flickr Shortcode Importer text labels?](https://aihrus.zendesk.com/entries/23691557-How-do-I-change-Testimonials-Widget-text-labels-), though bugs with strings that can't be translated are welcome here.</strike>
+<strike>For localization, please refer to [How do I change Flickr Shortcode Importer text labels?](https://nodedesk.zendesk.com/hc/en-us/articles/202294892-How-do-I-change-Testimonials-Widget-text-labels-), though bugs with strings that can't be translated are welcome here.</strike>
 
 ## Getting Started
 

@@ -1,4 +1,4 @@
-# Flickr Shortcode Importer API Documentation
+# API - Flickr Shortcode Importer
 
 The [Flickr Shortcode Importer plugin](http://wordpress.org/plugins/flickr-shortcode-importer/) comes with its own set of actions and filters, as described below.
 
