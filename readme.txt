@@ -1,7 +1,7 @@
 === Flickr Shortcode Importer ===
 
-Contributors: comprock,saurabhd
-Donate link: http://axelerant.com/about-axelerant/donate/
+Contributors: comprock,saurabhd,subharanjan
+Donate link: https://axelerant.com/about-axelerant/donate/
 Tags: flickr,import,featured image,photo,image,video
 Requires at least: 3.9.2
 Tested up to: 4.3.0
@@ -170,7 +170,7 @@ dget on posts and page edit screens.
 1. [Open Issues](https://github.com/michael-cannon/flickr-shortcode-importer/issues) - review and submit bug reports and enhancement requests
 1. [Support on WordPress](http://wordpress.org/support/plugin/flickr-shortcode-importer) - ask questions and review responses
 1. [Contribute Code](https://github.com/michael-cannon/flickr-shortcode-importer/blob/master/CONTRIBUTING.md)
-1. [Beta Testers Needed](http://axelerant.com/become-beta-tester/) - get the latest Flickr Shortcode Importer version
+1. [Beta Testers Needed](http://store.axelerant.com/become-beta-tester/) - get the latest Flickr Shortcode Importer version
 
 
 == Screenshots ==
@@ -221,7 +221,7 @@ See [Changelog](https://github.com/michael-cannon/flickr-shortcode-importer/blob
 
 == Localization ==
 
-You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](http://axelerant.com/contact-axelerant/) for plugin inclusion.
+You can translate this plugin into your own language if it's not done so already. The localization file `flickr-shortcode-importer.pot` can be found in the `languages` folder of this plugin. After translation, please [send the localized file](https://axelerant.com/contact-axelerant/) for plugin inclusion.
 
 **[How do I localize?](https://nodedesk.zendesk.com/hc/en-us/articles/202294892)**
 
@@ -234,4 +234,4 @@ You can translate this plugin into your own language if it's not done so already
 * [flickr] shortcode handling code copied from Trent Gardner's very fine Flickr Manager plugin.
 * Hat's off to Alison Barret for her Settings API tutorials and class My_Theme_Options.
 
-Current development by [Axelerant](http://axelerant.com/about-axelerant/).
+Current development by [Axelerant](https://axelerant.com/about-axelerant/).

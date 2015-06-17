@@ -5,7 +5,7 @@
  * Description: Flickr Shortcode Importer by Axelerant imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
  * Version: 2.2.1RC1
  * Author: Axelerant
- * Author URI: http://axelerant.com/
+ * Author URI: https://axelerant.com/
  * License: GPLv2 or later
  * Text Domain: flickr-shortcode-importer
  * Domain Path: /languages
@@ -13,7 +13,7 @@
 
 
 /**
- * Copyright 2015 Axelerant (email: info@axelerant.com)
+ * Copyright 2015 Axelerant
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as
  * published by the Free Software Foundation.
