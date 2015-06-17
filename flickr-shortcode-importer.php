@@ -27,29 +27,37 @@
  */
 
 // Exit if accessed directly
-if ( ! defined( 'ABSPATH' ) )
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
+}
 
-if ( ! defined( 'FSI_AIHR_VERSION' ) )
+if ( ! defined( 'FSI_AIHR_VERSION' ) ) {
 	define( 'FSI_AIHR_VERSION', '1.2.2RC1' );
+}
 
-if ( ! defined( 'FSI_BASE' ) )
+if ( ! defined( 'FSI_BASE' ) ) {
 	define( 'FSI_BASE', plugin_basename( __FILE__ ) );
+}
 
-if ( ! defined( 'FSI_DIR' ) )
+if ( ! defined( 'FSI_DIR' ) ) {
 	define( 'FSI_DIR', plugin_dir_path( __FILE__ ) );
+}
 
-if ( ! defined( 'FSI_DIR_INC' ) )
+if ( ! defined( 'FSI_DIR_INC' ) ) {
 	define( 'FSI_DIR_INC', FSI_DIR . 'includes/' );
+}
 
-if ( ! defined( 'FSI_DIR_LIB' ) )
+if ( ! defined( 'FSI_DIR_LIB' ) ) {
 	define( 'FSI_DIR_LIB', FSI_DIR_INC . 'libraries/' );
+}
 
-if ( ! defined( 'FSI_NAME' ) )
+if ( ! defined( 'FSI_NAME' ) ) {
 	define( 'FSI_NAME', 'Testimonials by Axelerant' );
+}
 
-if ( ! defined( 'FSI_VERSION' ) )
+if ( ! defined( 'FSI_VERSION' ) ) {
 	define( 'FSI_VERSION', '2.2.1RC1' );
+}
 
 require_once FSI_DIR_INC . 'requirements.php';
 

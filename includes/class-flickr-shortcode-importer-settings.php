@@ -24,8 +24,9 @@
 
 require_once AIHR_DIR_INC . 'class-aihrus-settings.php';
 
-if ( class_exists( 'Flickr_Shortcode_Importer_Settings' ) )
+if ( class_exists( 'Flickr_Shortcode_Importer_Settings' ) ) {
 	return;
+}
 
 
 class Flickr_Shortcode_Importer_Settings extends Aihrus_Settings {
@@ -524,20 +525,23 @@ function fsi_get_options() {
 function fsi_get_option( $option, $default = null ) {
 	$options = get_option( Flickr_Shortcode_Importer_Settings::ID, null );
 
-	if ( isset( $options[$option] ) )
-		return $options[$option];
-	else
+	if ( isset( $options[ $option ] ) ) {
+		return $options[ $option ];
+	}
+	else {
 		return $default;
+	}
 }
 
 
 function fsi_set_option( $option, $value = null ) {
 	$options = get_option( Flickr_Shortcode_Importer_Settings::ID );
 
-	if ( ! is_array( $options ) )
+	if ( ! is_array( $options ) ) {
 		$options = array();
+	}
 
-	$options[$option] = $value;
+	$options[ $option ] = $value;
 	update_option( Flickr_Shortcode_Importer_Settings::ID, $options );
 }
 
