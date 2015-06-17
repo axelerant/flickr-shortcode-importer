@@ -2,6 +2,14 @@
 
 ## master
 
+## 1.2.2RC2
+* Add Inside Axelerant link
+* Store branding updates
+* Update about Axelerant verbiage
+
+## 1.2.1
+* RESOLVE PHP Fatal error: Access to undeclared static property: CLASS::$scripts_called
+
 ## 1.2.0
 * Add Axelerant careers link
 * Update about Axelerant data

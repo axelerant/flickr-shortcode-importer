@@ -25,6 +25,7 @@ abstract class Aihrus_Common {
 	public static $donate_button;
 	public static $donate_link;
 	public static $markdown_helper;
+	public static $scripts_called = false;
 	public static $value_check;
 
 
@@ -40,7 +41,7 @@ abstract class Aihrus_Common {
 </form>
 EOD;
 
-		self::$donate_link = '<a href="//axelerant.cmo/about-axelerant/donate/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" alt="PayPal - The safer, easier way to pay online!" /></a>';
+		self::$donate_link = '<a href="https://axelerant.com/about-axelerant/donate/"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" alt="PayPal - The safer, easier way to pay online!" /></a>';
 
 		add_action( 'admin_init', array( static::$class, 'check_notices' ), 9999 );
 	}
