@@ -3,7 +3,7 @@
  * Plugin Name: Flickr Shortcode Importer
  * Plugin URI: http://wordpress.org/extend/plugins/flickr-shortcode-importer/
  * Description: Flickr Shortcode Importer by Axelerant imports [flickr], [flickrset], [flickr-gallery] shortcodes and Flickr-sourced media into the Media Library.
- * Version: 2.2.0
+ * Version: 2.2.1RC1
  * Author: Axelerant
  * Author URI: http://axelerant.com/
  * License: GPLv2 or later
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) )
 	exit;
 
 if ( ! defined( 'FSI_AIHR_VERSION' ) )
-	define( 'FSI_AIHR_VERSION', '1.2.0' );
+	define( 'FSI_AIHR_VERSION', '1.2.2RC1' );
 
 if ( ! defined( 'FSI_BASE' ) )
 	define( 'FSI_BASE', plugin_basename( __FILE__ ) );
@@ -49,7 +49,7 @@ if ( ! defined( 'FSI_NAME' ) )
 	define( 'FSI_NAME', 'Testimonials by Axelerant' );
 
 if ( ! defined( 'FSI_VERSION' ) )
-	define( 'FSI_VERSION', '2.2.0' );
+	define( 'FSI_VERSION', '2.2.1RC1' );
 
 require_once FSI_DIR_INC . 'requirements.php';
 
