@@ -22,7 +22,7 @@ The first [flickr] image found in post content is set as the post's Featured Ima
 
 [flickrset] and [flickr-gallery] shortcodes are converted to [ gallery] after the Flickr set images have been added to the Media Library. If 'Set Featured Image' is checked in Options, then the first image of the [flickrset] is used as such.
 
-Flickr-sourced A/IMG tagged media is converted into [flickr] and then imported as normal. Great for finally bringing into your control all of those media items you've been using, but now Flickr is giving you 'Image is unavaiable' for. A/IMG tag is processed before IMG to prevent unexpected results.
+Flickr-sourced A/IMG tagged media is converted into [flickr] and then imported as normal. Great for finally bringing into your control all of those media items you've been using, but now Flickr is giving you 'Image is unavailable' for. A/IMG tag is processed before IMG to prevent unexpected results.
 
 Image attribution links can be added if enabled via Settings.
 
@@ -120,7 +120,10 @@ dget on posts and page edit screens.
 
 = Requirements =
 
-* TBD
+* PHP 5.3+ [Read notice](https://nodedesk.zendesk.com/hc/en-us/articles/202331041) – Since 2.16.0
+* WordPress 3.6+
+* [jQuery 1.10+](https://nodedesk.zendesk.com/hc/en-us/articles/202244022)
+
 
 = Install Methods =
 

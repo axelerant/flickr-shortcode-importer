@@ -4,6 +4,8 @@
 
 ## 2.2.2RC1
 * Samples text update
+* Update readme verbiage
+* Update requirements
 
 ## 2.2.1
 * Require Aihrus Framework version 1.2.2
