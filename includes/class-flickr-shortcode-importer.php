@@ -256,94 +256,94 @@ class Flickr_Shortcode_Importer extends Aihrus_Common {
 	<h2><?php _e( 'Flickr Shortcode Importer', 'flickr-shortcode-importer' ); ?></h2>
 
 <?php
-		if ( fsi_get_option( 'debug_mode' ) ) {
-			$posts_to_import = fsi_get_option( 'posts_to_import' );
-			$posts_to_import = explode( ',', $posts_to_import );
-			foreach ( $posts_to_import as $post_id ) {
-				$this->post_id = $post_id;
-				$this->ajax_process_shortcode();
-			}
+if ( fsi_get_option( 'debug_mode' ) ) {
+	$posts_to_import = fsi_get_option( 'posts_to_import' );
+	$posts_to_import = explode( ',', $posts_to_import );
+	foreach ( $posts_to_import as $post_id ) {
+		$this->post_id = $post_id;
+		$this->ajax_process_shortcode();
+	}
 
-			exit( __LINE__ . ':' . basename( __FILE__ ) . " DONE<br />\n" );
-		}
+	exit( __LINE__ . ':' . basename( __FILE__ ) . " DONE<br />\n" );
+}
 
-		// If the button was clicked
-		if ( ! empty( $_POST['flickr-shortcode-importer'] ) || ! empty( $_REQUEST['posts'] ) ) {
-			// Form nonce check
-			check_admin_referer( 'flickr-shortcode-importer' );
+// If the button was clicked
+if ( ! empty( $_POST['flickr-shortcode-importer'] ) || ! empty( $_REQUEST['posts'] ) ) {
+	// Form nonce check
+	check_admin_referer( 'flickr-shortcode-importer' );
 
-			// Create the list of image IDs
-			if ( ! empty( $_REQUEST['posts'] ) ) {
-				$posts = array_map( 'intval', explode( ',', trim( $_REQUEST['posts'], ',' ) ) );
-				$count = count( $posts );
-				$posts = implode( ',', $posts );
-			} else {
-				$flickr_source_where = '';
-				if ( fsi_get_option( 'import_flickr_sourced_tags' ) ) {
-					$flickr_source_where = <<<EOD
-						OR (
-							post_content LIKE '%<img%src=%http%://farm%.static.flickr.com/%>%'
-							OR post_content LIKE '%<img%src=%http%://farm%staticflickr.com/%>%'
-						)
+	// Create the list of image IDs
+	if ( ! empty( $_REQUEST['posts'] ) ) {
+		$posts = array_map( 'intval', explode( ',', trim( $_REQUEST['posts'], ',' ) ) );
+		$count = count( $posts );
+		$posts = implode( ',', $posts );
+	} else {
+		$flickr_source_where = '';
+		if ( fsi_get_option( 'import_flickr_sourced_tags' ) ) {
+			$flickr_source_where = <<<EOD
+				OR (
+					post_content LIKE '%<img%src=%http%://farm%.static.flickr.com/%>%'
+					OR post_content LIKE '%<img%src=%http%://farm%staticflickr.com/%>%'
+				)
 EOD;
-				}
-
-				// Directly querying the database is normally frowned upon, but all of the API functions will return the full post objects which will suck up lots of memory. This is best, just not as future proof.
-				$query = "
-					SELECT ID
-					FROM $wpdb->posts
-					WHERE 1 = 1
-					AND post_type IN ( '" . implode( "','", self::$post_types ) . "' )
-					AND post_parent = 0
-					AND (
-						post_content LIKE '%[flickr %'
-						OR post_content LIKE '%[flickr]%'
-						OR post_content LIKE '%[flickrset %'
-						OR post_content LIKE '%[flickrset]%'
-						OR post_content LIKE '%[flickr-gallery %'
-						OR post_content LIKE '%[flickr-gallery]%'
-						$flickr_source_where
-					)
-					";
-
-				$include_ids = fsi_get_option( 'posts_to_import' );
-				if ( $include_ids ) {
-					$query .= ' AND ID IN ( ' . $include_ids . ' )';
-				}
-
-				$skip_ids = fsi_get_option( 'skip_importing_post_ids' );
-				if ( $skip_ids ) {
-					$query .= ' AND ID NOT IN ( ' . $skip_ids . ' )';
-				}
-
-				$limit = fsi_get_option( 'limit' );
-				if ( $limit ) {
-					$query .= ' LIMIT ' . $limit;
-				}
-
-				$results = $wpdb->get_results( $query );
-				$count  = 0;
-
-				// Generate the list of IDs
-				$posts = array();
-				foreach ( $results as $post ) {
-					$posts[] = $post->ID;
-					$count++;
-				}
-
-				if ( ! $count ) {
-					echo '	<p>' . _e( 'All done. No [flickr] codes found in posts', 'flickr-shortcode-importer' ) . '</p></div>';
-					return;
-				}
-
-				$posts = implode( ',', $posts );
-			}
-
-			$this->show_status( $count, $posts );
-		} else {
-			// No button click? Display the form.
-			$this->show_greeting();
 		}
+
+		// Directly querying the database is normally frowned upon, but all of the API functions will return the full post objects which will suck up lots of memory. This is best, just not as future proof.
+		$query = "
+			SELECT ID
+			FROM $wpdb->posts
+			WHERE 1 = 1
+			AND post_type IN ( '" . implode( "','", self::$post_types ) . "' )
+			AND post_parent = 0
+			AND (
+				post_content LIKE '%[flickr %'
+				OR post_content LIKE '%[flickr]%'
+				OR post_content LIKE '%[flickrset %'
+				OR post_content LIKE '%[flickrset]%'
+				OR post_content LIKE '%[flickr-gallery %'
+				OR post_content LIKE '%[flickr-gallery]%'
+				$flickr_source_where
+			)
+			";
+
+		$include_ids = fsi_get_option( 'posts_to_import' );
+		if ( $include_ids ) {
+			$query .= ' AND ID IN ( ' . $include_ids . ' )';
+		}
+
+		$skip_ids = fsi_get_option( 'skip_importing_post_ids' );
+		if ( $skip_ids ) {
+			$query .= ' AND ID NOT IN ( ' . $skip_ids . ' )';
+		}
+
+		$limit = fsi_get_option( 'limit' );
+		if ( $limit ) {
+			$query .= ' LIMIT ' . $limit;
+		}
+
+		$results = $wpdb->get_results( $query );
+		$count  = 0;
+
+		// Generate the list of IDs
+		$posts = array();
+		foreach ( $results as $post ) {
+			$posts[] = $post->ID;
+			$count++;
+		}
+
+		if ( ! $count ) {
+			echo '	<p>' . _e( 'All done. No [flickr] codes found in posts', 'flickr-shortcode-importer' ) . '</p></div>';
+			return;
+		}
+
+		$posts = implode( ',', $posts );
+	}
+
+	$this->show_status( $count, $posts );
+} else {
+	// No button click? Display the form.
+	$this->show_greeting();
+}
 ?>
 	</div>
 <?php
@@ -714,7 +714,7 @@ EOD;
 			&& fsi_get_option( 'set_featured_image' )
 			&& ( ! has_post_thumbnail( $this->post_id ) || fsi_get_option( 'force_set_featured_image' ) ) ) {
 				update_post_meta( $this->post_id, '_thumbnail_id', $this->featured_id );
-			}
+		}
 
 		if ( fsi_get_option( 'force_reimport' ) ) {
 			fsi_set_option( 'force_reimport', 0 );
@@ -786,35 +786,35 @@ EOD;
 		}
 
 		switch ( $args['mode'] ) {
-		case 'photoset':
-			self::$flickset_id = $args['photoset'];
-			$info       = $this->flickr->photosets_getInfo( self::$flickset_id );
-			$args['set_title'] = $info['title'];
+			case 'photoset':
+				self::$flickset_id = $args['photoset'];
+				$info       = $this->flickr->photosets_getInfo( self::$flickset_id );
+				$args['set_title'] = $info['title'];
 
-			$photos = $this->flickr->photosets_getPhotos( self::$flickset_id );
-			$photos = $photos['photoset']['photo'];
-			break;
+				$photos = $this->flickr->photosets_getPhotos( self::$flickset_id );
+				$photos = $photos['photoset']['photo'];
+				break;
 
-		case 'recent':
-		case 'tag':
-			$photos = $this->flickr->photos_search( $attr );
-			$photos = $photos['photo'];
-			break;
+			case 'recent':
+			case 'tag':
+				$photos = $this->flickr->photos_search( $attr );
+				$photos = $photos['photo'];
+				break;
 
-		case 'interesting':
-			$attr['sort'] = 'interestingness-desc';
-			$photos       = $this->flickr->photos_search( $attr );
-			$photos       = $photos['photo'];
-			break;
+			case 'interesting':
+				$attr['sort'] = 'interestingness-desc';
+				$photos       = $this->flickr->photos_search( $attr );
+				$photos       = $photos['photo'];
+				break;
 
-		case 'search':
-			unset( $attr['user_id'] );
-			$photos = $this->flickr->photos_search( $attr );
-			$photos = $photos['photo'];
-			break;
+			case 'search':
+				unset( $attr['user_id'] );
+				$photos = $this->flickr->photos_search( $attr );
+				$photos = $photos['photo'];
+				break;
 
-		default:
-			break;
+			default:
+				break;
 		}
 
 		if ( ! empty( $photos ) ) {
@@ -1009,29 +1009,29 @@ EOD;
 		$size_name = ( ! empty( $size_matches[0] ) ) ? array_pop( $size_matches[0] ) : '';
 
 		switch ( strtolower( $size_name ) ) {
-		case 'square':
-		case 'thumbnail':
-		case 'small':
-			$size = 'thumbnail';
-			break;
+			case 'square':
+			case 'thumbnail':
+			case 'small':
+				$size = 'thumbnail';
+				break;
 
-		case 'medium':
-		case 'medium_640':
-			$size = 'medium';
-			break;
+			case 'medium':
+			case 'medium_640':
+				$size = 'medium';
+				break;
 
-		case 'large':
-			$size = 'large';
-			break;
+			case 'large':
+				$size = 'large';
+				break;
 
-		case 'original':
-		case 'full':
-			$size = 'full';
-			break;
+			case 'original':
+			case 'full':
+				$size = 'full';
+				break;
 
-		default:
-			$size = fsi_get_option( 'default_image_size', 'medium' );
-			break;
+			default:
+				$size = fsi_get_option( 'default_image_size', 'medium' );
+				break;
 		}
 
 		return $size;
@@ -1050,10 +1050,10 @@ EOD;
 			if ( ( preg_match( '#\.[a-zA-Z]{3}$#', $title )
 				|| preg_match( '#^DSCF\d+#', $title ) )
 				&& ! empty( $set_title ) ) {
-					$title = $set_title . ' - ' . $this->menu_order;
-				} elseif ( ! preg_match( '#\s#', $title ) ) {
+				$title = $set_title . ' - ' . $this->menu_order;
+			} elseif ( ! preg_match( '#\s#', $title ) ) {
 					$title = self::readable_str( $title );
-				}
+			}
 		}
 
 		$alt   = $title;
