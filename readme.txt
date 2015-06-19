@@ -44,7 +44,6 @@ There is no restore functionality. Backup beforehand or be prepared to revert ev
 
 * [flickr size="small" float="left"]http://www.flickr.com/photos/dancoulter/2619594365/[/flickr] (image)
 * [flickr height="300" width="400"]http://www.flickr.com/photos/dancoulter/2422361554/[/flickr] (video)
-* WARNING: Video media imported, but doesn't seem to work
 * [flickr id="5348222727" thumbnail="small" overlay="false" size="large" group="" align="none"]
 * [flickrset id="72157631107721746" thumbnail="small" photos="" overlay="true" size="large"]
 * [flickr-gallery mode="photoset" photoset="72157626302265777"]
