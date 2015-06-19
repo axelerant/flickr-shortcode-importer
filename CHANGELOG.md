@@ -2,7 +2,7 @@
 
 ## master
 
-## 2.2.2RC1
+## 2.2.2
 * Samples text update
 * Update readme verbiage
 * Update requirements
