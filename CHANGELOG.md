@@ -2,6 +2,9 @@
 
 ## master
 
+## 2.2.3RC1
+* Require Aihrus Framework version 1.2.3RC1
+
 ## 2.2.2
 * Samples text update
 * Update readme verbiage

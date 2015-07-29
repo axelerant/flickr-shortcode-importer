@@ -5,7 +5,7 @@ Donate link: https://axelerant.com/about-axelerant/donate/
 Tags: flickr,import,featured image,photo,image,video
 Requires at least: 3.9.2
 Tested up to: 4.3.0
-Stable tag: 2.2.2
+Stable tag: 2.2.3RC1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
