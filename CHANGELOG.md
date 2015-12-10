@@ -3,7 +3,8 @@
 ## master
 
 ## 2.2.3RC1
-* Require Aihrus Framework version 1.2.3RC1
+* Require Aihrus Framework version 1.2.4RC1
+* Changed support email address to support@axelerant.com
 
 ## 2.2.2
 * Samples text update

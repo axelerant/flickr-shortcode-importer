@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'FSI_AIHR_VERSION' ) ) {
-	define( 'FSI_AIHR_VERSION', '1.2.3RC1' );
+	define( 'FSI_AIHR_VERSION', '1.2.4RC1' );
 }
 
 if ( ! defined( 'FSI_BASE' ) ) {
