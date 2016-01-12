@@ -1,7 +1,6 @@
 # README - Flickr Shortcode Importer
 
 [![Build Status](https://travis-ci.org/michael-cannon/flickr-shortcode-importer.png?branch=master)](https://travis-ci.org/michael-cannon/flickr-shortcode-importer)
-[![ProjectStatus](http://stillmaintained.com/michael-cannon/flickr-shortcode-importer.png)](http://stillmaintained.com/michael-cannon/flickr-shortcode-importer)
 
 ## Welcome to the Flickr Shortcode Importer Github repository
 
