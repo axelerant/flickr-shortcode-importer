@@ -3,8 +3,10 @@
 ## master
 
 ## 2.2.3RC2
-* Require Aihrus Framework version 1.2.4RC1
 * Changed support email address to support@axelerant.com
+* Confirm WordPress 4.4 compatibility
+* Removed stillmaintained.com project status button
+* Require Aihrus Framework version 1.2.4RC1
 
 ## 2.2.2
 * Samples text update
