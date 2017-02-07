@@ -2,7 +2,7 @@
 
 ## master
 
-## 2.2.3RC3
+## 2.2.3
 * Changed support email address to support@axelerant.com
 * Confirm WordPress 4.7.2 compatibility
 * Removed stillmaintained.com project status button
