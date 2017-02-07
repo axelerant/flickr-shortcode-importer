@@ -2,11 +2,28 @@
 
 ## master
 
-## 1.2.4RC1
-* Remove option to disable the license not saved notice rather set sslverify to false.
-* Change support email address to support@axelerant.com
-* Remove the use of deprecated function `wp_htmledit_pre()` and use `format_for_editor()` instead.
-* Fix coding standards for CI.
+## 1.2.9
+* Added target url to blank to open links in seperate tab
+
+## 1.2.8
+* Change support email address to `support@axelerant.com`
+* Modify class name to display error message for license missing
+
+## 1.2.7
+* Change support email address to `support@axelerant.atlassian.net`
+* Update FAQ's link
+
+## 1.2.6
+* Update Parsedown 1.6.1
+
+## 1.2.5
+* Use WP provided nonce functions
+
+## 1.2.4
+* Change support email address to `support@axelerant.com`
+* Fix coding standards for CI
+* Remove option to disable the license not saved notice rather set sslverify to false
+* Remove the use of deprecated function `wp_htmledit_pre()` and use `format_for_editor()` instead
 
 ## 1.2.3
 * RELATES #7 Add option to disable the license not saved notice
